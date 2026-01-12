@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harikrushna Multimedia Institute</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Oswald:wght@700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-red: #e63946;
+      --primary-blue: #1d3557;
+      --white: #ffffff;
+      --bg-dark: #0a0a0c;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--white);
+      background: var(--bg-dark);
+      overflow-x: hidden;
+    }
+
+    /* ── Navbar Fixes ── */
+    /* --- Navbar Initial State (Hidden) --- */
+    /* --- Stylish Navbar (Floating Pill) --- */
+    .navbar {
+      position: fixed;
+      top: 20px;
+      left: 5%;
+      right: 5%;
+      z-index: 1000;
+      padding: 0.8rem 2.5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 100px;
+      /* Modern Pill Shape */
+
+      /* Initial State: Hidden */
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-30px) scale(0.95);
+
+      background: transparent;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* --- Scrolled State --- */
+    .navbar.scrolled {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      background: rgba(29, 53, 87, 0.9);
+      /* Navy Blue Glass */
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4),
+        0 0 15px rgba(230, 57, 70, 0.15);
+      /* Subtle Red Glow */
+    }
+
+    /* --- Nav Links Styling --- */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .nav-links a:not(.nav-cta) {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    /* Link Hover Underline */
+    .nav-links a:not(.nav-cta)::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-red);
+      transition: 0.3s;
+    }
+
+    .nav-links a:not(.nav-cta):hover::after {
+      width: 100%;
+    }
+
+    /* --- THE "GET IN TOUCH" CTA BUTTON --- */
+    .nav-cta {
+      background: linear-gradient(135deg, #ff0000 0%, #b30000 100%);
+      color: white !important;
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      margin-left: 10px;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 6px 20px rgba(230, 57, 70, 0.6);
+      background: #ffffff;
+      color: var(--primary-red) !important;
+      border: 2px solid var(--primary-red);
+    }
+
+    /* Container for Image + Text */
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    /* Logo Image Styling */
+    .nav-logo {
+      height: 45px;
+      /* Adjust this to fit your pill-shaped nav height */
+      width: auto;
+      border-radius: 5px;
+      /* Optional: if your logo is square but you want soft edges */
+      transition: transform 0.3s ease;
+    }
+
+    /* Hover effect for the logo */
+    .logo-container:hover .nav-logo {
+      transform: scale(1.1) rotate(-5deg);
+    }
+
+    /* Refined Logo Text */
+    .logo-text {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Responsive adjustment for small screens */
+    @media (max-width: 480px) {
+      .logo-text {
+        display: none;
+        /* Only show the image logo on very small phones to save space */
+      }
+    }
+
+
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 750px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .bg-image {
+      position: absolute;
+      inset: 0;
+      background-image: url('Fantastic Epic Wallpapers.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transform: scale(1.1);
+      transition: all 3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .bg-image.loaded {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(29, 53, 87, 0.9) 0%, rgba(10, 10, 12, 0.7) 100%);
+      z-index: 1;
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .left-content {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease-out;
+    }
+
+    .left-content.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .cert-tag {
+      display: inline-block;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      color: var(--primary-red);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    .left-content h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .left-content h1 span {
+      color: var(--primary-red);
+    }
+
+    .left-content p {
+      font-size: clamp(1.1rem, 2vw, 1.3rem);
+      color: #cbd5e1;
+      line-height: 1.6;
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1.5rem;
+      opacity: 0;
+      transition: all 1s ease-out 0.5s;
+    }
+
+    .btn-group.show {
+      opacity: 1;
+    }
+
+    .btn-primary {
+      padding: 18px 45px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: white;
+      background: var(--primary-red);
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-primary:hover {
+      background: #c12a35;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
+    }
+
+    .right-image {
+      opacity: 0;
+      transform: translateX(50px);
+      transition: all 1.2s cubic-bezier(0.22, 0.9, 0.3, 1) 0.4s;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .right-image.show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .right-image img {
+      width: 140%;
+      max-width: none;
+      height: auto;
+      display: block;
+      position: relative;
+      left: 15%;
+      filter: drop-shadow(-20px 20px 50px rgba(0, 0, 0, 0.5));
+    }
+
+    @media (max-width: 1200px) {
+      .nav-links {
+        gap: 10px;
+      }
+
+      .nav-links a {
+        font-size: 0.75rem;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .navbar {
+        padding: 1rem 5%;
+        background: var(--primary-blue);
+      }
+
+      .nav-links,
+      .nav-cta {
+        display: none;
+      }
+
+      .content-wrapper {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 100px;
+      }
+
+      .left-content p {
+        margin: 0 auto 2.5rem;
+      }
+
+      .btn-group {
+        justify-content: center;
+      }
+
+      .right-image img {
+        width: 100%;
+        left: 0;
+      }
+    }
+
+    /* aboutsection */
+    :root {
+      --primary-red: #e63946;
+      /* From Logo */
+      --primary-blue: #1d3557;
+      /* From Logo */
+      --white: #ffffff;
+      --bg-dark: #0a0a0c;
+    }
+
+    /* --- About Section Styles --- */
+    /* Container with 3D Depth */
+    .about-section {
+      background-color: var(--bg-dark);
+      padding: 100px 5%;
+      overflow: hidden;
+      /* Perspective added to the section for depth */
+      perspective: 1500px;
+    }
+
+    .about-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* --- THE IMAGE & DYNAMIC FLASH --- */
+    .about-img {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      will-change: transform;
+    }
+
+    /* Dynamic Flash Gradient: Tied to the Harikrushna Red (#e63946) */
+    .about-img::before {
+      content: '';
+      position: absolute;
+      width: 130%;
+      height: 130%;
+      background: radial-gradient(circle, rgba(230, 57, 70, 0.45) 0%, rgba(29, 53, 87, 0) 70%);
+      opacity: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.8s ease-out;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Flash triggers when section is active */
+    .about-img.active::before {
+      opacity: 1;
+    }
+
+    .about-img img {
+      width: 100%;
+      border-radius: 20px;
+      /* Clean shadow without the solid frame */
+      filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.5));
+      display: block;
+    }
+
+    /* --- NEW PARALLAX REVEAL (Follows Pointer/Scroll) --- */
+    .flip-reveal {
+      opacity: 0;
+      /* Initial State: Smaller, Lower, and slightly tilted away */
+      transform: scale(0.85) translateY(60px) rotateX(-5deg);
+      /* Use 'all' for opacity, but JS will override 'transform' for the scroll effect */
+      transition: opacity 0.6s ease-out;
+      will-change: transform, opacity;
+    }
+
+    .flip-reveal.active {
+      opacity: 1;
+    }
+
+    /* --- CONTENT STYLING --- */
+    .about-text h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      line-height: 1.1;
+      color: var(--white);
+    }
+
+    .about-text h2 span {
+      color: var(--primary-red);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .about-card {
+      /* Navy Blue transparency #1d3557 */
+      background: rgba(29, 53, 87, 0.25);
+      padding: 25px;
+      border-left: 4px solid var(--primary-red);
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .about-card:hover {
+      background: rgba(29, 53, 87, 0.4);
+    }
+
+    .about-card h3 {
+      font-family: 'Oswald', sans-serif;
+      color: var(--primary-red);
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    @media (max-width: 992px) {
+      .about-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-card {
+        border-left: none;
+        border-top: 4px solid var(--primary-red);
+      }
+    }
+
+    /* testimonial section */
+    .testimonial-accordion {
+      display: flex;
+      width: 100%;
+      height: 80vh;
+      background: #000;
+      overflow: hidden;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url('service-bg.jpg');
+    }
+
+    .testimonial-panel {
+      position: relative;
+      flex: 1;
+      /* background-image: url('service-bg.jpg'); */
+      /* background-image: var(--bg-img); */
+      background-size: cover;
+      background-position: center;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      transition: flex 0.8s cubic-bezier(0.25, 1, 0.3, 1);
+      cursor: pointer;
+    }
+
+    /* Dark overlay for readability */
+    .testimonial-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 30%, rgba(0, 0, 0, 0.9) 90%);
+      z-index: 1;
+    }
+
+    .testimonial-panel:hover,
+    .testimonial-panel.active {
+      flex: 3;
+    }
+
+    /* Red tint on active/hovered panel */
+    .testimonial-panel:hover::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(230, 57, 70, 0.2);
+      z-index: 2;
+    }
+
+    .panel-content {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Vertical name when collapsed */
+    .testimonial-panel:not(:hover) .panel-name {
+      writing-mode: vertical-lr;
+      transform: rotate(180deg);
+      margin: 0 auto;
+    }
+
+    .review-no {
+      color: var(--primary-red);
+      font-family: 'Oswald', sans-serif;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .panel-name {
+      color: white;
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      font-size: 2rem;
+      line-height: 1.1;
+      margin-top: 20px;
+    }
+
+    /* Footer details: Only show when expanded */
+    .panel-footer {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: 0.5s ease;
+    }
+
+    .testimonial-panel:hover .panel-footer,
+    .testimonial-panel.active .panel-footer {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .rating {
+      color: #ffcc00;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .review-text {
+      color: #ddd;
+      font-style: italic;
+      font-size: 1rem;
+      max-width: 350px;
+      margin-bottom: 15px;
+    }
+
+    .designation {
+      color: var(--primary-red);
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+    }
+
+    /* coursepagesection */
+    .horizontal-scroll-section {
+      background: #000;
+    }
+
+    /* Height determines the 'scroll speed' (500vh = 5 full page scrolls) */
+    .sticky-wrapper {
+      height: 500vh;
+      position: relative;
+    }
+
+    .sticky-content {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .course-horizontal-track {
+      display: flex;
+      height: 100%;
+      width: max-content;
+      /* Critical: allows track to be wider than screen */
+      will-change: transform;
+    }
+
+    .course-full-card {
+      width: 100vw;
+      /* Each course takes full screen width */
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 0 8%;
+    }
+
+    .course-card-overlay {
+      z-index: 2;
+      max-width: 600px;
+    }
+
+    .course-main-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      color: #fff;
+      text-transform: uppercase;
+      margin: 15px 0;
+    }
+
+    .course-tag {
+      background: var(--primary-red, #ff0000);
+      padding: 4px 12px;
+      font-weight: 800;
+      font-size: 0.8rem;
+    }
+
+    /* --- Progress Line Styling --- */
+    .scroll-progress-container {
+      position: absolute;
+      bottom: 50px;
+      left: 8%;
+      right: 8%;
+      z-index: 10;
+    }
+
+    .progress-base-line {
+      height: 2px;
+      background: rgba(255, 255, 255, 0.2);
+      width: 100%;
+      position: relative;
+    }
+
+    .progress-active-segment {
+      position: absolute;
+      height: 4px;
+      top: -1px;
+      background: var(--primary-red, #ff0000);
+      width: 0%;
+      /* Updated via JS */
+      transition: width 0.1s ease-out;
+    }
+
+    /* footer */
+
+    :root {
+      --footer-bg: #0f1115;
+      /* Darkest Grey/Black */
+      --footer-card: #1a1d23;
+      /* Lighter Slate Grey for form fields */
+      --primary-red: #e63946;
+      /* Vibrant Gaming Red */
+      --text-main: #ffffff;
+      --text-dim: #a0a0a0;
+    }
+
+    .main-footer {
+      background-color: var(--footer-bg);
+      color: var(--text-main);
+      padding: 80px 5% 40px 5%;
+      border-top: 2px solid var(--primary-red);
+      /* Sharp red line at the top */
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr 1.2fr;
+      gap: 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Titles */
+    .col-title {
+      color: var(--text-main);
+      font-family: 'Oswald', sans-serif;
+      /* Matching your gaming headers */
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 25px;
+      position: relative;
+    }
+
+    /* The small red underline under titles */
+    .col-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--primary-red);
+    }
+
+    /* Social Media Icons */
+    .social-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      background: #252830;
+      /* Dark Grey box */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      text-decoration: none;
+      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .social-icon:hover {
+      background: var(--primary-red);
+      color: white;
+      transform: rotate(10deg) scale(1.1);
+      /* Gaming hover effect */
+      box-shadow: 0 0 15px rgba(230, 57, 70, 0.4);
+    }
+
+    /* Links */
+    .footer-links {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: 0.3s;
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-red);
+      padding-left: 8px;
+    }
+
+    /* Contact Section */
+    .contact-info p {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-dim);
+    }
+
+    .contact-info i {
+      color: var(--primary-red);
+    }
+
+    /* Verify Button */
+    .btn-verify {
+      display: inline-block;
+      background: transparent;
+      color: var(--primary-red);
+      padding: 10px 20px;
+      border: 1px solid var(--primary-red);
+      text-decoration: none;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 20px 0;
+      transition: 0.3s;
+    }
+
+    .btn-verify:hover {
+      background: var(--primary-red);
+      color: white;
+    }
+
+    /* Newsletter */
+    .newsletter-form {
+      display: flex;
+      margin-top: 15px;
+    }
+
+    .newsletter-form input {
+      background: var(--footer-card);
+      border: 1px solid #333;
+      padding: 12px;
+      color: white;
+      flex: 1;
+      outline: none;
+    }
+
+    .newsletter-form button {
+      background: var(--primary-red);
+      color: white;
+      border: none;
+      padding: 0 20px;
+      cursor: pointer;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    /* Bottom Bar */
+    .footer-bottom {
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+
+    .bottom-links a {
+      color: var(--text-dim);
+      margin-left: 20px;
+      text-decoration: none;
+    }
+
+    /* portfoliosections */
+    :root {
+      --primary-red: #e63946;
+      --dark-bg: #0b0d11;
+    }
+
+    .portfolio-section {
+      background: var(--dark-bg);
+      padding: 80px 0;
+      color: white;
+      font-family: 'Oswald', sans-serif;
+    }
+
+    .portfolio-header {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 5%;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .portfolio-counter {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #555;
+    }
+
+    #current-number {
+      color: var(--primary-red);
+      font-size: 2rem;
+    }
+
+    .portfolio-container {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      cursor: grab;
+    }
+
+    .portfolio-track {
+      display: flex;
+      gap: 25px;
+      padding: 20px 5%;
+      width: max-content;
+      transition: transform 0.1s linear;
+    }
+
+    .portfolio-card {
+      width: 350px;
+      background: #161a20;
+      border: 1px solid #333;
+      position: relative;
+      overflow: hidden;
+      transition: 0.4s;
+    }
+
+    .portfolio-card img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      transition: 0.6s;
+      filter: brightness(0.7);
+    }
+
+    /* Hover Effect */
+    .portfolio-card:hover {
+      border-color: var(--primary-red);
+      transform: scale(1.02);
+      box-shadow: 0 0 20px rgba(230, 57, 70, 0.3);
+    }
+
+    .portfolio-card:hover img {
+      filter: brightness(1);
+      transform: scale(1.1);
+    }
+
+    .card-content {
+      position: absolute;
+      bottom: 60px;
+      left: 20px;
+      z-index: 2;
+    }
+
+    .category {
+      color: var(--primary-red);
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .proj-title {
+      font-size: 1.8rem;
+      margin: 5px 0;
+      text-transform: uppercase;
+    }
+
+    .ext-link {
+      display: block;
+      background: #1e2329;
+      color: #888;
+      text-align: center;
+      padding: 15px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: 0.3s;
+    }
+
+    .ext-link:hover {
+      background: var(--primary-red);
+      color: white;
+    }
+
+    /* Progress Bar */
+    .portfolio-footer {
+      padding: 40px 5%;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 2px;
+      background: #333;
+      position: relative;
+    }
+
+    .progress-fill {
+      position: absolute;
+      height: 4px;
+      top: -1px;
+      background: var(--primary-red);
+      width: 0%;
+      transition: 0.2s;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <a href="Untitled-1.html" class="logo-container">
+      <img src="hkmi.jpeg" alt="Harikrushna Logo" class="nav-logo">
+
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Course</a>
+        <a href="#">Event</a>
+        <a href="#">Portfolios</a>
+        <a href="#">Contact</a>
+      </div>
+
+      <a href="#" class="nav-cta">Get In Touch</a>
+  </nav>
+
+  <section class="hero">
+    <div class="bg-image"></div>
+    <div class="overlay"></div>
+
+    <div class="content-wrapper">
+      <div class="left-content">
+        <span class="cert-tag">ISO 9001:2015 Certified Institution</span>
+        <h1>Master the Art of <span>Multimedia</span></h1>
+        <p>Advance your career with industry-leading courses in Graphics, Animation, and Visual Effects. Learn from the
+          experts at Harikrushna Multimedia Institute.</p>
+
+        <div class="btn-group">
+          <a href="#" class="btn-primary">Explore Courses</a>
+        </div>
+      </div>
+
+      <div class="right-image">
+        <img src="hero-image.png" alt="Harikrushna Logo">
+      </div>
+    </div>
+  </section>
+  <section class="about-section" id="about-us">
+    <div class="about-container">
+
+      <div class="about-img flip-reveal">
+        <img src="about_image.png" alt="About Harikrushna">
+      </div>
+
+      <div class="about-text flip-reveal">
+        <span class="cert-tag">ISO 9001:2015 Certified</span>
+        <h2>About <span>Harikrushna</span></h2>
+        <p>Mastering the tools of tomorrow with expert-led multimedia training.</p>
+
+        <div class="about-grid">
+          <div class="about-card">
+            <h3>Why Choose Us?</h3>
+            <p>Practical training with 100% placement support.</p>
+          </div>
+          <div class="about-card">
+            <h3>Our Mission</h3>
+            <p>Empowering creative minds through innovative VFX and Animation courses.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <section class="horizontal-scroll-section">
+    <div class="sticky-wrapper">
+      <div class="sticky-content">
+
+        <div class="course-horizontal-track" id="courseTrack">
+
+          <div class="course-full-card" style="background-image: url('game-02.jpg');">
+            <div class="course-card-overlay">
+              <span class="course-tag">ADVENTURE</span>
+              <h2 class="course-main-title">FULL GAME DEVELOPMENT</h2>
+              <p>Master the complete cycle of game production from concept to launch.</p>
+              <span class="course-index">01</span>
+            </div>
+          </div>
+
+          <div class="course-full-card" style="background-image: url('game-03.jpg');">
+            <div class="course-card-overlay">
+              <span class="course-tag">DESIGN</span>
+              <h2 class="course-main-title">3D ART & ANIMATIONS</h2>
+              <p>Create immersive worlds and lifelike characters with industry-standard tools.</p>
+              <span class="course-index">02</span>
+            </div>
+          </div>
+
+          <div class="course-full-card" style="background-image: url('game-04.jpg');">
+            <div class="course-card-overlay">
+              <span class="course-tag">CREATIVE</span>
+              <h2 class="course-main-title">CHARACTER DESIGN MODEL</h2>
+              <p>Focus on prioritizing immersive gameplay and complex mechanics.</p>
+              <span class="course-index">03</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="scroll-progress-container">
+          <div class="progress-base-line">
+            <div class="progress-active-segment" id="progressSegment"></div>
+            <div class="progress-step-dots">
+              <span class="dot active"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <section class="testimonial-accordion">
+    <div class="testimonial-panel" style="--bg-img: url('student1.jpg');">
+      <div class="panel-content">
+        <div class="panel-header">
+          <span class="review-no">01</span>
+          <h2 class="panel-name">Alex <br> Rivers</h2>
+        </div>
+        <div class="panel-footer">
+          <div class="rating">★★★★★</div>
+          <p class="review-text">"The game design course changed my career path. The mentors are industry legends."</p>
+          <span class="designation">Junior Environment Artist</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-panel" style="--bg-img: url('student2.jpg');">
+      <div class="panel-content">
+        <div class="panel-header">
+          <span class="review-no">02</span>
+          <h2 class="panel-name">Sarah <br> Jenkins</h2>
+        </div>
+        <div class="panel-footer">
+          <div class="rating">★★★★★</div>
+          <p class="review-text">"Character modeling here is top-tier. I learned more in 3 months than in 2 years of
+            college."</p>
+          <span class="designation">3D Character Modeler</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-panel active" style="--bg-img: url('student3.jpg');">
+      <div class="panel-content">
+        <div class="panel-header">
+          <span class="review-no">03</span>
+          <h2 class="panel-name">James <br> Wolfe</h2>
+        </div>
+        <div class="panel-footer">
+          <div class="rating">★★★★★</div>
+          <p class="review-text">"Xsports provides a real studio environment. You aren't just a student; you're a
+            developer."</p>
+          <span class="designation">Lead Art Director</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-panel" style="--bg-img: url('student4.jpg');">
+      <div class="panel-content">
+        <div class="panel-header">
+          <span class="review-no">04</span>
+          <h2 class="panel-name">Emma <br> Vance</h2>
+        </div>
+        <div class="panel-footer">
+          <div class="rating">★★★★★</div>
+          <p class="review-text">"Technically sound and creatively liberating. The best place for aspiring game
+            artists."</p>
+          <span class="designation">Freelance Illustrator</span>
+        </div>
+      </div>
+    </div>
+    </section>
+    <section class="portfolio-section">
+      <div class="portfolio-header">
+        <div class="title-area">
+          <span class="tag-line">STUDENT WORK</span>
+          <h2 class="section-title">PORTFOLIOS</h2>
+        </div>
+        <div class="portfolio-counter">
+          <span id="current-number">01</span> / 03
+        </div>
+      </div>
+
+      <div class="portfolio-container">
+        <div class="portfolio-track" id="autoTrack">
+          <div class="portfolio-card" data-index="01">
+            <a href="#" class="main-card-link">
+              <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800" alt="Work 1">
+              <div class="card-content">
+                <span class="category">3D MODELING</span>
+                <h3 class="proj-title">CYBER CITY</h3>
+              </div>
+            </a>
+            <a href="#" class="ext-link">View Project</a>
+          </div>
+
+          <div class="portfolio-card" data-index="02">
+            <a href="#" class="main-card-link">
+              <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800" alt="Work 2">
+              <div class="card-content">
+                <span class="category">VFX ART</span>
+                <h3 class="proj-title">NEON STRIKE</h3>
+              </div>
+            </a>
+            <a href="#" class="ext-link">View Project</a>
+          </div>
+
+          <div class="portfolio-card" data-index="03">
+            <a href="#" class="main-card-link">
+              <img src="https://images.unsplash.com/photo-1552824236-40dc02570d65?w=800" alt="Work 3">
+              <div class="card-content">
+                <span class="category">GAME DESIGN</span>
+                <h3 class="proj-title">WARRIOR ARENA</h3>
+              </div>
+            </a>
+            <a href="#" class="ext-link">View Project</a>
+          </div>
+
+          <div class="portfolio-card" data-index="01"><img
+              src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800">
+            <div class="card-content">
+              <h3 class="proj-title">CYBER CITY</h3>
+            </div>
+          </div>
+          <div class="portfolio-card" data-index="02"><img
+              src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800">
+            <div class="card-content">
+              <h3 class="proj-title">NEON STRIKE</h3>
+            </div>
+          </div>
+          <div class="portfolio-card" data-index="03"><img
+              src="https://images.unsplash.com/photo-1552824236-40dc02570d65?w=800">
+            <div class="card-content">
+              <h3 class="proj-title">WARRIOR ARENA</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-footer">
+        <div class="progress-bar-bg">
+          <div class="progress-fill" id="p-fill"></div>
+        </div>
+      </div>
+    </section>
+    <footer class="main-footer">
+      <div class="footer-container">
+        <div class="footer-col footer-about">
+          <p class="about-text">
+            Harikrishna Multimedia Institute is Surat's premier destination for creative education in Animation, Game
+            Design, VFX, and more.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="col-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Courses</a></li>
+            <li><a href="#">Student Work</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Student Certificate</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="col-title">Our Courses</h3>
+          <ul class="footer-links">
+            <li><a href="#">3D Animation</a></li>
+            <li><a href="#">VFX</a></li>
+            <li><a href="#">2D Animation</a></li>
+            <li><a href="#">Graphics Design</a></li>
+            <li><a href="#">3D Architecture</a></li>
+            <li><a href="#">Video Editing</a></li>
+            <li><a href="#">Graphics Animation</a></li>
+            <li><a href="#">Game Design Program</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="col-title">Contact Us</h3>
+          <div class="contact-info">
+            <p><i class="fas fa-map-marker-alt"></i> 123 Adajan, Surat, Gujarat 395009, India</p>
+            <p><i class="fas fa-phone-alt"></i> +91 96648 33542</p>
+            <p><i class="fas fa-envelope"></i> info@harikrishnamultimedia.com</p>
+          </div>
+
+          <a href="#" class="btn-verify">Verify Student Certificate</a>
+
+          <div class="newsletter-section">
+            <h4 class="newsletter-title">Subscribe to our newsletter</h4>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Your email" required>
+              <button type="submit">Subscribe</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Harikrishna Multimedia Institute. All rights reserved.</p>
+        <div class="bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+      window.addEventListener('load', () => {
+        // Hero Animations (Landing Page)
+        setTimeout(() => {
+          const bgImage = document.querySelector('.bg-image');
+          if (bgImage) bgImage.classList.add('loaded');
+        }, 100);
+
+        setTimeout(() => {
+          const leftContent = document.querySelector('.left-content');
+          const rightImage = document.querySelector('.right-image');
+          const btnGroup = document.querySelector('.btn-group');
+
+          if (leftContent) leftContent.classList.add('show');
+          if (rightImage) rightImage.classList.add('show');
+          if (btnGroup) btnGroup.classList.add('show');
+        }, 600);
+
+        // Check scroll position immediately on page load
+        handleScrollEffects();
+      });
+
+      /**
+       * Consolidated Scroll Function
+       * Handles Navbar visibility and Smooth Scale/Rotate linked to scroll position
+       */
+      const handleScrollEffects = () => {
+        // 1. Navbar Logic
+        const nav = document.querySelector('.navbar');
+        if (nav) {
+          if (window.scrollY > 100) {
+            nav.classList.add('scrolled');
+          } else {
+            nav.classList.remove('scrolled');
+          }
+        }
+
+        // 2. Smooth Scale & Fade Logic (Linked to Scroll Pointer)
+        const flipElements = document.querySelectorAll('.flip-reveal');
+        const windowHeight = window.innerHeight;
+
+        flipElements.forEach(el => {
+          const rect = el.getBoundingClientRect();
+
+          // Find the center of the element and the center of the viewport
+          const elementCenter = rect.top + rect.height / 2;
+          const viewportCenter = windowHeight / 2;
+
+          // Calculate distance from center (0 = perfectly centered, 1 = off-screen)
+          const distanceFromCenter = Math.abs(viewportCenter - elementCenter);
+          const maxDistance = windowHeight / 1.5; // Controls how quickly it scales
+          const normalizedDistance = Math.min(distanceFromCenter / maxDistance, 1);
+
+          // Transformation Calculations
+          // Scale: Goes from 1.0 (centered) down to 0.85 (away)
+          const scale = 1 - (0.15 * normalizedDistance);
+          // Rotation: Tilted slightly (-10deg) when away, flat (0deg) when centered
+          const rotation = -10 * normalizedDistance;
+          // Y-Offset: Moves slightly down (40px) as it fades out
+          const translateY = normalizedDistance * 40;
+          // Opacity: Fades out as it leaves the center
+          const opacity = 1 - normalizedDistance;
+
+          // Check if element is at least partially in the viewport
+          if (rect.top < windowHeight && rect.bottom > 0) {
+            el.classList.add('active');
+
+            // Apply the styles directly to link them to the scroll movement
+            el.style.transform = `scale(${scale}) rotateX(${rotation}deg) translateY(${translateY}px)`;
+            el.style.opacity = opacity + 0.2; // Offset ensures it doesn't disappear too fast
+
+            // Handle the Flash Gradient trigger (specific to the about-img container)
+            if (el.classList.contains('about-img')) {
+              if (normalizedDistance < 0.5) {
+                el.classList.add('active');
+              } else {
+                el.classList.remove('active');
+              }
+            }
+          } else {
+            el.classList.remove('active');
+          }
+        });
+      };
+
+
+      // Use requestAnimationFrame for 60fps smooth "pointer" movement
+      window.addEventListener('scroll', () => {
+        window.requestAnimationFrame(handleScrollEffects);
+      });
+
+      // coyrsepage horizontal scroll
+      window.addEventListener('scroll', () => {
+        const wrapper = document.querySelector('.sticky-wrapper');
+        const track = document.getElementById('courseTrack');
+        const progress = document.getElementById('progressSegment');
+
+        if (!wrapper || !track) return;
+
+        const wrapperTop = wrapper.offsetTop;
+        const wrapperHeight = wrapper.offsetHeight;
+        const viewportHeight = window.innerHeight;
+
+        // Calculate how much has been scrolled within the wrapper (0 to 1)
+        let scrollFraction = (window.scrollY - wrapperTop) / (wrapperHeight - viewportHeight);
+
+        // Constrain between 0 and 1
+        scrollFraction = Math.max(0, Math.min(1, scrollFraction));
+
+        // Move the course track horizontally
+        const maxMove = track.scrollWidth - window.innerWidth;
+        track.style.transform = `translateX(-${scrollFraction * maxMove}px)`;
+
+        // Update the bottom progress line width
+        progress.style.width = `${scrollFraction * 100}%`;
+
+        // Update dots active state based on index
+        const dots = document.querySelectorAll('.dot');
+        const activeIndex = Math.round(scrollFraction * (dots.length - 1));
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === activeIndex);
+        });
+      });
+
+      // portfolio section
+      const track = document.getElementById('autoTrack');
+      const fill = id = "p-fill";
+      const currentNumDisplay = document.getElementById('current-number');
+      const cards = document.querySelectorAll('.portfolio-card');
+
+      let scrollPos = 0;
+      let isPaused = false;
+
+      // Pause auto-scroll on hover
+      track.addEventListener('mouseenter', () => isPaused = true);
+      track.addEventListener('mouseleave', () => isPaused = false);
+
+      function startAutoScroll() {
+        if (!isPaused) {
+          scrollPos += 1; // સ્પીડ અહીંથી બદલી શકાય (1, 2, 3...)
+
+          const maxScroll = track.scrollWidth - window.innerWidth;
+
+          if (scrollPos >= maxScroll) {
+            scrollPos = 0; // રીસેટ
+          }
+
+          track.style.transform = `translateX(-${scrollPos}px)`;
+
+          // Progress line અને Number અપડેટ કરવાનું લોજિક
+          updateUI(scrollPos, maxScroll);
+        }
+        requestAnimationFrame(startAutoScroll);
+      }
+
+      function updateUI(pos, max) {
+        // Progress Line
+        const percentage = (pos / max) * 100;
+        document.getElementById('p-fill').style.width = `${percentage}%`;
+
+        // કયું કાર્ડ અત્યારે સેન્ટરમાં છે તે ચેક કરવા માટે
+        cards.forEach((card) => {
+          const rect = card.getBoundingClientRect();
+          if (rect.left > 0 && rect.left < window.innerWidth / 2) {
+            currentNumDisplay.innerText = card.getAttribute('data-index');
+          }
+        });
+      }
+
+      // બધી ઈમેજ લોડ થયા પછી શરૂ કરો
+      window.onload = startAutoScroll;
+    </script>
+</body>
+
+</html>

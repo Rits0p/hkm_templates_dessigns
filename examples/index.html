@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harikrushna Multimedia Institute</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-1: #0b1020;
+            --bg-2: #11141f;
+            --accent: #06b6d4;
+            --muted: #9aa3b2;
+            --card-w: 320px;
+            --card-h: 460px;
+            --radius: 680px;
+            --glass: rgba(255, 255, 255, 0.04);
+        }
+
+        * { box-sizing: border-box; }
+        html, body { height: 100%; margin: 0; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+            color: #eef2f7;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .header {
+            position: absolute;
+            top: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            text-align: center;
+            width: 100%;
+        }
+        .header h1 {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin: 0;
+            background: linear-gradient(90deg, var(--accent), #aee9ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header p {
+            margin-top: 6px;
+            color: var(--muted);
+            font-weight: 400;
+        }
+
+        .courses-section {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 2000px;
+            position: relative;
+            overflow: hidden;
+        }
+        .orbit-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            touch-action: none; /* Prevents scroll interference while dragging */
+        }
+
+        .course-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: var(--card-w);
+            height: var(--card-h);
+            margin-left: calc(var(--card-w) / -2);
+            margin-top: calc(var(--card-h) / -2);
+            border-radius: 18px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1), opacity 0.35s;
+            box-shadow: 0 12px 30px rgba(2, 6, 23, 0.6);
+            will-change: transform, opacity;
+        }
+        .course-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease, filter 0.6s ease;
+        }
+        .course-card .card-info {
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            padding: 18px 16px;
+            background: linear-gradient(0deg, rgba(6,6,10,0.9), transparent);
+        }
+        .card-info h3 {
+            margin: 0;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .view-btn {
+            margin-top: 10px;
+            padding: 7px 14px;
+            font-size: 13px;
+            border-radius: 6px;
+            border: none;
+            background: linear-gradient(90deg, var(--accent), #7ee0ff);
+            color: #012;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .view-btn:hover { opacity: 0.9; transform: scale(1.05); }
+
+        .course-card.front {
+            box-shadow: 0 26px 60px rgba(6,182,212,0.15), 0 8px 30px rgba(2,6,23,0.7);
+            z-index: 50;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 18;
+            display: flex;
+            gap: 10px;
+        }
+        .dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .dot.active {
+            background: var(--accent);
+            box-shadow: 0 0 8px rgba(6,182,212,0.4);
+            transform: scale(1.3);
+        }
+
+        .instructions {
+            position: absolute;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--muted);
+            font-size: 13px;
+            z-index: 15;
+            pointer-events: none;
+        }
+
+        /* Popover */
+        .popover {
+            position: fixed;
+            min-width: 260px;
+            max-width: 360px;
+            background: linear-gradient(180deg, #0d1624, #0b1520);
+            border-radius: 12px;
+            padding: 14px;
+            box-shadow: 0 18px 50px rgba(0,0,0,0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #e7f2f7;
+            z-index: 3000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .popover.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .popover img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .popover h4 { margin: 0 0 6px 0; font-size: 18px; color: #fff; }
+        .popover p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.4; }
+        .popover .row { display: flex; gap: 8px; margin-top: 15px; }
+        .popover .action { flex: 1; }
+        .popover .more {
+            width: 100%;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 10px;
+            border-radius: 8px;
+            color: #dceef8;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .popover .more:hover { background: rgba(255,255,255,0.05); }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 8, 20, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 4000;
+            backdrop-filter: blur(8px);
+        }
+        .modal-overlay.active { visibility: visible; opacity: 1; }
+        .modal-content {
+            width: min(900px, 94%);
+            max-height: 85vh;
+            border-radius: 20px;
+            background: #0f172a;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .modal-header { height: 200px; position: relative; }
+        .modal-header img { width: 100%; height: 100%; object-fit: cover; }
+        .close-btn {
+            position: absolute;
+            top: 15px; right: 20px;
+            background: rgba(0,0,0,0.5);
+            border: none;
+            color: #fff;
+            width: 35px; height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .modal-body {
+            padding: 30px;
+            overflow-y: auto;
+            max-height: calc(85vh - 200px);
+        }
+        #modalTitle { font-size: 32px; margin: 0 0 10px 0; }
+        #modalDesc { color: var(--muted); margin-bottom: 25px; line-height: 1.6; }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .info-card {
+            background: rgba(255,255,255,0.03);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .info-card h4 { color: var(--accent); margin: 0 0 5px 0; font-size: 12px; text-transform: uppercase; }
+        .info-card p { margin: 0; font-weight: 600; }
+
+        .modal-section h3 { color: var(--accent); font-size: 18px; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 5px; }
+        .modal-section ul { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 25px; }
+        .modal-section li::before { content: '→'; color: var(--accent); margin-right: 8px; }
+        .modal-section li { font-size: 14px; color: #cbd5e1; }
+
+        .enroll-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, var(--accent), #7ee0ff);
+            color: #012;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+        .enroll-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        @media (max-width: 820px) {
+            :root { --card-w: 260px; --card-h: 380px; --radius: 400px; }
+            .modal-section ul { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>HARIKRUSHNA MULTIMEDIA INSTITUTE</h1>
+        <p>Transforming Careers With Next-gen Technology</p>
+    </div>
+
+    <div class="courses-section">
+        <div class="orbit-container" id="orbit">
+            <div class="course-card" data-course="graphics">
+                <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=800" alt="Graphics">
+                <div class="card-info"><h3>Graphics Design</h3><button class="view-btn">View Details</button></div>
+            </div>
+            <div class="course-card" data-course="architectural">
+                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800" alt="3D Arch">
+                <div class="card-info"><h3>3D Architectural</h3><button class="view-btn">View Details</button></div>
+            </div>
+            <div class="course-card" data-course="video">
+                <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=800" alt="Video">
+                <div class="card-info"><h3>Video Editing</h3><button class="view-btn">View Details</button></div>
+            </div>
+            <div class="course-card" data-course="vfx">
+                <img src="https://images.unsplash.com/photo-1535016120720-40c646be5580?q=80&w=800" alt="VFX">
+                <div class="card-info"><h3>Visual Effects (VFX)</h3><button class="view-btn">View Details</button></div>
+            </div>
+            <div class="course-card" data-course="uiux">
+                <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?q=80&w=800" alt="UI/UX">
+                <div class="card-info"><h3>UI/UX Design</h3><button class="view-btn">View Details</button></div>
+            </div>
+            <div class="course-card" data-course="programming">
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800" alt="Programming">
+                <div class="card-info"><h3>Programming</h3><button class="view-btn">View Details</button></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="instructions">Scroll or drag to rotate • Click center card</div>
+    <div class="controls" id="controls"></div>
+    <div id="popover" class="popover"></div>
+
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img id="modalImg" src="" alt="">
+                <button class="close-btn" onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Full Course Data Object
+        const courseData = {
+            "graphics": {
+                title: "Graphics Design",
+                description: "Master visual storytelling and branding. Learn to create professional designs for digital and print media.",
+                duration: "6 Months",
+                practice: "2 Hours Daily",
+                software: ["Photoshop", "Illustrator", "CorelDraw", "InDesign"],
+                content: ["Layout Design", "Typography", "Color Theory", "Vector Art"],
+                jobProfiles: ["Graphic Designer", "UI Designer", "Brand Specialist"]
+            },
+            "architectural": {
+                title: "3D Architectural",
+                description: "Create photorealistic 3D models of buildings and interiors using industry-leading rendering engines.",
+                duration: "8 Months",
+                practice: "3 Hours Daily",
+                software: ["3ds Max", "V-Ray", "AutoCAD", "SketchUp"],
+                content: ["Interior Modeling", "Exterior Lighting", "Walkthroughs", "Texturing"],
+                jobProfiles: ["3D Visualizer", "Interior Designer", "3D Modeler"]
+            },
+            "video": {
+                title: "Video Editing",
+                description: "The art of post-production. Learn cinematic editing, color grading, and audio synchronization.",
+                duration: "4 Months",
+                practice: "2 Hours Daily",
+                software: ["Premiere Pro", "After Effects", "DaVinci Resolve"],
+                content: ["Multi-cam Editing", "Color Correction", "Sound Design", "Special Effects"],
+                jobProfiles: ["Video Editor", "Content Creator", "Film Editor"]
+            },
+            "vfx": {
+                title: "Visual Effects (VFX)",
+                description: "Learn to blend real-world footage with computer-generated magic for films and commercials.",
+                duration: "12 Months",
+                practice: "3 Hours Daily",
+                software: ["Maya", "Nuke", "After Effects", "Houdini"],
+                content: ["Matchmoving", "Rotoscopy", "Compositing", "3D Particles"],
+                jobProfiles: ["VFX Artist", "Compositor", "Roto Artist"]
+            },
+            "uiux": {
+                title: "UI/UX Design",
+                description: "Focus on user experience and interface design for mobile apps and modern websites.",
+                duration: "5 Months",
+                practice: "2 Hours Daily",
+                software: ["Figma", "Adobe XD", "Miro"],
+                content: ["User Research", "Wireframing", "Prototyping", "Interaction Design"],
+                jobProfiles: ["Product Designer", "UX Researcher", "App Designer"]
+            },
+            "programming": {
+                title: "Core Programming",
+                description: "Build a strong foundation in logic and software development across multiple languages.",
+                duration: "6 Months",
+                practice: "3 Hours Daily",
+                software: ["VS Code", "Python", "Java", "C++"],
+                content: ["Data Structures", "Algorithms", "OOP Concepts", "Database Management"],
+                jobProfiles: ["Software Developer", "Web Developer", "Backend Engineer"]
+            }
+        };
+
+        const orbit = document.getElementById('orbit');
+        const cards = Array.from(document.querySelectorAll('.course-card'));
+        const popover = document.getElementById('popover');
+        const modal = document.getElementById('modal');
+        const controls = document.getElementById('controls');
+
+        let angleOffset = 0;
+        let velocity = 0;
+        const friction = 0.95;
+        const cardCount = cards.length;
+        const degPer = 360 / cardCount;
+        let radius = window.innerWidth < 820 ? 400 : 680;
+
+        // Build Navigation Dots
+        function buildDots() {
+            controls.innerHTML = '';
+            cards.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                dot.onclick = () => snapTo(i);
+                controls.appendChild(dot);
+            });
+        }
+        buildDots();
+
+        // Animation Loop
+        function update() {
+            if (!modal.classList.contains('active') && !isDown) {
+                angleOffset += velocity;
+                velocity *= friction;
+            }
+
+            cards.forEach((card, i) => {
+                const angleDeg = i * degPer + angleOffset * 360;
+                const rad = angleDeg * Math.PI / 180;
+                const x = Math.sin(rad) * radius;
+                const z = Math.cos(rad) * radius - radius;
+                
+                const depth = (z + radius) / (2 * radius);
+                const scale = 0.6 + depth * 0.5;
+                const opacity = 0.2 + depth * 0.8;
+
+                card.style.transform = `translate3d(${x}px, 0, ${z}px) scale(${scale})`;
+                card.style.opacity = opacity;
+                card.style.zIndex = Math.round(z + radius);
+                card.classList.toggle('front', scale > 0.98);
+            });
+
+            // Update Active Dot
+            let frontIndex = 0, maxZ = -Infinity;
+            cards.forEach((c, i) => {
+                const z = parseInt(c.style.zIndex);
+                if (z > maxZ) { maxZ = z; frontIndex = i; }
+            });
+            Array.from(controls.children).forEach((dot, i) => dot.classList.toggle('active', i === frontIndex));
+
+            requestAnimationFrame(update);
+        }
+
+        // Input Handling
+        let isDown = false, startX = 0, startOffset = 0;
+        window.addEventListener('wheel', e => { velocity += e.deltaY * 0.0005; }, { passive: true });
+        
+        orbit.addEventListener('pointerdown', e => {
+            isDown = true; startX = e.clientX; startOffset = angleOffset;
+            hidePopover();
+        });
+        window.addEventListener('pointermove', e => {
+            if (!isDown) return;
+            const dx = e.clientX - startX;
+            angleOffset = startOffset + dx / 800;
+            velocity = 0;
+        });
+        window.addEventListener('pointerup', () => isDown = false);
+
+        function snapTo(index) {
+            const target = -(index / cardCount);
+            let diff = ((target - angleOffset + 0.5) % 1) - 0.5;
+            const start = angleOffset;
+            let startT = null;
+            function step(t) {
+                if (!startT) startT = t;
+                const progress = Math.min((t - startT) / 600, 1);
+                const ease = 1 - Math.pow(1 - progress, 3);
+                angleOffset = start + diff * ease;
+                if (progress < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+
+        // Popover Logic
+        function showPopover(card, index) {
+            const id = card.dataset.course;
+            const data = courseData[id];
+            if (!data) return;
+
+            popover.innerHTML = `
+                <img src="${card.querySelector('img').src}" alt="">
+                <h4>${data.title}</h4>
+                <p>${data.description}</p>
+                <div class="row">
+                    <div class="action"><button class="more" onclick="openModalById('${id}')">Details</button></div>
+                    <div class="action"><button class="enroll-btn" onclick="alert('Inquiry Sent!')">Enroll</button></div>
+                </div>
+            `;
+
+            const rect = card.getBoundingClientRect();
+            popover.style.left = (rect.left + rect.width / 2 - 150) + 'px';
+            popover.style.top = (rect.top + 50) + 'px';
+            popover.classList.add('active');
+        }
+
+        function hidePopover() { popover.classList.remove('active'); }
+
+        // Interaction bindings
+        cards.forEach((card, i) => {
+            card.addEventListener('click', (e) => {
+                if (e.target.closest('.view-btn')) {
+                    // Navigate to external page
+                    window.location.href = `course-details.html?course=${card.dataset.course}`;
+                    return;
+                }
+                showPopover(card, i);
+            });
+        });
+
+        function openModalById(id) {
+            const data = courseData[id];
+            hidePopover();
+            document.getElementById('modalImg').src = document.querySelector(`[data-course="${id}"] img`).src;
+            document.getElementById('modalBody').innerHTML = `
+                <h2 id="modalTitle">${data.title}</h2>
+                <p id="modalDesc">${data.description}</p>
+                <div class="info-grid">
+                    <div class="info-card"><h4>Duration</h4><p>${data.duration}</p></div>
+                    <div class="info-card"><h4>Schedule</h4><p>${data.practice}</p></div>
+                </div>
+                <div class="modal-section">
+                    <h3>Software You'll Learn</h3>
+                    <ul>${data.software.map(s => `<li>${s}</li>`).join('')}</ul>
+                    <h3>Career Paths</h3>
+                    <ul>${data.jobProfiles.map(j => `<li>${j}</li>`).join('')}</ul>
+                </div>
+                <button class="enroll-btn" onclick="alert('Connecting to admissions...')">Apply for this Course</button>
+            `;
+            modal.classList.add('active');
+        }
+
+        function closeModal() { modal.classList.remove('active'); }
+        window.addEventListener('click', e => { 
+            if (e.target === modal) closeModal();
+            if (!e.target.closest('.course-card') && !e.target.closest('.popover')) hidePopover();
+        });
+
+        requestAnimationFrame(update);
+    </script>
+</body>
+</html>
