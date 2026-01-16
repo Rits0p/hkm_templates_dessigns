@@ -34,6 +34,7 @@
     /* ── Navbar Fixes ── */
     /* --- Navbar Initial State (Hidden) --- */
     /* --- Stylish Navbar (Floating Pill) --- */
+    /* --- Base Navbar (Hidden by Default) --- */
     .navbar {
       position: fixed;
       top: 20px;
@@ -45,30 +46,30 @@
       justify-content: space-between;
       align-items: center;
       border-radius: 100px;
-      /* Modern Pill Shape */
 
-      /* Initial State: Hidden */
+      /* Hidden State */
       opacity: 0;
       visibility: hidden;
-      transform: translateY(-30px) scale(0.95);
+      transform: translateY(-20px);
+      /* Slides down when appearing */
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 
-      background: transparent;
-      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      /* Initial Glass Setup (even while hidden) */
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    /* --- Scrolled State --- */
+    /* --- Scrolled State (Revealed with Glass Effect) --- */
     .navbar.scrolled {
       opacity: 1;
       visibility: visible;
-      transform: translateY(0) scale(1);
-      background: rgba(29, 53, 87, 0.9);
-      /* Navy Blue Glass */
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4),
-        0 0 15px rgba(230, 57, 70, 0.15);
-      /* Subtle Red Glow */
+      transform: translateY(0);
+
+      /* Navy Blue Glass variant */
+      background: rgba(29, 53, 87, 0.8);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
 
     /* --- Nav Links Styling --- */
@@ -353,6 +354,85 @@
       .right-image img {
         width: 100%;
         left: 0;
+      }
+    }
+
+    /* arrowpointer */
+    /* Container positioning */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    /* The Mouse Shape */
+    .mouse {
+      width: 26px;
+      height: 42px;
+      border: 2px solid #fff;
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      padding-top: 8px;
+    }
+
+    /* The Animated Wheel */
+    .wheel {
+      width: 4px;
+      height: 8px;
+      background: #fff;
+      border-radius: 2px;
+      animation: scroll-wheel 1.6s infinite ease-out;
+    }
+
+    /* The Bouncing Arrows */
+    .arrow span {
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-bottom: 2px solid #fff;
+      border-right: 2px solid #fff;
+      transform: rotate(45deg);
+      margin: -5px;
+      animation: arrow-bounce 1.6s infinite;
+    }
+
+    .arrow span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    /* Animations */
+    @keyframes scroll-wheel {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+    }
+
+    @keyframes arrow-bounce {
+      0% {
+        opacity: 0;
+        transform: rotate(45deg) translate(-5px, -5px);
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+        transform: rotate(45deg) translate(5px, 5px);
       }
     }
 
@@ -648,6 +728,7 @@
       position: relative;
       display: flex;
       align-items: center;
+      box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
       padding: 0 8%;
     }
 
@@ -661,7 +742,8 @@
       font-size: clamp(2.5rem, 5vw, 4.5rem);
       color: #fff;
       text-transform: uppercase;
-      margin: 15px 0;
+      margin: 10px 0;
+      line-height: 1.1;
     }
 
     .course-tag {
@@ -1014,7 +1096,7 @@
 
   <nav class="navbar">
     <a href="Untitled-1.html" class="logo-container">
-      <img src="hkmi.jpeg" alt="Harikrushna Logo" class="nav-logo">
+      <img src="logo.png" alt="Harikrushna Logo" class="nav-logo">
 
       <div class="nav-links">
         <a href="#">Home</a>
@@ -1046,6 +1128,15 @@
 
       <div class="right-image">
         <img src="hero-image.png" alt="Harikrushna Logo">
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="mouse">
+        <div class="wheel"></div>
+      </div>
+      <div class="arrow">
+        <span></span>
+        <span></span>
       </div>
     </div>
   </section>
@@ -1183,325 +1274,325 @@
         </div>
       </div>
     </div>
-    </section>
-    <section class="portfolio-section">
-      <div class="portfolio-header">
-        <div class="title-area">
-          <span class="tag-line">STUDENT WORK</span>
-          <h2 class="section-title">PORTFOLIOS</h2>
-        </div>
-        <div class="portfolio-counter">
-          <span id="current-number">01</span> / 03
-        </div>
+  </section>
+  <section class="portfolio-section">
+    <div class="portfolio-header">
+      <div class="title-area">
+        <span class="tag-line">STUDENT WORK</span>
+        <h2 class="section-title">PORTFOLIOS</h2>
       </div>
+      <div class="portfolio-counter">
+        <span id="current-number">01</span> / 03
+      </div>
+    </div>
 
-      <div class="portfolio-container">
-        <div class="portfolio-track" id="autoTrack">
-          <div class="portfolio-card" data-index="01">
-            <a href="#" class="main-card-link">
-              <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800" alt="Work 1">
-              <div class="card-content">
-                <span class="category">3D MODELING</span>
-                <h3 class="proj-title">CYBER CITY</h3>
-              </div>
-            </a>
-            <a href="#" class="ext-link">View Project</a>
-          </div>
-
-          <div class="portfolio-card" data-index="02">
-            <a href="#" class="main-card-link">
-              <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800" alt="Work 2">
-              <div class="card-content">
-                <span class="category">VFX ART</span>
-                <h3 class="proj-title">NEON STRIKE</h3>
-              </div>
-            </a>
-            <a href="#" class="ext-link">View Project</a>
-          </div>
-
-          <div class="portfolio-card" data-index="03">
-            <a href="#" class="main-card-link">
-              <img src="https://images.unsplash.com/photo-1552824236-40dc02570d65?w=800" alt="Work 3">
-              <div class="card-content">
-                <span class="category">GAME DESIGN</span>
-                <h3 class="proj-title">WARRIOR ARENA</h3>
-              </div>
-            </a>
-            <a href="#" class="ext-link">View Project</a>
-          </div>
-
-          <div class="portfolio-card" data-index="01"><img
-              src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800">
+    <div class="portfolio-container">
+      <div class="portfolio-track" id="autoTrack">
+        <div class="portfolio-card" data-index="01">
+          <a href="#" class="main-card-link">
+            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800" alt="Work 1">
             <div class="card-content">
+              <span class="category">3D MODELING</span>
               <h3 class="proj-title">CYBER CITY</h3>
             </div>
-          </div>
-          <div class="portfolio-card" data-index="02"><img
-              src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800">
+          </a>
+          <a href="#" class="ext-link">View Project</a>
+        </div>
+
+        <div class="portfolio-card" data-index="02">
+          <a href="#" class="main-card-link">
+            <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800" alt="Work 2">
             <div class="card-content">
+              <span class="category">VFX ART</span>
               <h3 class="proj-title">NEON STRIKE</h3>
             </div>
-          </div>
-          <div class="portfolio-card" data-index="03"><img
-              src="https://images.unsplash.com/photo-1552824236-40dc02570d65?w=800">
+          </a>
+          <a href="#" class="ext-link">View Project</a>
+        </div>
+
+        <div class="portfolio-card" data-index="03">
+          <a href="#" class="main-card-link">
+            <img src="https://images.unsplash.com/photo-1552824236-40dc02570d65?w=800" alt="Work 3">
             <div class="card-content">
+              <span class="category">GAME DESIGN</span>
               <h3 class="proj-title">WARRIOR ARENA</h3>
             </div>
+          </a>
+          <a href="#" class="ext-link">View Project</a>
+        </div>
+
+        <div class="portfolio-card" data-index="01"><img
+            src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800">
+          <div class="card-content">
+            <h3 class="proj-title">CYBER CITY</h3>
+          </div>
+        </div>
+        <div class="portfolio-card" data-index="02"><img
+            src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800">
+          <div class="card-content">
+            <h3 class="proj-title">NEON STRIKE</h3>
+          </div>
+        </div>
+        <div class="portfolio-card" data-index="03"><img
+            src="https://images.unsplash.com/photo-1552824236-40dc02570d65?w=800">
+          <div class="card-content">
+            <h3 class="proj-title">WARRIOR ARENA</h3>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="portfolio-footer">
-        <div class="progress-bar-bg">
-          <div class="progress-fill" id="p-fill"></div>
-        </div>
+    <div class="portfolio-footer">
+      <div class="progress-bar-bg">
+        <div class="progress-fill" id="p-fill"></div>
       </div>
-    </section>
-    <footer class="main-footer">
-      <div class="footer-container">
-        <div class="footer-col footer-about">
-          <p class="about-text">
-            Harikrishna Multimedia Institute is Surat's premier destination for creative education in Animation, Game
-            Design, VFX, and more.
-          </p>
-          <div class="social-links">
-            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-          </div>
-        </div>
-
-        <div class="footer-col">
-          <h3 class="col-title">Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Courses</a></li>
-            <li><a href="#">Student Work</a></li>
-            <li><a href="#">Gallery</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Student Certificate</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h3 class="col-title">Our Courses</h3>
-          <ul class="footer-links">
-            <li><a href="#">3D Animation</a></li>
-            <li><a href="#">VFX</a></li>
-            <li><a href="#">2D Animation</a></li>
-            <li><a href="#">Graphics Design</a></li>
-            <li><a href="#">3D Architecture</a></li>
-            <li><a href="#">Video Editing</a></li>
-            <li><a href="#">Graphics Animation</a></li>
-            <li><a href="#">Game Design Program</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h3 class="col-title">Contact Us</h3>
-          <div class="contact-info">
-            <p><i class="fas fa-map-marker-alt"></i> 123 Adajan, Surat, Gujarat 395009, India</p>
-            <p><i class="fas fa-phone-alt"></i> +91 96648 33542</p>
-            <p><i class="fas fa-envelope"></i> info@harikrishnamultimedia.com</p>
-          </div>
-
-          <a href="#" class="btn-verify">Verify Student Certificate</a>
-
-          <div class="newsletter-section">
-            <h4 class="newsletter-title">Subscribe to our newsletter</h4>
-            <form class="newsletter-form">
-              <input type="email" placeholder="Your email" required>
-              <button type="submit">Subscribe</button>
-            </form>
-          </div>
+    </div>
+  </section>
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-col footer-about">
+        <p class="about-text">
+          Harikrishna Multimedia Institute is Surat's premier destination for creative education in Animation, Game
+          Design, VFX, and more.
+        </p>
+        <div class="social-links">
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
         </div>
       </div>
 
-      <div class="footer-bottom">
-        <p>© 2026 Harikrishna Multimedia Institute. All rights reserved.</p>
-        <div class="bottom-links">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
+      <div class="footer-col">
+        <h3 class="col-title">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Courses</a></li>
+          <li><a href="#">Student Work</a></li>
+          <li><a href="#">Gallery</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Student Certificate</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="col-title">Our Courses</h3>
+        <ul class="footer-links">
+          <li><a href="#">3D Animation</a></li>
+          <li><a href="#">VFX</a></li>
+          <li><a href="#">2D Animation</a></li>
+          <li><a href="#">Graphics Design</a></li>
+          <li><a href="#">3D Architecture</a></li>
+          <li><a href="#">Video Editing</a></li>
+          <li><a href="#">Graphics Animation</a></li>
+          <li><a href="#">Game Design Program</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="col-title">Contact Us</h3>
+        <div class="contact-info">
+          <p><i class="fas fa-map-marker-alt"></i> 123 Adajan, Surat, Gujarat 395009, India</p>
+          <p><i class="fas fa-phone-alt"></i> +91 96648 33542</p>
+          <p><i class="fas fa-envelope"></i> info@harikrishnamultimedia.com</p>
+        </div>
+
+        <a href="#" class="btn-verify">Verify Student Certificate</a>
+
+        <div class="newsletter-section">
+          <h4 class="newsletter-title">Subscribe to our newsletter</h4>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Your email" required>
+            <button type="submit">Subscribe</button>
+          </form>
         </div>
       </div>
-    </footer>
+    </div>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script>
-      window.addEventListener('load', () => {
-        // Hero Animations (Landing Page)
-        setTimeout(() => {
-          const bgImage = document.querySelector('.bg-image');
-          if (bgImage) bgImage.classList.add('loaded');
-        }, 100);
+    <div class="footer-bottom">
+      <p>© 2026 Harikrishna Multimedia Institute. All rights reserved.</p>
+      <div class="bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
 
-        setTimeout(() => {
-          const leftContent = document.querySelector('.left-content');
-          const rightImage = document.querySelector('.right-image');
-          const btnGroup = document.querySelector('.btn-group');
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script>
+    window.addEventListener('load', () => {
+      // Hero Animations (Landing Page)
+      setTimeout(() => {
+        const bgImage = document.querySelector('.bg-image');
+        if (bgImage) bgImage.classList.add('loaded');
+      }, 100);
 
-          if (leftContent) leftContent.classList.add('show');
-          if (rightImage) rightImage.classList.add('show');
-          if (btnGroup) btnGroup.classList.add('show');
-        }, 600);
+      setTimeout(() => {
+        const leftContent = document.querySelector('.left-content');
+        const rightImage = document.querySelector('.right-image');
+        const btnGroup = document.querySelector('.btn-group');
 
-        // Check scroll position immediately on page load
-        handleScrollEffects();
-      });
+        if (leftContent) leftContent.classList.add('show');
+        if (rightImage) rightImage.classList.add('show');
+        if (btnGroup) btnGroup.classList.add('show');
+      }, 600);
 
-      /**
-       * Consolidated Scroll Function
-       * Handles Navbar visibility and Smooth Scale/Rotate linked to scroll position
-       */
-      const handleScrollEffects = () => {
-        // 1. Navbar Logic
-        const nav = document.querySelector('.navbar');
-        if (nav) {
-          if (window.scrollY > 100) {
-            nav.classList.add('scrolled');
-          } else {
-            nav.classList.remove('scrolled');
-          }
+      // Check scroll position immediately on page load
+      handleScrollEffects();
+    });
+
+    /**
+     * Consolidated Scroll Function
+     * Handles Navbar visibility and Smooth Scale/Rotate linked to scroll position
+     */
+    const handleScrollEffects = () => {
+      // 1. Navbar Logic
+      const nav = document.querySelector('.navbar');
+      if (nav) {
+        if (window.scrollY > 100) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
         }
+      }
 
-        // 2. Smooth Scale & Fade Logic (Linked to Scroll Pointer)
-        const flipElements = document.querySelectorAll('.flip-reveal');
-        const windowHeight = window.innerHeight;
+      // 2. Smooth Scale & Fade Logic (Linked to Scroll Pointer)
+      const flipElements = document.querySelectorAll('.flip-reveal');
+      const windowHeight = window.innerHeight;
 
-        flipElements.forEach(el => {
-          const rect = el.getBoundingClientRect();
+      flipElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
 
-          // Find the center of the element and the center of the viewport
-          const elementCenter = rect.top + rect.height / 2;
-          const viewportCenter = windowHeight / 2;
+        // Find the center of the element and the center of the viewport
+        const elementCenter = rect.top + rect.height / 2;
+        const viewportCenter = windowHeight / 2;
 
-          // Calculate distance from center (0 = perfectly centered, 1 = off-screen)
-          const distanceFromCenter = Math.abs(viewportCenter - elementCenter);
-          const maxDistance = windowHeight / 1.5; // Controls how quickly it scales
-          const normalizedDistance = Math.min(distanceFromCenter / maxDistance, 1);
+        // Calculate distance from center (0 = perfectly centered, 1 = off-screen)
+        const distanceFromCenter = Math.abs(viewportCenter - elementCenter);
+        const maxDistance = windowHeight / 1.5; // Controls how quickly it scales
+        const normalizedDistance = Math.min(distanceFromCenter / maxDistance, 1);
 
-          // Transformation Calculations
-          // Scale: Goes from 1.0 (centered) down to 0.85 (away)
-          const scale = 1 - (0.15 * normalizedDistance);
-          // Rotation: Tilted slightly (-10deg) when away, flat (0deg) when centered
-          const rotation = -10 * normalizedDistance;
-          // Y-Offset: Moves slightly down (40px) as it fades out
-          const translateY = normalizedDistance * 40;
-          // Opacity: Fades out as it leaves the center
-          const opacity = 1 - normalizedDistance;
+        // Transformation Calculations
+        // Scale: Goes from 1.0 (centered) down to 0.85 (away)
+        const scale = 1 - (0.15 * normalizedDistance);
+        // Rotation: Tilted slightly (-10deg) when away, flat (0deg) when centered
+        const rotation = -10 * normalizedDistance;
+        // Y-Offset: Moves slightly down (40px) as it fades out
+        const translateY = normalizedDistance * 40;
+        // Opacity: Fades out as it leaves the center
+        const opacity = 1 - normalizedDistance;
 
-          // Check if element is at least partially in the viewport
-          if (rect.top < windowHeight && rect.bottom > 0) {
-            el.classList.add('active');
+        // Check if element is at least partially in the viewport
+        if (rect.top < windowHeight && rect.bottom > 0) {
+          el.classList.add('active');
 
-            // Apply the styles directly to link them to the scroll movement
-            el.style.transform = `scale(${scale}) rotateX(${rotation}deg) translateY(${translateY}px)`;
-            el.style.opacity = opacity + 0.2; // Offset ensures it doesn't disappear too fast
+          // Apply the styles directly to link them to the scroll movement
+          el.style.transform = `scale(${scale}) rotateX(${rotation}deg) translateY(${translateY}px)`;
+          el.style.opacity = opacity + 0.2; // Offset ensures it doesn't disappear too fast
 
-            // Handle the Flash Gradient trigger (specific to the about-img container)
-            if (el.classList.contains('about-img')) {
-              if (normalizedDistance < 0.5) {
-                el.classList.add('active');
-              } else {
-                el.classList.remove('active');
-              }
+          // Handle the Flash Gradient trigger (specific to the about-img container)
+          if (el.classList.contains('about-img')) {
+            if (normalizedDistance < 0.5) {
+              el.classList.add('active');
+            } else {
+              el.classList.remove('active');
             }
-          } else {
-            el.classList.remove('active');
           }
-        });
-      };
-
-
-      // Use requestAnimationFrame for 60fps smooth "pointer" movement
-      window.addEventListener('scroll', () => {
-        window.requestAnimationFrame(handleScrollEffects);
-      });
-
-      // coyrsepage horizontal scroll
-      window.addEventListener('scroll', () => {
-        const wrapper = document.querySelector('.sticky-wrapper');
-        const track = document.getElementById('courseTrack');
-        const progress = document.getElementById('progressSegment');
-
-        if (!wrapper || !track) return;
-
-        const wrapperTop = wrapper.offsetTop;
-        const wrapperHeight = wrapper.offsetHeight;
-        const viewportHeight = window.innerHeight;
-
-        // Calculate how much has been scrolled within the wrapper (0 to 1)
-        let scrollFraction = (window.scrollY - wrapperTop) / (wrapperHeight - viewportHeight);
-
-        // Constrain between 0 and 1
-        scrollFraction = Math.max(0, Math.min(1, scrollFraction));
-
-        // Move the course track horizontally
-        const maxMove = track.scrollWidth - window.innerWidth;
-        track.style.transform = `translateX(-${scrollFraction * maxMove}px)`;
-
-        // Update the bottom progress line width
-        progress.style.width = `${scrollFraction * 100}%`;
-
-        // Update dots active state based on index
-        const dots = document.querySelectorAll('.dot');
-        const activeIndex = Math.round(scrollFraction * (dots.length - 1));
-        dots.forEach((dot, idx) => {
-          dot.classList.toggle('active', idx === activeIndex);
-        });
-      });
-
-      // portfolio section
-      const track = document.getElementById('autoTrack');
-      const fill = id = "p-fill";
-      const currentNumDisplay = document.getElementById('current-number');
-      const cards = document.querySelectorAll('.portfolio-card');
-
-      let scrollPos = 0;
-      let isPaused = false;
-
-      // Pause auto-scroll on hover
-      track.addEventListener('mouseenter', () => isPaused = true);
-      track.addEventListener('mouseleave', () => isPaused = false);
-
-      function startAutoScroll() {
-        if (!isPaused) {
-          scrollPos += 1; // સ્પીડ અહીંથી બદલી શકાય (1, 2, 3...)
-
-          const maxScroll = track.scrollWidth - window.innerWidth;
-
-          if (scrollPos >= maxScroll) {
-            scrollPos = 0; // રીસેટ
-          }
-
-          track.style.transform = `translateX(-${scrollPos}px)`;
-
-          // Progress line અને Number અપડેટ કરવાનું લોજિક
-          updateUI(scrollPos, maxScroll);
+        } else {
+          el.classList.remove('active');
         }
-        requestAnimationFrame(startAutoScroll);
+      });
+    };
+
+
+    // Use requestAnimationFrame for 60fps smooth "pointer" movement
+    window.addEventListener('scroll', () => {
+      window.requestAnimationFrame(handleScrollEffects);
+    });
+
+    // coyrsepage horizontal scroll
+    window.addEventListener('scroll', () => {
+      const wrapper = document.querySelector('.sticky-wrapper');
+      const track = document.getElementById('courseTrack');
+      const progress = document.getElementById('progressSegment');
+
+      if (!wrapper || !track) return;
+
+      const wrapperTop = wrapper.offsetTop;
+      const wrapperHeight = wrapper.offsetHeight;
+      const viewportHeight = window.innerHeight;
+
+      // Calculate how much has been scrolled within the wrapper (0 to 1)
+      let scrollFraction = (window.scrollY - wrapperTop) / (wrapperHeight - viewportHeight);
+
+      // Constrain between 0 and 1
+      scrollFraction = Math.max(0, Math.min(1, scrollFraction));
+
+      // Move the course track horizontally
+      const maxMove = track.scrollWidth - window.innerWidth;
+      track.style.transform = `translateX(-${scrollFraction * maxMove}px)`;
+
+      // Update the bottom progress line width
+      progress.style.width = `${scrollFraction * 100}%`;
+
+      // Update dots active state based on index
+      const dots = document.querySelectorAll('.dot');
+      const activeIndex = Math.round(scrollFraction * (dots.length - 1));
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === activeIndex);
+      });
+    });
+
+    // portfolio section
+    const track = document.getElementById('autoTrack');
+    const fill = id = "p-fill";
+    const currentNumDisplay = document.getElementById('current-number');
+    const cards = document.querySelectorAll('.portfolio-card');
+
+    let scrollPos = 0;
+    let isPaused = false;
+
+    // Pause auto-scroll on hover
+    track.addEventListener('mouseenter', () => isPaused = true);
+    track.addEventListener('mouseleave', () => isPaused = false);
+
+    function startAutoScroll() {
+      if (!isPaused) {
+        scrollPos += 1; // સ્પીડ અહીંથી બદલી શકાય (1, 2, 3...)
+
+        const maxScroll = track.scrollWidth - window.innerWidth;
+
+        if (scrollPos >= maxScroll) {
+          scrollPos = 0; // રીસેટ
+        }
+
+        track.style.transform = `translateX(-${scrollPos}px)`;
+
+        // Progress line અને Number અપડેટ કરવાનું લોજિક
+        updateUI(scrollPos, maxScroll);
       }
+      requestAnimationFrame(startAutoScroll);
+    }
 
-      function updateUI(pos, max) {
-        // Progress Line
-        const percentage = (pos / max) * 100;
-        document.getElementById('p-fill').style.width = `${percentage}%`;
+    function updateUI(pos, max) {
+      // Progress Line
+      const percentage = (pos / max) * 100;
+      document.getElementById('p-fill').style.width = `${percentage}%`;
 
-        // કયું કાર્ડ અત્યારે સેન્ટરમાં છે તે ચેક કરવા માટે
-        cards.forEach((card) => {
-          const rect = card.getBoundingClientRect();
-          if (rect.left > 0 && rect.left < window.innerWidth / 2) {
-            currentNumDisplay.innerText = card.getAttribute('data-index');
-          }
-        });
-      }
+      // કયું કાર્ડ અત્યારે સેન્ટરમાં છે તે ચેક કરવા માટે
+      cards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        if (rect.left > 0 && rect.left < window.innerWidth / 2) {
+          currentNumDisplay.innerText = card.getAttribute('data-index');
+        }
+      });
+    }
 
-      // બધી ઈમેજ લોડ થયા પછી શરૂ કરો
-      window.onload = startAutoScroll;
-    </script>
+    // બધી ઈમેજ લોડ થયા પછી શરૂ કરો
+    window.onload = startAutoScroll;
+  </script>
 </body>
 
 </html>

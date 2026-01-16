@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Development | Studio Curriculum</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #ff0000;
+            --bg-dark: #000000;
+            --text-main: #ffffff;
+            --glass-card: rgba(255, 255, 255, 0.08);
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            background-color: var(--bg-dark);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- BACKGROUND --- */
+        .animated-bg {
+            position: fixed; inset: 0; z-index: 1;
+            background: radial-gradient(circle at center, #220000 0%, #000 100%);
+            perspective: 1000px;
+        }
+
+        .grid-plane {
+            position: absolute; width: 200%; height: 200%;
+            bottom: -50%; left: -50%;
+            background-image: 
+                linear-gradient(rgba(255, 0, 0, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: rotateX(75deg);
+            animation: grid-travel 4s linear infinite;
+        }
+
+        @keyframes grid-travel {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 50px; }
+        }
+
+        /* --- NAVIGATION --- */
+        .top-nav {
+            position: absolute;
+            top: 40px; left: 5%;
+            z-index: 100;
+        }
+
+        .back-btn {
+            background: var(--glass-card);
+            color: white;
+            padding: 10px 24px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover { 
+            background: var(--primary-red); 
+            padding-left: 30px; 
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+        }
+
+        /* --- MAIN CONTENT --- */
+        .course-page {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            align-items: center;
+            padding: 0 5%;
+            gap: 40px;
+        }
+
+        .content-wrapper {
+            max-width: 1000px;
+            display: flex;
+            flex-direction: column;
+            margin-top: 60px;
+            animation: slideInLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .studio-label {
+            color: var(--primary-red);
+            font-weight: 800;
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .course-main-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(3.5rem, 7vw, 6.5rem);
+            line-height: 1;
+            margin: 0 0 30px 0;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        /* --- THE ANIMATED GLASS CARD --- */
+        .details-grid {
+            background: var(--glass-card);
+            padding: 40px;
+            border-left: 4px solid var(--primary-red);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-radius: 15px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .details-grid::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+            box-shadow: 0 0 15px var(--primary-red);
+            animation: card-scan 4s linear infinite;
+        }
+
+        @keyframes card-scan {
+            0% { top: -5%; }
+            100% { top: 105%; }
+        }
+
+        .overview-text {
+            font-size: 0.95rem; line-height: 1.6;
+            margin-bottom: 25px;
+            color: #ddd;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 20px;
+        }
+
+        .columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .detail-col h3 {
+            font-size: 0.75rem;
+            color: var(--primary-red);
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 800;
+        }
+
+        .detail-col ul { list-style: none; padding: 0; margin: 0; }
+        .detail-col li {
+            font-size: 0.85rem; margin-bottom: 10px;
+            display: flex; align-items: center; gap: 10px;
+            color: #eee;
+        }
+        .detail-col li::before {
+            content: ""; width: 6px; height: 6px;
+            background: var(--primary-red); border-radius: 50%;
+            box-shadow: 0 0 8px var(--primary-red);
+        }
+
+        .job-profiles {
+            margin-top: 25px; font-size: 0.8rem; color: #999;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+
+        /* --- SIDEBAR --- */
+        .side-stats {
+            background: rgba(15, 0, 0, 0.6);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            padding: 35px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column; gap: 25px;
+            animation: slideInRight 0.8s ease forwards;
+        }
+
+        .stat-item h4 { margin: 0; font-size: 0.65rem; color: #777; text-transform: uppercase; letter-spacing: 1px; }
+        .stat-item p { margin: 5px 0 0; font-size: 1.2rem; font-weight: 700; color: white; }
+
+        .enroll-btn {
+            background: var(--primary-red);
+            color: white; text-decoration: none;
+            padding: 18px 45px; font-weight: 800;
+            border-radius: 50px; text-transform: uppercase;
+            letter-spacing: 2px; transition: 0.3s;
+            display: inline-block;
+            margin-top: 35px;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+        }
+
+        .enroll-btn:hover { transform: scale(1.05); background: white; color: black; }
+
+        @keyframes slideInLeft { from { transform: translateX(-100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+        @media (max-width: 1200px) {
+            .course-main-title { white-space: normal; line-height: 1; }
+            .course-page { grid-template-columns: 1fr; height: auto; padding-top: 150px; padding-bottom: 50px; }
+            body { overflow-y: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="animated-bg">
+        <div class="grid-plane"></div>
+    </div>
+
+    <nav class="top-nav">
+        <a href="index.html" class="back-btn">← Back to Gallery</a>
+    </nav>
+
+    <main class="course-page">
+        <section class="content-wrapper">
+            <span class="studio-label">Mobile Development Curriculum</span>
+            <h1 class="course-main-title">Android Development</h1>
+            
+            <div class="details-grid">
+                <div class="overview-text">
+                    <strong>Overview:</strong> Designing, building, and maintaining high-performance mobile applications. Using Kotlin and Java alongside the Android SDK to create secure, user-friendly experiences for the world's most popular OS.
+                </div>
+
+                <div class="columns">
+                    <div class="detail-col">
+                        <h3>Course Content</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <ul>
+                                <li>Kotlin / Java Core</li>
+                                <li>Android SDK Tools</li>
+                                <li>Core Components</li>
+                                <li>UI Design (XML)</li>
+                            </ul>
+                            <ul>
+                                <li>SQLite & Room DB</li>
+                                <li>Retrofit (APIs)</li>
+                                <li>Firebase Services</li>
+                                <li>Play Store Launch</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="detail-col">
+                        <h3>Digital Mastery (Tools)</h3>
+                        <ul>
+                            <li>Android Studio</li>
+                            <li>Kotlin / Java</li>
+                            <li>Retrofit / MySQL</li>
+                            <li>Firebase & DevOps</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="job-profiles">
+                    <strong>Job Profiles:</strong> Android Developer | Mobile App Product Manager | DevOps Engineer
+                </div>
+            </div>
+
+            <div class="cta-container">
+                <a href="contact.html" class="enroll-btn">Enroll Now</a>
+            </div>
+        </section>
+
+        <aside class="side-stats">
+            <div class="stat-item">
+                <h4>Duration</h4>
+                <p>24 Weeks</p>
+            </div>
+            <div class="stat-item">
+                <h4>Schedule</h4>
+                <p>6 Days / Week</p>
+            </div>
+            <div class="stat-item">
+                <h4>Intensity</h4>
+                <p>2h Lecture + 2h Practice</p>
+            </div>
+            <div class="stat-item">
+                <h4>Certification</h4>
+                <p>Mobile Specialist</p>
+            </div>
+        </aside>
+    </main>
+
+</body>
+</html>
