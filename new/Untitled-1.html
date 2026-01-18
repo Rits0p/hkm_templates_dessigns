@@ -958,137 +958,336 @@
       text-decoration: none;
     }
 
-    /* portfoliosections */
+    /* placed student sections */
     :root {
-      --primary-red: #e63946;
-      --dark-bg: #0b0d11;
+      --ps-primary-blue: #0d3154;
+      /* Deep navy blue from your image */
+      --ps-accent-red: #e63946;
+      /* Bold red for CTC tag */
+      --ps-white: #ffffff;
+      --ps-text-gray: #bdc3c7;
     }
 
-    .portfolio-section {
-      background: var(--dark-bg);
+    .placed-students-section {
+      background: #0b0d11;
+      /* Dark page background */
       padding: 80px 0;
       color: white;
       font-family: 'Oswald', sans-serif;
+      overflow: hidden;
     }
 
-    .portfolio-header {
+    /* Header Styles */
+    .placed-students-header {
       display: flex;
       justify-content: space-between;
       padding: 0 5%;
       align-items: center;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
 
-    .portfolio-counter {
+    .placed-students-counter {
       font-size: 1.5rem;
       font-weight: bold;
       color: #555;
     }
 
     #current-number {
-      color: var(--primary-red);
-      font-size: 2rem;
+      color: var(--ps-accent-red);
+      font-size: 2.2rem;
     }
 
-    .portfolio-container {
+    /* Track and Container */
+    .placed-students-container {
       width: 100%;
       overflow: hidden;
       position: relative;
-      cursor: grab;
     }
 
-    .portfolio-track {
+    .placed-students-track {
       display: flex;
-      gap: 25px;
+      gap: 30px;
       padding: 20px 5%;
       width: max-content;
-      transition: transform 0.1s linear;
+      will-change: transform;
+      /* Optimization for smooth auto-scroll */
     }
 
-    .portfolio-card {
-      width: 350px;
-      background: #161a20;
-      border: 1px solid #333;
-      position: relative;
-      overflow: hidden;
-      transition: 0.4s;
-    }
+    /* The Pill-Shaped Card */
+    .placed-students-card {
+      width: 280px;
+      /* 1. Transparent background (0.15 for subtle, 0.4 for visible color) */
+      background: rgba(13, 49, 84, 0.25);
 
-    .portfolio-card img {
-      width: 100%;
-      height: 400px;
-      object-fit: cover;
-      transition: 0.6s;
-      filter: brightness(0.7);
-    }
+      /* 2. Glass Blur Effect */
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      /* For Safari support */
 
-    /* Hover Effect */
-    .portfolio-card:hover {
-      border-color: var(--primary-red);
-      transform: scale(1.02);
-      box-shadow: 0 0 20px rgba(230, 57, 70, 0.3);
-    }
+      /* 3. High-definition border (looks like glass edge) */
+      border: 1px solid rgba(255, 255, 255, 0.15);
 
-    .portfolio-card:hover img {
-      filter: brightness(1);
-      transform: scale(1.1);
-    }
-
-    .card-content {
-      position: absolute;
-      bottom: 60px;
-      left: 20px;
-      z-index: 2;
-    }
-
-    .category {
-      color: var(--primary-red);
-      font-size: 0.8rem;
-      font-weight: bold;
-    }
-
-    .proj-title {
-      font-size: 1.8rem;
-      margin: 5px 0;
-      text-transform: uppercase;
-    }
-
-    .ext-link {
-      display: block;
-      background: #1e2329;
-      color: #888;
+      border-radius: 100px;
+      padding: 40px 20px;
       text-align: center;
-      padding: 15px;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: 0.3s;
+      flex-shrink: 0;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+      /* 4. Shadow for depth */
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
     }
 
-    .ext-link:hover {
-      background: var(--primary-red);
-      color: white;
+    .placed-students-card:hover {
+      transform: scale(1.05) translateY(-10px);
+      background: rgba(13, 49, 84, 0.4);
+      /* Becomes slightly more solid on hover */
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
     }
 
-    /* Progress Bar */
-    .portfolio-footer {
-      padding: 40px 5%;
+    /* Image Styling */
+    .image-container {
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 25px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 6px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Name Badge (White Pill) */
+    .name-badge {
+      /* Semi-transparent white */
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(4px);
+      color: var(--ps-primary-blue);
+      font-weight: 700;
+      padding: 12px 20px;
+      border-radius: 20px;
+      display: inline-block;
+      width: 85%;
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    /* Placement Text */
+    .placement-text {
+      color: var(--ps-text-gray);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 25px;
+      font-family: 'Oswald', sans-serif;
+    }
+
+    .placement-text strong {
+      color: var(--ps-white);
+      display: block;
+      font-size: 1.1rem;
+      margin-top: 4px;
+    }
+
+    /* CTC Tag (Red Pill) */
+    .ctc-tag {
+      background: rgba(230, 57, 70, 0.9);
+      /* Keep the red mostly solid for readability */
+      color: var(--ps-white);
+      padding: 12px 25px;
+      border-radius: 12px;
+      font-weight: 700;
+      display: inline-block;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+    }
+
+    /* Footer Progress Bar */
+    .placed-students-footer {
+      padding: 50px 5% 20px;
     }
 
     .progress-bar-bg {
       width: 100%;
       height: 2px;
-      background: #333;
+      background: #222;
       position: relative;
+      border-radius: 2px;
     }
 
     .progress-fill {
       position: absolute;
       height: 4px;
       top: -1px;
-      background: var(--primary-red);
+      background: var(--ps-accent-red);
       width: 0%;
-      transition: 0.2s;
+      transition: width 0.1s linear;
+      border-radius: 2px;
+      box-shadow: 0 0 10px var(--ps-accent-red);
     }
+
+    /* portfolio section */
+    /* --- 1. SECTION & LAYOUT --- */
+    /* --- 1. SECTION & WRAPPER --- */
+    .portfolio-section {
+    background-color: #0b0d11;
+    padding: 100px 0;
+    font-family: 'Oswald', sans-serif;
+    overflow: hidden; /* Keeps the cards inside the section boundaries */
+}
+
+/* --- THE WRAPPER: Centers content & fixes "Too far left" --- */
+.portfolio-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 60px;
+}
+
+/* --- THE HEADER: Fixes "Too close" issue --- */
+.portfolio-header {
+    text-align: left;
+    margin-bottom: 120px; /* Big gap so upward sliding card doesn't hit title */
+    border-left: 5px solid #e63946;
+    padding-left: 20px;
+}
+
+.tag-line {
+    color: #e63946;
+    font-weight: 600;
+    letter-spacing: 4px;
+    display: block;
+    font-size: 0.9rem;
+}
+
+.section-title {
+    font-size: 3rem;
+    color: #ffffff;
+    margin: 5px 0 0 0;
+    text-transform: uppercase;
+}
+
+/* --- THE CONTAINER --- */
+.portfolio-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 40px;
+    padding: 80px 0 150px 0; /* Extra bottom padding for the downward slide */
+}
+
+/* --- THE CARD --- */
+.card {
+    position: relative;
+    width: 400px; 
+    height: 300px; 
+    transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Slide 1: Image Cover (Sits on TOP) */
+.card .slide.slide1 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #1a1d23;
+    z-index: 5; /* High z-index to stay on top initially */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card:hover .slide.slide1 {
+    transform: translateY(-150px); /* Moves exactly half-way up */
+    background: #0d3154;
+    border-color: #e63946;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.card .slide1 .icon img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid rgba(255,255,255,0.05);
+    transition: 0.5s;
+}
+
+.card:hover .slide1 .icon img {
+    transform: scale(1.1);
+    border-color: #e63946;
+}
+
+/* Slide 2: Details (Hidden BEHIND Slide 1) */
+.card .slide.slide2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    z-index: 1; /* Behind slide 1 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    border-radius: 15px;
+    transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    opacity: 0; /* Hidden until hover */
+}
+
+.card:hover .slide.slide2 {
+    transform: translateY(150px); /* Moves exactly half-way down */
+    opacity: 1; /* Makes content visible */
+}
+
+/* --- CONTENT STYLE --- */
+.slide2 .content {
+    text-align: center;
+}
+
+.slide2 .content h3 {
+    color: #0b0d11;
+    font-size: 28px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.slide2 .content p {
+    color: #444;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.visit-link {
+    display: inline-block;
+    padding: 12px 30px;
+    color: #e63946;
+    border: 2px solid #e63946;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 5px;
+    transition: 0.3s;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+.visit-link:hover {
+    background: #e63946;
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(230, 57, 70, 0.3);
+}
   </style>
 </head>
 
@@ -1276,75 +1475,253 @@
     </div>
   </section>
   <section class="portfolio-section">
-    <div class="portfolio-header">
-      <div class="title-area">
+    <div class="portfolio-wrapper">
+
+      <div class="portfolio-header">
         <span class="tag-line">STUDENT WORK</span>
-        <h2 class="section-title">PORTFOLIOS</h2>
+        <h2 class="section-title">FEATURED PORTFOLIOS</h2>
       </div>
-      <div class="portfolio-counter">
-        <span id="current-number">01</span> / 03
+
+      <div class="portfolio-container">
+
+        <div class="card">
+          <div class="slide slide1">
+            <div class="icon">
+              <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400" alt="Kenil Patel">
+            </div>
+          </div>
+          <div class="slide slide2">
+            <div class="content">
+              <h3>Kenil Patel</h3>
+              <p>Graphic Designer<br><strong>Maya • Photoshop • Illustrator</strong></p>
+              <a href="#" class="visit-link">VISIT PORTFOLIO</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="slide slide1">
+            <div class="icon">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400" alt="Arjun Mehta">
+            </div>
+          </div>
+          <div class="slide slide2">
+            <div class="content">
+              <h3>Arjun Mehta</h3>
+              <p>3D Modeler<br><strong>ZBrush • Blender • Substance</strong></p>
+              <a href="#" class="visit-link">VISIT PORTFOLIO</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="slide slide1">
+            <div class="icon">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400" alt="Priya Shah">
+            </div>
+          </div>
+          <div class="slide slide2">
+            <div class="content">
+              <h3>Priya Shah</h3>
+              <p>VFX Artist<br><strong>Houdini • Nuke • After Effects</strong></p>
+              <a href="#" class="visit-link">VISIT PORTFOLIO</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <section class="placed-students-section">
+    <div class="placed-students-header">
+      <div class="title-area">
+        <span class="tag-line">CAREER SUCCESS</span>
+        <h2 class="section-title">PLACED STUDENTS</h2>
+      </div>
+      <div class="placed-students-counter">
+        <span id="current-number">01</span> / 14
       </div>
     </div>
 
-    <div class="portfolio-container">
-      <div class="portfolio-track" id="autoTrack">
-        <div class="portfolio-card" data-index="01">
-          <a href="#" class="main-card-link">
-            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800" alt="Work 1">
-            <div class="card-content">
-              <span class="category">3D MODELING</span>
-              <h3 class="proj-title">CYBER CITY</h3>
-            </div>
-          </a>
-          <a href="#" class="ext-link">View Project</a>
-        </div>
+    <div class="placed-students-container">
+      <div class="placed-students-track" id="autoTrack">
 
-        <div class="portfolio-card" data-index="02">
-          <a href="#" class="main-card-link">
-            <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800" alt="Work 2">
-            <div class="card-content">
-              <span class="category">VFX ART</span>
-              <h3 class="proj-title">NEON STRIKE</h3>
+        <div class="placed-students-card" data-index="01">
+          <div class="student-profile-wrapper">
+            <div class="image-container">
+              <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400" alt="Kenil Patel">
             </div>
-          </a>
-          <a href="#" class="ext-link">View Project</a>
-        </div>
-
-        <div class="portfolio-card" data-index="03">
-          <a href="#" class="main-card-link">
-            <img src="https://images.unsplash.com/photo-1552824236-40dc02570d65?w=800" alt="Work 3">
-            <div class="card-content">
-              <span class="category">GAME DESIGN</span>
-              <h3 class="proj-title">WARRIOR ARENA</h3>
+            <div class="student-details">
+              <div class="name-badge">Kenil Patel</div>
+              <p class="placement-text">For getting placed as a <br><strong>Graphic Designer</strong></p>
+              <div class="ctc-tag">CTC - 1.86 LPA</div>
             </div>
-          </a>
-          <a href="#" class="ext-link">View Project</a>
-        </div>
-
-        <div class="portfolio-card" data-index="01"><img
-            src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800">
-          <div class="card-content">
-            <h3 class="proj-title">CYBER CITY</h3>
           </div>
         </div>
-        <div class="portfolio-card" data-index="02"><img
-            src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800">
-          <div class="card-content">
-            <h3 class="proj-title">NEON STRIKE</h3>
+
+        <div class="placed-students-card" data-index="02">
+          <div class="student-profile-wrapper">
+            <div class="image-container">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400" alt="Student Name">
+            </div>
+            <div class="student-details">
+              <div class="name-badge">Arjun Mehta</div>
+              <p class="placement-text">For getting placed as a <br><strong>3D Modeler</strong></p>
+              <div class="ctc-tag">CTC - 2.40 LPA</div>
+            </div>
           </div>
         </div>
-        <div class="portfolio-card" data-index="03"><img
-            src="https://images.unsplash.com/photo-1552824236-40dc02570d65?w=800">
-          <div class="card-content">
-            <h3 class="proj-title">WARRIOR ARENA</h3>
+
+        <div class="placed-students-card" data-index="03">
+          <div class="student-profile-wrapper">
+            <div class="image-container">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400" alt="Student Name">
+            </div>
+            <div class="student-details">
+              <div class="name-badge">Priya Shah</div>
+              <p class="placement-text">For getting placed as a <br><strong>VFX Artist</strong></p>
+              <div class="ctc-tag">CTC - 3.10 LPA</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="placed-students-card" data-index="04">
+          <div class="student-profile-wrapper">
+            <div class="image-container"><img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400">
+            </div>
+            <div class="student-details">
+              <div class="name-badge">Kenil Patel</div>
+              <p class="placement-text">For getting placed as a <br><strong>Graphic Designer</strong></p>
+              <div class="ctc-tag">CTC - 1.86 LPA</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="placed-students-card" data-index="05">
+          <div class="student-profile-wrapper">
+            <div class="image-container"><img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400">
+            </div>
+            <div class="student-details">
+              <div class="name-badge">Kenil Patel</div>
+              <p class="placement-text">For getting placed as a <br><strong>Graphic Designer</strong></p>
+              <div class="ctc-tag">CTC - 1.86 LPA</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="placed-students-card" data-index="06">
+          <div class="student-profile-wrapper">
+            <div class="image-container"><img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400">
+            </div>
+            <div class="student-details">
+              <div class="name-badge">Kenil Patel</div>
+              <p class="placement-text">For getting placed as a <br><strong>Graphic Designer</strong></p>
+              <div class="ctc-tag">CTC - 1.86 LPA</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="placed-students-card" data-index="07">
+          <div class="student-profile-wrapper">
+            <div class="image-container"><img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400">
+            </div>
+            <div class="student-details">
+              <div class="name-badge">Kenil Patel</div>
+              <p class="placement-text">For getting placed as a <br><strong>Graphic Designer</strong></p>
+              <div class="ctc-tag">CTC - 1.86 LPA</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="placed-students-card" data-index="08">
+          <div class="student-profile-wrapper">
+            <div class="image-container"><img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400">
+            </div>
+            <div class="student-details">
+              <div class="name-badge">Kenil Patel</div>
+              <p class="placement-text">For getting placed as a <br><strong>Graphic Designer</strong></p>
+              <div class="ctc-tag">CTC - 1.86 LPA</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="placed-students-card" data-index="09">
+          <div class="student-profile-wrapper">
+            <div class="image-container"><img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400">
+            </div>
+            <div class="student-details">
+              <div class="name-badge">Kenil Patel</div>
+              <p class="placement-text">For getting placed as a <br><strong>Graphic Designer</strong></p>
+              <div class="ctc-tag">CTC - 1.86 LPA</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="placed-students-card" data-index="10">
+          <div class="student-profile-wrapper">
+            <div class="image-container"><img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400">
+            </div>
+            <div class="student-details">
+              <div class="name-badge">Kenil Patel</div>
+              <p class="placement-text">For getting placed as a <br><strong>Graphic Designer</strong></p>
+              <div class="ctc-tag">CTC - 1.86 LPA</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="placed-students-card" data-index="11">
+          <div class="student-profile-wrapper">
+            <div class="image-container"><img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400">
+            </div>
+            <div class="student-details">
+              <div class="name-badge">Kenil Patel</div>
+              <p class="placement-text">For getting placed as a <br><strong>Graphic Designer</strong></p>
+              <div class="ctc-tag">CTC - 1.86 LPA</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="placed-students-card" data-index="12">
+          <div class="student-profile-wrapper">
+            <div class="image-container"><img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400">
+            </div>
+            <div class="student-details">
+              <div class="name-badge">Kenil Patel</div>
+              <p class="placement-text">For getting placed as a <br><strong>Graphic Designer</strong></p>
+              <div class="ctc-tag">CTC - 1.86 LPA</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="placed-students-card" data-index="13">
+          <div class="student-profile-wrapper">
+            <div class="image-container"><img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400">
+            </div>
+            <div class="student-details">
+              <div class="name-badge">Kenil Patel</div>
+              <p class="placement-text">For getting placed as a <br><strong>Graphic Designer</strong></p>
+              <div class="ctc-tag">CTC - 1.86 LPA</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="placed-students-card" data-index="14">
+          <div class="student-profile-wrapper">
+            <div class="image-container"><img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400">
+            </div>
+            <div class="student-details">
+              <div class="name-badge">Kenil Patel</div>
+              <p class="placement-text">For getting placed as a <br><strong>Graphic Designer</strong></p>
+              <div class="ctc-tag">CTC - 1.86 LPA</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="portfolio-footer">
+    <div class="placed-students-footer">
       <div class="progress-bar-bg">
-        <div class="progress-fill" id="p-fill"></div>
+        <div class="progress-fill"></div>
       </div>
     </div>
   </section>
@@ -1423,96 +1800,69 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <script>
     window.addEventListener('load', () => {
-      // Hero Animations (Landing Page)
+      // 1. Hero Animations
       setTimeout(() => {
         const bgImage = document.querySelector('.bg-image');
         if (bgImage) bgImage.classList.add('loaded');
       }, 100);
 
       setTimeout(() => {
-        const leftContent = document.querySelector('.left-content');
-        const rightImage = document.querySelector('.right-image');
-        const btnGroup = document.querySelector('.btn-group');
-
-        if (leftContent) leftContent.classList.add('show');
-        if (rightImage) rightImage.classList.add('show');
-        if (btnGroup) btnGroup.classList.add('show');
+        const elements = ['.left-content', '.right-image', '.btn-group'];
+        elements.forEach(selector => {
+          const el = document.querySelector(selector);
+          if (el) el.classList.add('show');
+        });
       }, 600);
 
-      // Check scroll position immediately on page load
+      // Initialize effects
       handleScrollEffects();
+      // Start the placed students auto-scroll
+      startAutoScroll();
     });
 
     /**
-     * Consolidated Scroll Function
-     * Handles Navbar visibility and Smooth Scale/Rotate linked to scroll position
+     * Navbar and Flip Reveal Logic
      */
     const handleScrollEffects = () => {
-      // 1. Navbar Logic
       const nav = document.querySelector('.navbar');
       if (nav) {
-        if (window.scrollY > 100) {
-          nav.classList.add('scrolled');
-        } else {
-          nav.classList.remove('scrolled');
-        }
+        window.scrollY > 100 ? nav.classList.add('scrolled') : nav.classList.remove('scrolled');
       }
 
-      // 2. Smooth Scale & Fade Logic (Linked to Scroll Pointer)
       const flipElements = document.querySelectorAll('.flip-reveal');
       const windowHeight = window.innerHeight;
 
       flipElements.forEach(el => {
         const rect = el.getBoundingClientRect();
-
-        // Find the center of the element and the center of the viewport
         const elementCenter = rect.top + rect.height / 2;
         const viewportCenter = windowHeight / 2;
 
-        // Calculate distance from center (0 = perfectly centered, 1 = off-screen)
         const distanceFromCenter = Math.abs(viewportCenter - elementCenter);
-        const maxDistance = windowHeight / 1.5; // Controls how quickly it scales
+        const maxDistance = windowHeight / 1.5;
         const normalizedDistance = Math.min(distanceFromCenter / maxDistance, 1);
 
-        // Transformation Calculations
-        // Scale: Goes from 1.0 (centered) down to 0.85 (away)
         const scale = 1 - (0.15 * normalizedDistance);
-        // Rotation: Tilted slightly (-10deg) when away, flat (0deg) when centered
         const rotation = -10 * normalizedDistance;
-        // Y-Offset: Moves slightly down (40px) as it fades out
         const translateY = normalizedDistance * 40;
-        // Opacity: Fades out as it leaves the center
         const opacity = 1 - normalizedDistance;
 
-        // Check if element is at least partially in the viewport
         if (rect.top < windowHeight && rect.bottom > 0) {
           el.classList.add('active');
-
-          // Apply the styles directly to link them to the scroll movement
           el.style.transform = `scale(${scale}) rotateX(${rotation}deg) translateY(${translateY}px)`;
-          el.style.opacity = opacity + 0.2; // Offset ensures it doesn't disappear too fast
-
-          // Handle the Flash Gradient trigger (specific to the about-img container)
-          if (el.classList.contains('about-img')) {
-            if (normalizedDistance < 0.5) {
-              el.classList.add('active');
-            } else {
-              el.classList.remove('active');
-            }
-          }
+          el.style.opacity = opacity + 0.2;
         } else {
           el.classList.remove('active');
         }
       });
     };
 
-
-    // Use requestAnimationFrame for 60fps smooth "pointer" movement
     window.addEventListener('scroll', () => {
       window.requestAnimationFrame(handleScrollEffects);
     });
 
-    // coyrsepage horizontal scroll
+    /**
+     * Course Page Horizontal Scroll (Sticky Wrapper)
+     */
     window.addEventListener('scroll', () => {
       const wrapper = document.querySelector('.sticky-wrapper');
       const track = document.getElementById('courseTrack');
@@ -1524,20 +1874,14 @@
       const wrapperHeight = wrapper.offsetHeight;
       const viewportHeight = window.innerHeight;
 
-      // Calculate how much has been scrolled within the wrapper (0 to 1)
       let scrollFraction = (window.scrollY - wrapperTop) / (wrapperHeight - viewportHeight);
-
-      // Constrain between 0 and 1
       scrollFraction = Math.max(0, Math.min(1, scrollFraction));
 
-      // Move the course track horizontally
       const maxMove = track.scrollWidth - window.innerWidth;
       track.style.transform = `translateX(-${scrollFraction * maxMove}px)`;
 
-      // Update the bottom progress line width
-      progress.style.width = `${scrollFraction * 100}%`;
+      if (progress) progress.style.width = `${scrollFraction * 100}%`;
 
-      // Update dots active state based on index
       const dots = document.querySelectorAll('.dot');
       const activeIndex = Math.round(scrollFraction * (dots.length - 1));
       dots.forEach((dot, idx) => {
@@ -1545,53 +1889,68 @@
       });
     });
 
-    // portfolio section
-    const track = document.getElementById('autoTrack');
-    const fill = id = "p-fill";
-    const currentNumDisplay = document.getElementById('current-number');
-    const cards = document.querySelectorAll('.portfolio-card');
+    /**
+     * Placed Students Section - Auto Horizontal Scroll Logic
+     */
+    const psTrack = document.getElementById('autoTrack');
+    const psProgressFill = document.querySelector('.progress-fill'); // Matches your CSS
+    const psCurrentNum = document.getElementById('current-number');
+    const psCards = document.querySelectorAll('.placed-students-card');
 
-    let scrollPos = 0;
-    let isPaused = false;
+    let psScrollPos = 0;
+    let psIsPaused = false;
 
     // Pause auto-scroll on hover
-    track.addEventListener('mouseenter', () => isPaused = true);
-    track.addEventListener('mouseleave', () => isPaused = false);
+    if (psTrack) {
+      psTrack.addEventListener('mouseenter', () => psIsPaused = true);
+      psTrack.addEventListener('mouseleave', () => psIsPaused = false);
+    }
 
     function startAutoScroll() {
-      if (!isPaused) {
-        scrollPos += 1; // સ્પીડ અહીંથી બદલી શકાય (1, 2, 3...)
-
-        const maxScroll = track.scrollWidth - window.innerWidth;
-
-        if (scrollPos >= maxScroll) {
-          scrollPos = 0; // રીસેટ
-        }
-
-        track.style.transform = `translateX(-${scrollPos}px)`;
-
-        // Progress line અને Number અપડેટ કરવાનું લોજિક
-        updateUI(scrollPos, maxScroll);
+      if (!psTrack || psIsPaused) {
+        requestAnimationFrame(startAutoScroll);
+        return;
       }
+
+      // Speed setting (0.5 to 1.5 is usually best for readability)
+      psScrollPos += 1;
+
+      // Calculate the point where the first set of cards ends (to create infinite loop)
+      // Since you have 3 cards + 3 clones, we reset when we reach halfway
+      const halfWidth = psTrack.scrollWidth / 2;
+
+      if (psScrollPos >= halfWidth) {
+        psScrollPos = 0;
+      }
+
+      // Apply movement via transform for better performance
+      psTrack.style.transform = `translateX(-${psScrollPos}px)`;
+
+      // Update Progress Bar and Number Counter
+      updatePlacedStudentsUI(psScrollPos, halfWidth);
+
       requestAnimationFrame(startAutoScroll);
     }
 
-    function updateUI(pos, max) {
-      // Progress Line
-      const percentage = (pos / max) * 100;
-      document.getElementById('p-fill').style.width = `${percentage}%`;
+    function updatePlacedStudentsUI(pos, max) {
+      // Update Progress Line
+      if (psProgressFill) {
+        const percentage = (pos / max) * 100;
+        psProgressFill.style.width = `${percentage}%`;
+      }
 
-      // કયું કાર્ડ અત્યારે સેન્ટરમાં છે તે ચેક કરવા માટે
-      cards.forEach((card) => {
+      // Update Number Counter based on which card is entering the viewport
+      psCards.forEach((card) => {
         const rect = card.getBoundingClientRect();
-        if (rect.left > 0 && rect.left < window.innerWidth / 2) {
-          currentNumDisplay.innerText = card.getAttribute('data-index');
+        // If the card's left edge is near the start of the container
+        if (rect.left > 0 && rect.left < 200) {
+          const index = card.getAttribute('data-index');
+          if (index && psCurrentNum) {
+            psCurrentNum.innerText = index;
+          }
         }
       });
     }
-
-    // બધી ઈમેજ લોડ થયા પછી શરૂ કરો
-    window.onload = startAutoScroll;
   </script>
 </body>
 
