@@ -1,357 +1,422 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us | Harikrushna Multimedia</title>
-  
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Poppins:wght@300;400;600&display=swap"
+    rel="stylesheet">
+
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap');
     /* --- CSS VARIABLES --- */
-   /* ================================================================
+    /* ================================================================
    1. CORE VARIABLES & GLOBAL STYLES
    ================================================================ */
-:root {
-  --footer-bg: #0f1115;      /* Primary Dark Background */
-  --footer-card: #1a1d23;    /* Surface color for cards/inputs */
-  --primary-red: #e63946;    /* Accent Red for branding */
-  --text-main: #ffffff;      /* Pure white text */
-  --text-dim: #a0a0a0;       /* Muted grey text */
-  --white: #ffffff;
-  --nav-glass: rgba(255, 255, 255, 0.1);
-}
+    :root {
+      --footer-bg: #0f1115;
+      /* Primary Dark Background */
+      --footer-card: #1a1d23;
+      /* Surface color for cards/inputs */
+      --primary-red: #e63946;
+      /* Accent Red for branding */
+      --text-main: #ffffff;
+      /* Pure white text */
+      --text-dim: #a0a0a0;
+      /* Muted grey text */
+      --white: #ffffff;
+      --nav-glass: rgba(255, 255, 255, 0.1);
+    }
 
-* { 
-  margin: 0; 
-  padding: 0; 
-  box-sizing: border-box; 
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-body { 
-  background-color: #08090b; 
-  color: var(--text-main);
-  font-family: 'Poppins', sans-serif;
-  padding-top: 100px; /* Prevents hero from hiding under fixed nav */
-  overflow-x: hidden;
-}
+    body {
+      background-color: #08090b;
+      color: var(--text-main);
+      font-family: 'Poppins', sans-serif;
+      padding-top: 100px;
+      /* Prevents hero from hiding under fixed nav */
+      overflow-x: hidden;
+    }
 
-/* ================================================================
+    /* ================================================================
    2. NAVBAR STYLES (Floating Glass Design)
    ================================================================ */
-.navbar {
-  position: fixed;
-  top: 20px;
-  left: 5%;
-  right: 5%;
-  z-index: 1000;
-  padding: 0.8rem 2.5%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 100px;
-  
-  /* Initial State: Glassy Translucent */
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  background: var(--nav-glass);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
+    .navbar {
+      position: fixed;
+      top: 20px;
+      left: 5%;
+      right: 5%;
+      z-index: 1000;
+      padding: 0.8rem 2.5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 100px;
 
-/* Scrolled State: Navy Blue variant triggered by JS */
-.navbar.scrolled {
-  background: rgba(29, 53, 87, 0.9); 
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  top: 10px;
-}
+      /* Initial State: Glassy Translucent */
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      background: var(--nav-glass);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
 
-.nav-links { display: flex; align-items: center; gap: 25px; }
+    /* Scrolled State: Navy Blue variant triggered by JS */
+    .navbar.scrolled {
+      background: rgba(29, 53, 87, 0.9);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      top: 10px;
+    }
 
-/* Desktop Menu Links */
-.nav-links a:not(.nav-cta) {
-  color: var(--white);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  position: relative;
-  transition: 0.3s;
-}
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
 
-/* Link Underline Animation */
-.nav-links a:not(.nav-cta)::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--primary-red);
-  transition: 0.3s;
-}
-.nav-links a:not(.nav-cta):hover::after { width: 100%; }
+    /* Desktop Menu Links */
+    .nav-links a:not(.nav-cta) {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      transition: 0.3s;
+    }
 
-/* Red Button CTA */
-.nav-cta {
-  background: linear-gradient(135deg, #ff0000 0%, #b30000 100%);
-  color: white !important;
-  padding: 10px 24px;
-  border-radius: 50px;
-  font-weight: 800;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-decoration: none;
-  box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-  margin-left: 10px;
-}
-.nav-cta:hover {
-  transform: translateY(-2px) scale(1.05);
-  background: #ffffff;
-  color: var(--primary-red) !important;
-  border: 2px solid var(--primary-red);
-}
+    /* Link Underline Animation */
+    .nav-links a:not(.nav-cta)::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-red);
+      transition: 0.3s;
+    }
 
-/* Logo Area */
-.logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.nav-logo { height: 45px; transition: all 0.4s; }
-.logo-text { font-family: 'Oswald', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--white); text-transform: uppercase; }
+    .nav-links a:not(.nav-cta):hover::after {
+      width: 100%;
+    }
 
-/* ================================================================
+    /* Red Button CTA */
+    .nav-cta {
+      background: linear-gradient(135deg, #ff0000 0%, #b30000 100%);
+      color: white !important;
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      margin-left: 10px;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px) scale(1.05);
+      background: #ffffff;
+      color: var(--primary-red) !important;
+      border: 2px solid var(--primary-red);
+    }
+
+    /* Logo Area */
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo {
+      height: 45px;
+      transition: all 0.4s;
+    }
+
+    .logo-text {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+
+    /* ================================================================
    3. CONTACT HERO SECTION (Animation & Background)
    ================================================================ */
-.contact-hero { 
-  position: relative;
-  padding: 80px 5% 120px 5%;
-  /* Dark space background */
-  background: radial-gradient(circle at 20% 30%, #1a1d23 0%, #08090b 100%);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-}
+    /* --- Hero Section Main Container --- */
+:root {
+        --primary-red: #e63946;
+        --bg-dark: #08090b;
+        --card-bg: rgba(20, 22, 26, 0.95);
+    }
 
-/* Animated background glow */
-.hero-overlay-glow {
-  position: absolute;
-  top: -10%;
-  right: -5%;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(230, 57, 70, 0.15) 0%, transparent 70%);
-  filter: blur(80px);
-  z-index: 1;
-  animation: glowMove 10s infinite alternate ease-in-out;
-}
+    /* Entrance Animation on Page Load */
+    @keyframes heroEntrance {
+        0% { opacity: 0; transform: translateY(80px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
 
-.contact-container {
-  max-width: 1300px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 60px;
-  position: relative;
-  z-index: 2;
-}
+    .contact-hero {
+        position: relative;
+        padding: 40px 5% 0 5%; /* Minimized top padding to remove gap */
+        background: var(--bg-dark);
+        background-image: radial-gradient(circle at 70% 30%, rgba(230, 57, 70, 0.15) 0%, transparent 60%);
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+    }
 
-/* Overview Text Styling */
-.cert-tag {
-  color: var(--primary-red);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-weight: bold;
-  font-size: 0.85rem;
-  display: block;
-  margin-bottom: 10px;
-  animation: fadeInUp 0.8s ease forwards;
-}
+    .contact-container {
+        max-width: 1300px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 50px;
+        position: relative;
+        z-index: 10;
+        align-items: flex-end; /* Character sits on the bottom edge */
+        width: 100%;
+    }
 
-.contact-title { 
-  font-family: 'Oswald', sans-serif; 
-  font-size: 3.5rem; 
-  text-transform: uppercase; 
-  margin-bottom: 25px; 
-  animation: fadeInUp 0.8s ease forwards 0.2s;
-  opacity: 0;
-}
-.contact-title span { color: var(--primary-red); text-shadow: 0 0 15px rgba(230, 57, 70, 0.3); }
+    .hero-visual {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        will-change: transform;
+        /* Initial entrance animation */
+        animation: heroEntrance 1.2s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+    }
 
-.hero-subtitle {
-  animation: fadeInUp 0.8s ease forwards 0.4s;
-  opacity: 0;
-}
+    .hero-visual img {
+        width: 100%;
+        max-width: 580px;
+        height: auto;
+        filter: drop-shadow(0 0 30px rgba(0, 0, 0, 0.8));
+        margin-bottom: -5px; /* Removes tiny gaps under the image */
+        transition: transform 0.1s ease-out; /* Smooths the scroll sync */
+    }
 
-/* Stats Row Styling */
-.overview-stats { 
-  margin-top: 40px; 
-  display: flex; 
-  gap: 20px;
-  animation: fadeInUp 0.8s ease forwards 0.6s;
-  opacity: 0;
-}
-.stat-item {
-  background: var(--footer-card);
-  padding: 15px 20px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.05);
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  transition: 0.3s;
-}
-.stat-item:hover { transform: translateY(-5px); border-color: var(--primary-red); }
-.stat-item i { color: var(--primary-red); font-size: 1.5rem; }
+    .contact-content {
+        padding-bottom: 80px; /* Aligns text vertically with the image center */
+    }
 
-/* Visual Side (Right) */
-.hero-visual { display: flex; justify-content: center; align-items: center; }
-.contact-main-icon {
-  font-size: 7rem;
-  color: var(--primary-red);
-  filter: drop-shadow(0 0 20px rgba(230, 57, 70, 0.4));
-  animation: floatIcon 4s infinite ease-in-out;
-}
-.pulse-ring {
-  position: absolute;
-  width: 150px; height: 150px;
-  border: 2px solid var(--primary-red);
-  border-radius: 50%;
-  animation: pulseRing 3s infinite;
-}
+    .contact-title {
+        font-family: 'Oswald', sans-serif;
+        font-size: clamp(2.5rem, 5vw, 4.2rem);
+        line-height: 1;
+        color: #fff;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
 
-/* ================================================================
+    .contact-title span {
+        color: var(--primary-red);
+        display: block;
+        text-shadow: 0 0 20px rgba(230, 57, 70, 0.4);
+    }
+
+    .hero-subtitle {
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 1.1rem;
+        max-width: 520px;
+        margin-bottom: 35px;
+    }
+
+    .overview-stats {
+        display: flex;
+        gap: 20px;
+    }
+
+    .stat-item {
+        background: var(--card-bg);
+        border-left: 4px solid var(--primary-red);
+        padding: 20px;
+        flex: 1;
+        clip-path: polygon(0 0, 100% 0, 100% 82%, 92% 100%, 0 100%);
+    }
+
+    .stat-item h4 {
+        color: #fff;
+        text-transform: uppercase;
+        font-size: 1rem;
+        margin-bottom: 5px;
+    }
+
+    .stat-item p {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.85rem;
+    }
+
+    /* Responsiveness */
+    @media (max-width: 992px) {
+        .contact-container { grid-template-columns: 1fr; }
+        .hero-visual { order: 2; }
+        .contact-content { text-align: center; padding-bottom: 40px; }
+        .overview-stats { flex-direction: column; }
+    }
+
+/* Clean up: Removed old Icon/Pulse ring classes */
+    /* ================================================================
    4. CONTACT FORM & INFO SECTION
    ================================================================ */
-/* ================================================================
+    /* ================================================================
    FULL-SCREEN "GET IN TOUCH" STYLES
    ================================================================ */
-/* MAIN WRAPPER */
+    /* MAIN WRAPPER */
+    :root {
+  --primary-red: #e63946;
+  --dark-bg: #08090b;
+  --card-bg: #1a1d23;
+  --input-bg: #0d1117;
+  --text-gray: #8b949e;
+}
+
+/* --- Layout Wrapper --- */
 .form-container-main {
-  width: 100vw;
-  min-height: 100vh;
+  /* Added margin-top to ensure space if title is considered part of this section */
+  margin-top: 20px; 
   display: flex;
-  margin: 0;
-  padding: 0;
-  background-color: #08090b;
-  overflow: visible;
-}
-.form-clip-wrapper {
-  flex: 1;
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% calc(100% - 60px),
-    calc(100% - 60px) 100%,
-    0 100%
-  );
-}
-
-/* FORM CONTAINER */
-.form-container {
-  width: 100%;
-  padding-top: 40px;
-  min-height: 100vh;
-  background-color: #1a1d23;
-  display: flex;
+  justify-content: center;
   align-items: flex-start;
-  padding: 60px 8%;          /* ✅ LEFT + RIGHT SPACE */
   gap: 60px;
-  border-left: 10px solid #e63946;
-  clip-path: none;
+  padding: 0 5% 100px; /* Space at the bottom of the page */
 }
 
-/* LEFT SIDE */
+/* --- The Main Card --- */
+.form-container {
+  display: flex;
+  flex-direction: row; /* Keeps Model and Form side-by-side */
+  align-items: flex-start; /* Keeps heading/model at the top */
+  gap: 60px; /* Space between model and form */
+  width: 100%;
+  max-width: 1300px;
+  background-color: var(--card-bg);
+  padding: 60px;
+  border-left: 6px solid var(--primary-red);
+  position: relative;
+  overflow: visible;
+  
+  /* Cyberpunk corner cut for the whole card */
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%);
+}
+
+/* --- Left Side: Heading & Model --- */
 .form-image {
-  flex: 1;
+  flex: 0.8; 
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* ✅ TITLE AT TOP */
-   overflow: visible;
 }
 
-/* LEFT TITLE */
-.form-right-title {
+.section-title-wrap {
+  border-left: 5px solid var(--primary-red);
+  padding-left: 20px;
+  margin-bottom: 25px;
+}
+
+.section-title-wrap .subtitle {
+  color: #e63946;
   font-family: 'Oswald', sans-serif;
-  font-size: 2.2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  color: white;
-  margin-bottom: 40px;
-  letter-spacing: 1px;
-  margin-top: 10px;
+  margin-bottom: 8px;
+  display: block;
+}
+.section-title-wrap {
+  /* This centers the heading area to match the form below */
+  max-width: 1200px; 
+  margin: 100px auto 40px; /* 100px space from above section, 40px space before form */
+  
+  /* Adds space from the left screen edge */
+  padding-left: 40px; 
+  
+  /* The red vertical bar */
+  border-left: 5px solid #e63946; 
+  
+  /* Ensures text doesn't touch the red bar */
+  margin-left: 5%; 
 }
 
-.form-right-title span {
+.section-title-wrap h1 {
+  color: white;
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+  margin: 0;
+}
+.section-title-wrap h1 span {
   color: #e63946;
 }
-
-.form-right-title::after {
-  content: "";
-  display: block;
-  width: 60px;
-  height: 4px;
-  background: #e63946;
-  margin-top: 8px;
-}
-
-/* MODEL */
-.form-image model-viewer {
+.model {
   width: 100%;
-  height: 50vh;
+  height: 500px;
+  margin-top: 20px;
   outline: none;
-  overflow: visible;
 }
 
-/* RIGHT SIDE */
-.form-content-area {
-  flex: 1;
-}
-
-/* FORM GRID */
-.contact-form-grid {
+/* --- Right Side: Form --- */
+.form {
+  flex: 1.2;
   display: flex;
   flex-direction: column;
   gap: 15px;
+  margin-top: 65px; /* Adjusts form position relative to heading */
 }
 
 .form-group input,
-.form-group select,
+.form-group .form-select,
 .form-group textarea {
   width: 100%;
-  background-color: #0d1117;
+  background-color: var(--input-bg);
   border: 1px solid #30363d;
   color: white;
   padding: 18px;
-  font-family: 'Poppins', sans-serif;
   font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
   outline: none;
-  transition: all 0.3s ease;
+  transition: 0.3s;
   border-left: 4px solid transparent;
 }
 
 .form-group input:focus,
-.form-group select:focus,
+.form-group .form-select:focus,
 .form-group textarea:focus {
-  border-left: 4px solid #e63946;
+  border-left: 4px solid var(--primary-red);
   background-color: #161b22;
-  box-shadow: 0 0 15px rgba(230, 57, 70, 0.1);
 }
 
-/* BUTTONS */
-.button-row {
+/* --- Buttons with Gaming Curve --- */
+.button-container {
   display: flex;
-  gap: 20px;
+  gap: 15px;
   margin-top: 10px;
 }
 
-.send-btn-main {
+.send-button {
   flex: 2;
-  background: #e63946;
+  background: var(--primary-red);
   color: white;
   border: none;
   padding: 18px;
@@ -359,159 +424,446 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   cursor: pointer;
-  transition: 0.4s;
+  transition: 0.3s;
+  /* Specific Gaming Curve Clip */
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
 }
 
-.send-btn-main:hover {
+.send-button:hover {
   background: white;
-  color: #e63946;
-  transform: translateY(-3px);
+  color: var(--primary-red);
 }
 
-.reset-wrap {
+.reset-button-container {
   flex: 1;
-  filter: drop-shadow(2px 2px 0px #e63946);
+  filter: drop-shadow(2px 2px 0px var(--primary-red));
 }
 
-.reset-btn-main {
-  width: 100%;
-  background: #08090b;
-  color: #e63946;
-  border: 1px solid #e63946;
+.reset-button {
+  background: #000;
+  color: white;
+  text-align: center;
   padding: 18px;
+  font-family: 'Oswald', sans-serif;
   font-weight: 700;
   text-transform: uppercase;
   cursor: pointer;
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% calc(100% - 12px),
-    calc(100% - 12px) 100%,
-    0 100%
-  );
+  transition: 0.3s;
+  /* Matching Gaming Curve Clip */
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
 }
 
-.reset-btn-main:hover {
-  background: #e63946;
+.reset-button:hover {
+  background: var(--primary-red);
   color: white;
 }
 
-/* RESPONSIVE */
+/* --- Responsive Fix --- */
 @media (max-width: 992px) {
   .form-container {
     flex-direction: column;
-    padding: 100px 5% 50px;
+    gap: 30px;
+    padding: 40px 20px;
     clip-path: none;
+  }
+
+  .form {
+    margin-top: 0;
+    width: 100%;
+  }
+  
+  .form-image {
+    width: 100%;
   }
 }
 
-
-/* ================================================================
+    /* ================================================================
    5. FOOTER STYLES (Gaming Aesthetic)
    ================================================================ */
-.main-footer {
-  background-color: var(--footer-bg);
-  color: var(--text-main);
-  padding: 80px 5% 40px 5%;
-  border-top: 2px solid var(--primary-red);
-}
+    .main-footer {
+      background-color: var(--footer-bg);
+      color: var(--text-main);
+      padding: 80px 5% 40px 5%;
+      border-top: 2px solid var(--primary-red);
+    }
 
-.footer-container {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr 0.8fr 1.2fr;
-  gap: 40px;
-  max-width: 1400px;
-  margin: 0 auto;
-}
+    .footer-container {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr 1.2fr;
+      gap: 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
 
-.col-title {
-  color: var(--text-main);
-  font-family: 'Oswald', sans-serif;
-  font-size: 1.3rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 25px;
-  position: relative;
-}
-.col-title::after {
-  content: ''; position: absolute; bottom: -8px; left: 0; width: 40px; height: 3px; background: var(--primary-red);
-}
+    .col-title {
+      color: var(--text-main);
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 25px;
+      position: relative;
+    }
 
-.social-links { display: flex; gap: 12px; margin-top: 20px; }
-.social-icon {
-  width: 40px; height: 40px; background: #252830;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--white); text-decoration: none;
-  transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-.social-icon:hover {
-  background: var(--primary-red); transform: rotate(10deg) scale(1.1);
-  box-shadow: 0 0 15px rgba(230, 57, 70, 0.4);
-}
+    .col-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--primary-red);
+    }
 
-.footer-links { list-style: none; }
-.footer-links li { margin-bottom: 12px; }
-.footer-links a { color: var(--text-dim); text-decoration: none; transition: 0.3s; font-size: 0.9rem; }
-.footer-links a:hover { color: var(--primary-red); padding-left: 8px; }
+    .social-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
 
-.btn-verify {
-  display: inline-block; background: transparent; color: var(--primary-red);
-  padding: 10px 20px; border: 1px solid var(--primary-red);
-  text-decoration: none; font-weight: bold; text-transform: uppercase;
-  margin: 20px 0; transition: 0.3s;
-}
-.btn-verify:hover { background: var(--primary-red); color: white; }
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      background: #252830;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      text-decoration: none;
+      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
 
-.newsletter-form { display: flex; margin-top: 15px; }
-.newsletter-form input { background: var(--footer-card); border: 1px solid #333; padding: 12px; color: white; flex: 1; outline: none; }
-.newsletter-form button { background: var(--primary-red); color: white; border: none; padding: 0 20px; cursor: pointer; font-weight: bold; }
+    .social-icon:hover {
+      background: var(--primary-red);
+      transform: rotate(10deg) scale(1.1);
+      box-shadow: 0 0 15px rgba(230, 57, 70, 0.4);
+    }
 
-.footer-bottom {
-  margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.05);
-  display: flex; justify-content: space-between; color: var(--text-dim); font-size: 0.85rem;
-}
+    .footer-links {
+      list-style: none;
+    }
 
-/* ================================================================
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: 0.3s;
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-red);
+      padding-left: 8px;
+    }
+
+    .btn-verify {
+      display: inline-block;
+      background: transparent;
+      color: var(--primary-red);
+      padding: 10px 20px;
+      border: 1px solid var(--primary-red);
+      text-decoration: none;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin: 20px 0;
+      transition: 0.3s;
+    }
+
+    .btn-verify:hover {
+      background: var(--primary-red);
+      color: white;
+    }
+
+    .newsletter-form {
+      display: flex;
+      margin-top: 15px;
+    }
+
+    .newsletter-form input {
+      background: var(--footer-card);
+      border: 1px solid #333;
+      padding: 12px;
+      color: white;
+      flex: 1;
+      outline: none;
+    }
+
+    .newsletter-form button {
+      background: var(--primary-red);
+      color: white;
+      border: none;
+      padding: 0 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .footer-bottom {
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+
+    /* ================================================================
    6. ANIMATION KEYFRAMES
    ================================================================ */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
 
-@keyframes floatIcon {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-@keyframes pulseRing {
-  0% { transform: scale(0.8); opacity: 0.5; }
-  100% { transform: scale(2); opacity: 0; }
-}
+    @keyframes floatIcon {
 
-@keyframes glowMove {
-  from { transform: translate(0, 0); }
-  to { transform: translate(-30px, 30px); }
-}
+      0%,
+      100% {
+        transform: translateY(0);
+      }
 
-/* ================================================================
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    @keyframes pulseRing {
+      0% {
+        transform: scale(0.8);
+        opacity: 0.5;
+      }
+
+      100% {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+
+    @keyframes glowMove {
+      from {
+        transform: translate(0, 0);
+      }
+
+      to {
+        transform: translate(-30px, 30px);
+      }
+    }
+
+    /* ================================================================
    7. RESPONSIVE BREAKPOINTS
    ================================================================ */
-@media (max-width: 992px) {
-  .footer-container, .contact-container { grid-template-columns: 1fr 1fr; }
-  .contact-title { font-size: 2.8rem; }
+    @media (max-width: 992px) {
+
+      .footer-container,
+      .contact-container {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .contact-title {
+        font-size: 2.8rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+
+      .footer-container,
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      /* Mobile menu toggle would go here */
+      .contact-hero {
+        text-align: center;
+      }
+
+      .overview-stats {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+    /* --- Info Section Layout --- */
+.contact-info-section {
+  background-color: #08090b;
+  padding: 80px 0; /* Vertical spacing only */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px; 
+  margin: 0 auto; /* સેક્શનને સેન્ટર રાખશે પણ અંદરની આઈટમ્સ લેફ્ટ રહેશે */
+  box-sizing: border-box;
+  align-items: flex-start;
+  margin-left: 5%;
+   /* Centers the 1200px content */
 }
 
-@media (max-width: 768px) {
-  .footer-container, .contact-container { grid-template-columns: 1fr; }
-  .nav-links { display: none; } /* Mobile menu toggle would go here */
-  .contact-hero { text-align: center; }
-  .overview-stats { justify-content: center; flex-wrap: wrap; }
+
+.info-grid {
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 80px;
 }
+
+.details-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-title-wrap.no-margin {
+  margin: 0 0 40px 0;
+}
+
+/* --- Info Items Styling --- */
+.info-items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.icon-box {
+  min-width: 55px;
+  height: 55px;
+  background: #1a1d23;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e63946;
+  font-size: 1.2rem;
+  border: 1px solid #30363d;
+  transition: 0.3s;
+}
+
+.info-item:hover .icon-box {
+  background: #e63946;
+  color: white;
+  transform: scale(1.1);
+}
+
+.text-box h3 {
+  color: white;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.3rem;
+  margin: 0 0 5px 0;
+  text-transform: uppercase;
+}
+
+.text-box p {
+  color: #8b949e;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* --- Social Media --- */
+.social-wrapper {
+  margin-top: 50px;
+}
+
+.social-wrapper h3 {
+  color: white;
+  font-family: 'Oswald', sans-serif;
+  margin-bottom: 20px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.social-btn {
+  width: 45px;
+  height: 45px;
+  background: #1a1d23;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  border: 1px solid #30363d;
+  transition: 0.3s;
+}
+
+.social-btn:hover {
+  background: #e63946;
+  border-color: #e63946;
+  transform: translateY(-5px);
+}
+
+/* --- Visual/Map Column --- */
+.visual-column {
+  display: flex;
+  align-items: center;
+}
+
+.map-placeholder {
+  width: 100%;
+  height: 500px;
+  background: #1a1d23;
+  border-left: 6px solid #e63946;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+}
+
+.cyber-box {
+  color: #30363d;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 800;
+  font-size: 2rem;
+  letter-spacing: 5px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+  .map-placeholder {
+    height: 300px;
+  }
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+   
 
   </style>
 </head>
+
 <body>
 
   <nav class="navbar" id="mainNav">
@@ -532,122 +884,193 @@ body {
   </nav>
 
   <section class="contact-hero">
-  <div class="hero-overlay-glow"></div>
-  <div class="contact-container">
-    <div class="hero-overview">
-      <span class="cert-tag">ISO 9001:2015 Certified Institution</span>
-      <h1 class="contact-title">Connect with <span>Harikrushna</span></h1>
-      <p class="hero-subtitle">
-        Have questions about your future in VFX, Animation, or Game Design? 
-        Our experts are ready to guide you through our industry-standard programs 
-        and placement opportunities.
-      </p>
-      
-      <div class="overview-stats">
-        <div class="stat-item">
-          <i class="fas fa-user-graduate"></i>
-          <div>
-            <strong>Expert Mentors</strong>
-            <span>Industry Professional Trainers</span>
-          </div>
+    <div class="hero-overlay-glow"></div>
+    <div class="contact-container">
+        <div class="hero-visual">
+            <img src="hammer.png" alt="Gaming Character" id="hero-warrior-img">
         </div>
-        <div class="stat-item">
-          <i class="fas fa-headset"></i>
-          <div>
-            <strong>Career Support</strong>
-            <span>Free Counseling Sessions</span>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="hero-visual">
-      <div class="floating-container">
-        <i class="fas fa-envelope-open-text contact-main-icon"></i>
-        <div class="pulse-ring"></div>
-      </div>
+        <div class="contact-content">
+            <span class="cert-tag">ISO 9001:2015 Certified Institution</span>
+            <h1 class="contact-title">
+                Connect With <span>Harikrushna</span>
+            </h1>
+            <p class="hero-subtitle">
+                Have questions about your future in VFX, Animation, or Game Design? Our experts are ready to guide you through our industry-standard programs and placement opportunities.
+            </p>
+
+            <div class="overview-stats">
+                <div class="stat-item">
+                    <h4>Expert Mentors</h4>
+                    <p>Industry Professional Trainers</p>
+                </div>
+                <div class="stat-item">
+                    <h4>Career Support</h4>
+                    <p>Free Counseling Sessions</p>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
-<script type="module"
-  src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js">
-</script>
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js">
+  </script>
 
-<section class="form-container-main">
-  <div class="form-container">
+  <div class="section-title-wrap">
 
-    <!-- LEFT SECTION -->
+    <span class="subtitle">GET IN TOUCH</span>
+
+    <h1 class="montserrat">CONTACT <span>US</span></h1>
+
+  </div>
+
+  <section class="form-container-main reveal">
+
     <div class="form-image">
-      <h1 class="form-right-title">
-        Get in <span>Touch</span>
-      </h1>
 
-      <model-viewer
+      <model-viewer class="model" alt="laptop"
         src="https://raw.githubusercontent.com/Smit-Prajapati/prajapatismit/b5f434ae4d45d10fe1664d5606ad28e4d9c739af/images/laptop.glb"
-        alt="Interactive Laptop Model"
-        shadow-intensity="1"
-        camera-controls
-        touch-action="pan-y"
-        exposure="1.2"
+        shadow-intensity="0" camera-controls touch-action="pan-y"
         environment-image="https://raw.githubusercontent.com/Smit-Prajapati/prajapatismit/b5f434ae4d45d10fe1664d5606ad28e4d9c739af/images/dancing_hall_2k.hdr"
-        disable-zoom
-        disable-tap
-        camera-orbit="-45deg 60deg 2.5m"
-        autoplay>
+        exposure="1.5" disable-zoom disable-tap camera-orbit="-45deg 60deg 9m" autoplay
+        style="outline: none; background: transparent;">
+
       </model-viewer>
+
     </div>
 
-    <!-- RIGHT SECTION -->
-    <div class="form-content-area">
-        <div class="form-clip-wrapper">
-  <!-- RIGHT FORM CONTENT -->
-        </div>
-      <form class="contact-form-grid">
 
-        <div class="form-group">
-          <input type="text" placeholder="Your Name" required>
+
+    <form class="form">
+
+      <div class="form-group">
+
+        <input type="text" placeholder="Your Name" required>
+
+      </div>
+
+      <div class="form-group">
+
+        <input type="email" placeholder="Email Address" required>
+
+      </div>
+
+      <div class="form-group">
+
+        <input type="tel" placeholder="Phone Number" required>
+
+      </div>
+
+      <div class="form-group">
+
+        <select required class="form-select">
+
+          <option value="" disabled selected>Interested Course</option>
+
+          <option value="animation">3D Animation</option>
+
+          <option value="vfx">VFX</option>
+
+          <option value="graphics">Graphics Design</option>
+
+          <option value="game">Game Design</option>
+
+        </select>
+
+      </div>
+
+      <div class="form-group">
+
+        <textarea rows="3" placeholder="How can we help you?" required></textarea>
+
+      </div>
+
+
+
+      <div class="button-container">
+
+        <button type="submit" class="send-button">Send Message</button>
+
+        <div class="reset-button-container">
+
+          <div class="reset-button" id="reset-btn">Reset</div>
+
         </div>
 
-        <div class="form-group">
-          <input type="email" placeholder="Email Address" required>
-        </div>
+      </div>
 
-        <div class="form-group">
-          <input type="tel" placeholder="Phone Number" required>
-        </div>
+    </form>
 
-        <div class="form-group">
-          <select required>
-            <option value="" disabled selected>Interested Course</option>
-            <option>3D Animation</option>
-            <option>VFX</option>
-            <option>Graphics Design</option>
-            <option>Game Design</option>
-          </select>
-        </div>
+  </section>
+  <section class="contact-info-section">
+  <div class="info-grid reveal">
+    
+    <div class="details-column">
+      <div class="section-title-wrap no-margin">
+        <span class="subtitle">FIND US</span>
+        <h1 class="montserrat">CONTACT <span>INFO</span></h1>
+      </div>
 
-        <div class="form-group">
-          <textarea rows="4" placeholder="How can we help you?" required></textarea>
-        </div>
-
-        <div class="button-row">
-          <button type="submit" class="send-btn-main">Send Message</button>
-          <div class="reset-wrap">
-            <button type="reset" class="reset-btn-main">Reset</button>
+      <div class="info-items-container">
+        <div class="info-item">
+          <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="text-box">
+            <h3>Our Location</h3>
+            <p>Shop No-7, Millenium Arcade, Hazira Rd, below You Broadband, opposite Royal Enfield Showroom, Aahura Nagar Society, Adajan Gam, Adajan, Surat, Gujarat 395009</p>
           </div>
         </div>
 
-      </form>
+        <div class="info-item">
+          <div class="icon-box"><i class="fas fa-phone-alt"></i></div>
+          <div class="text-box">
+            <h3>Phone Number</h3>
+            <p>+91 96648 33542</p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="icon-box"><i class="fas fa-envelope"></i></div>
+          <div class="text-box">
+            <h3>Email Address</h3>
+            <p>info@harikrishnamultimedia.com</p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="icon-box"><i class="fas fa-clock"></i></div>
+          <div class="text-box">
+            <h3>Working Hours</h3>
+            <p>Monday – Saturday: 9:00 AM – 7:00 PM<br>Sunday: Closed</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="social-wrapper">
+        <h3>Follow Us</h3>
+        <div class="social-icons">
+          <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="visual-column">
+      <div class="map-placeholder">
+        <div class="cyber-box">
+            <span>MAP VIEW</span>
+        </div>
+      </div>
     </div>
 
   </div>
 </section>
-
   <footer class="main-footer">
     <div class="footer-container">
       <div class="footer-col footer-about">
         <h3 class="col-title">About</h3>
-        <p style="color: var(--text-dim); font-size: 0.9rem;">Harikrishna Multimedia Institute is Surat's premier destination for creative education in Animation, Game Design, VFX, and more.</p>
+        <p style="color: var(--text-dim); font-size: 0.9rem;">Harikrishna Multimedia Institute is Surat's premier
+          destination for creative education in Animation, Game Design, VFX, and more.</p>
         <div class="social-links">
           <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
           <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
@@ -689,7 +1112,7 @@ body {
         </form>
       </div>
     </div>
-    
+
     <div class="footer-bottom">
       <p>© 2026 Harikrishna Multimedia Institute.</p>
       <div class="bottom-links">
@@ -700,16 +1123,37 @@ body {
   </footer>
 
   <script>
-    // Handle the navbar glass effect change on scroll
-    window.addEventListener('scroll', function() {
-      const nav = document.getElementById('mainNav');
-      if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
+  // 1. Intersection Observer for Scroll Animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
       }
     });
-  </script>
+  }, { threshold: 0.4 });
+
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+  // 2. Navbar Scroll Effect
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+  window.addEventListener('scroll', function() {
+        const warrior = document.getElementById('hero-warrior-img');
+        let scrollPos = window.scrollY;
+        
+        // This makes the image slide down when you scroll down, 
+        // and slide back in (up) when you swipe up.
+        // Adjust 0.2 to make the movement faster or slower
+        warrior.style.transform = `translateY(${scrollPos * 0.8}px)`;
+    });
+</script>
 
 </body>
+
 </html>
