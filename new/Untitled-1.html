@@ -164,13 +164,143 @@
     }
 
     /* Responsive adjustment for small screens */
-    @media (max-width: 480px) {
+    @media (max-width: 992px) {
       .logo-text {
         display: none;
         /* Only show the image logo on very small phones to save space */
       }
+      .nav-links {
+    display: none; /* Usually, you'd trigger this with a menu icon */
+  }
+  .navbar {
+    padding: 10px 20px;
+    justify-content: space-between;
+  }
+  .nav-cta {
+    font-size: 0.8rem;
+    padding: 8px 15px;
+  }
     }
 
+  /* --- Base Logo & Toggle Fixes (Global) --- */
+/* --- Base Logo & Toggle (Keep outside media query) --- */
+.logo-container {
+  display: flex !important;
+  align-items: center;
+  z-index: 1100;
+  text-decoration: none;
+}
+
+.menu-toggle {
+  display: none; /* Hidden on large Desktops */
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1200; /* Higher than nav-links */
+  padding: 0;
+}
+
+.menu-toggle .bar {
+  width: 100%;
+  height: 3px;
+  background-color: var(--white);
+  border-radius: 10px;
+  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* --- THE ULTIMATE RESPONSIVE FIX (Laptops, iPad Pro, Nest Hub, Phones) --- */
+/* Set to 1280px to catch iPad Pro 12.9" and Nest Hub Max */
+@media (max-width: 1280px) {
+  .menu-toggle {
+    display: flex; /* Show hamburger on all touch/small screen devices */
+  }
+
+  /* 1. Force Navbar to be visible & fix pill shape on mobile/tablet */
+  .navbar {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    background: rgba(29, 53, 87, 0.95) !important;
+    border-radius: 100px !important; /* Keep the pill shape */
+    padding: 10px 25px !important;
+    width: 90% !important;
+    left: 5% !important;
+  }
+
+  /* 2. Nav Links Panel - Mobile/Tablet Overlay */
+  .nav-links {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    /* Dropdown position */
+    position: absolute;
+    top: calc(100% + 15px); /* Perfectly spaced below the pill */
+    left: 0;
+    right: 0;
+    
+    /* Glassmorphism Panel */
+    background: rgba(10, 10, 12, 0.98); 
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 40px 0;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+
+    /* Animation: Hidden State */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px) scale(0.95);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    pointer-events: none;
+  }
+
+  /* 3. OPEN STATE - When user clicks hamburger */
+  .navbar.mobile-menu-open .nav-links {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+  }
+
+  /* 4. Hamburger to 'X' Animation */
+  .navbar.mobile-menu-open .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+  .navbar.mobile-menu-open .bar:nth-child(2) { opacity: 0; transform: translateX(-20px); }
+  .navbar.mobile-menu-open .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+  /* 5. Mobile/Tablet Link Styling */
+  .nav-links a:not(.nav-cta) {
+    font-size: 1.1rem !important;
+    padding: 12px 0;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 2px;
+  }
+
+  /* Remove desktop hover underline for mobile */
+  .nav-links a:not(.nav-cta)::after {
+    display: none;
+  }
+
+  /* Active/Tap feedback */
+  .nav-links a:active {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--primary-red);
+  }
+
+  .nav-cta {
+    margin: 15px auto 0 !important;
+    width: 80% !important;
+    text-align: center;
+    padding: 15px 0 !important;
+  }
+}
 
 
     /* ── Hero ── */
@@ -434,6 +564,7 @@
         transform: rotate(45deg) translate(5px, 5px);
       }
     }
+    
 
     /* aboutsection */
     :root {
@@ -1324,26 +1455,225 @@
       transform: translateY(-3px);
       box-shadow: 0 8px 20px rgba(230, 57, 70, 0.3);
     }
+    /* respoinsiveness */
+    /* ============================================================
+   RESPONSIVE OVERRIDES 
+   ============================================================ */
+
+/* --- Tablet & Small Laptops (1024px and below) --- */
+@media (max-width: 1024px) {
+  .content-wrapper {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .right-image {
+    justify-content: center;
+    transform: none;
+  }
+
+  .right-image img {
+    width: 80%;
+    left: 0;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr 1fr; /* 2x2 Grid for Tablet */
+  }
+
+  .portfolio-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 120px; /* Space for the slide-out animation */
+  }
+}
+
+/* --- Mobile Devices (768px and below) --- */
+@media (max-width: 768px) {
+  
+  /* 1. Navbar: Hide links, keep Logo and CTA */
+  .nav-links {
+    display: none; 
+  }
+  
+  .navbar {
+    top: 10px;
+    padding: 0.5rem 5%;
+  }
+
+  /* 2. Hero Section */
+  .hero {
+    min-height: 100vh;
+    padding-top: 80px;
+  }
+
+  .left-content h1 {
+    font-size: 2.8rem;
+  }
+
+  .btn-group {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* 3. About Section */
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* 4. Horizontal Scroll Section (Disable Horizontal on Mobile for UX) */
+  .sticky-wrapper {
+    height: auto; /* Kill the sticky height */
+  }
+
+  .sticky-content {
+    position: relative;
+    height: auto;
+  }
+
+  .course-horizontal-track {
+    flex-direction: column; /* Stack cards vertically */
+    width: 100%;
+  }
+
+  .course-full-card {
+    width: 100%;
+    height: 400px;
+    padding: 40px 20px;
+  }
+
+  .scroll-progress-container {
+    display: none; /* Progress line doesn't work in vertical stack */
+  }
+
+  /* 5. Testimonials (Accordion to Stack) */
+  .testimonial-accordion {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .testimonial-panel {
+    width: 100%;
+    height: 200px; /* Base height */
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .testimonial-panel:hover, 
+  .testimonial-panel.active {
+    flex: none;
+    height: 400px; /* Expanded height */
+  }
+
+  .testimonial-panel:not(:hover) .panel-name {
+    writing-mode: horizontal-tb; /* Fix text direction */
+    transform: none;
+  }
+
+  /* 6. Portfolio Cards (Fix width/height) */
+  .card {
+    width: 90vw; /* Take full width of phone */
+    max-width: 350px;
+  }
+
+  .card:hover .slide.slide1 {
+    transform: translateY(-100px); /* Smaller slide distance */
+  }
+
+  .card:hover .slide.slide2 {
+    transform: translateY(100px);
+  }
+
+  /* 7. Placed Students (Horizontal to Wrap) */
+  .placed-students-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .section-title {
+    font-size: 2.2rem;
+  }
+
+  .placed-students-track {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px 0;
+  }
+
+  /* 8. Footer */
+  .footer-container {
+    grid-template-columns: 1fr; /* Single column */
+    text-align: center;
+  }
+
+  .col-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .contact-info p {
+    justify-content: center;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+/* --- Very Small Phones (480px) --- */
+@media (max-width: 480px) {
+  .left-content h1 {
+    font-size: 2.2rem;
+  }
+  
+  .image-container {
+    width: 110px;
+    height: 110px;
+  }
+  
+  .placed-students-card {
+    width: 280px; /* Wider for better text fit on small screens */
+  }
+}
   </style>
 </head>
 
 <body>
 
-  <nav class="navbar">
-    <a href="Untitled-1.html" class="logo-container">
-      <img src="logo.png" alt="Harikrushna Logo" class="nav-logo">
+ <nav class="navbar">
+  <a href="#" class="logo-container">
+    <img src="logo.png" class="nav-logo" alt="Logo">
+    <!-- <span class="logo-text">Harikrushna</span> -->
+  </a>
 
-      <div class="nav-links">
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Course</a>
-        <a href="#">Event</a>
-        <a href="#">Portfolios</a>
-        <a href="#">Contact</a>
-      </div>
+  <button class="menu-toggle" aria-label="Toggle navigation">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
 
-      <a href="#" class="nav-cta">Get In Touch</a>
-  </nav>
+  <div class="nav-links">
+    <a href="#" class="nav-item">Home</a>
+    <a href="#" class="nav-item">About</a>
+    <a href="#" class="nav-item">Course</a>
+    <a href="#" class="nav-item">Event</a>
+    <a href="#" class="nav-item">Portfolios</a>
+    <a href="#" class="nav-item">Contact</a>
+    <a href="#" class="nav-cta nav-item">Get In Touch</a>
+  </div>
+</nav>
 
   <section class="hero">
     <div class="bg-image"></div>
@@ -1987,6 +2317,43 @@
         }
       });
     }
+document.addEventListener('DOMContentLoaded', () => {
+  const navbar = document.querySelector('.navbar');
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navItems = document.querySelectorAll('.nav-item');
+
+  // 1. Reveal Navbar on Scroll
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+
+  // 2. Mobile Menu Toggle Logic
+  if (menuToggle) {
+    menuToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      navbar.classList.toggle('mobile-menu-open');
+    });
+  }
+
+  // 3. Close Menu when clicking any link
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      navbar.classList.remove('mobile-menu-open');
+    });
+  });
+
+  // 4. Close if clicking outside
+  document.addEventListener('click', (e) => {
+    if (!navbar.contains(e.target) && navbar.classList.contains('mobile-menu-open')) {
+      navbar.classList.remove('mobile-menu-open');
+    }
+  });
+});
+
   </script>
 </body>
 
