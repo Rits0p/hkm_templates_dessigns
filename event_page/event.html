@@ -9,27 +9,25 @@
     
     <style>
         :root {
-            --primary-red: #e63946;
-            --bg-dark: #08090b;
-            --panel-bg: rgba(255, 255, 255, 0.03);
-            --heading-font: 'Oswald', sans-serif;
-            --body-font: 'Segoe UI', sans-serif;
-        }
+    --primary-red: #e63946;
+    --bg-dark: #08090b;
+    --panel-bg: rgba(255, 255, 255, 0.03);
+    --heading-font: 'Oswald', sans-serif;
+    --body-font: 'Segoe UI', sans-serif;
+}
 
-        body {
-            background-color: var(--bg-dark);
-            color: #fff;
-            font-family: var(--body-font);
-            margin: 0;
-            overflow-x: hidden;
-        }
+body {
+    background-color: var(--bg-dark);
+    color: #fff;
+    font-family: var(--body-font);
+    margin: 0;
+    overflow-x: hidden;
+}
 
-        /* --- HERO SECTION --- */
-        .event-hero {
+.event-hero {
     position: relative;
-    /* This ensures the section fills the screen exactly below a 70px navbar */
     height: calc(100vh - 70px); 
-    margin-top: 70px; /* Space for your fixed Navbar */
+    margin-top: 70px;
     padding: 0 5%;
     background: radial-gradient(circle at 15% 50%, rgba(230, 57, 70, 0.08) 0%, transparent 50%);
     display: flex;
@@ -38,25 +36,25 @@
     box-sizing: border-box;
 }
 
-        .event-container {
+.event-container {
     max-width: 1300px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr; /* Slightly wider text area */
+    grid-template-columns: 1.2fr 0.8fr;
     gap: 40px;
     z-index: 10;
-    align-items: center; /* Center content vertically */
+    align-items: center;
     width: 100%;
 }
-        .hero-visual {
+
+.hero-visual {
     height: 100%;
     display: flex;
-    align-items: flex-end; /* Character sits on the bottom */
+    align-items: flex-end;
     justify-content: center;
 }
 
-        .hero-visual img {
-    /* Responsive sizing to ensure image doesn't push the section height */
+.hero-visual img {
     max-height: 80vh; 
     width: auto;
     max-width: 100%;
@@ -64,80 +62,79 @@
     margin-bottom: -5px; 
 }
 
-        .hero-content { 
-    /* Remove heavy bottom padding to keep it centered */
+.hero-content { 
     padding-bottom: 0; 
 }
 
-        .hero-tag { 
-            color: var(--primary-red); 
-            font-family: var(--heading-font);
-            letter-spacing: 3px; 
-            font-size: 0.85rem; 
-            text-transform: uppercase;
-            margin-bottom: 12px; 
-            display: block; 
-        }
+.hero-tag { 
+    color: var(--primary-red); 
+    font-family: var(--heading-font);
+    letter-spacing: 3px; 
+    font-size: 0.85rem; 
+    text-transform: uppercase;
+    margin-bottom: 12px; 
+    display: block; 
+}
 
-        .hero-title {
-            font-family: var(--heading-font);
-            font-size: clamp(2.8rem, 5.5vw, 4.2rem);
-            line-height: 1;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
+.hero-title {
+    font-family: var(--heading-font);
+    font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+    line-height: 1;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
 
-        .hero-title span { color: var(--primary-red); }
+.hero-title span { color: var(--primary-red); }
 
-        .hero-description {
-            font-size: 1.1rem;
-            color: rgba(255,255,255,0.7);
-            max-width: 650px;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
+.hero-description {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.7);
+    max-width: 650px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
 
-        .event-highlights { display: flex; gap: 20px; }
+.event-highlights { display: flex; gap: 20px; }
 
-        .highlight-box {
-            background: var(--panel-bg);
-            border-left: 3px solid var(--primary-red);
-            padding: 15px 20px;
-            flex: 1;
-            max-width: 250px;
-        }
+.highlight-box {
+    background: var(--panel-bg);
+    border-left: 3px solid var(--primary-red);
+    padding: 15px 20px;
+    flex: 1;
+    max-width: 250px;
+}
 
-        .highlight-box h4 {
-            font-family: var(--heading-font);
-            color: #fff;
-            margin: 0 0 5px 0;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-        }
+.highlight-box h4 {
+    font-family: var(--heading-font);
+    color: #fff;
+    margin: 0 0 5px 0;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
 
-        .highlight-box p {
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.5);
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+.highlight-box p {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
-        /* --- FEATURED UPDATE SECTION --- */
-        .chronicles-section {
+.chronicles-section {
     padding: 80px 5%;
     max-width: 1300px;
     margin: 0 auto;
 }
 
-/* Section Header */
 .section-header { margin-bottom: 40px; }
+
 .section-tag {
     font-family: var(--heading-font);
     color: var(--primary-red);
     letter-spacing: 4px;
     font-size: 0.9rem;
 }
+
 .section-title {
     font-family: var(--heading-font);
     font-size: 3.2rem;
@@ -145,7 +142,6 @@
     margin: 5px 0;
 }
 
-/* Featured Update Card (Hero-style) */
 .featured-update-card {
     background: #0f1012;
     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -219,7 +215,6 @@
     color: var(--primary-red);
 }
 
-/* Featured Update Details Panel */
 .update-details-panel {
     max-height: 0;
     overflow: hidden;
@@ -276,9 +271,6 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* ────────────────────────────────────────────────
-   Chronicles Grid – Video on top, images below
-───────────────────────────────────────────────── */
 .chronicles-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -286,28 +278,24 @@
     margin-top: 40px;
 }
 
-/* Video card – full width on top */
 .video-card {
-    height: 560px;           /* ← main fix: taller but not excessive */
+    height: 560px;
     display: flex;
     flex-direction: column;
 }
 
-/* Image cards container – 2 columns on desktop */
 .image-cards-row {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
 }
 
-/* Individual image cards */
 .image-card {
-    height: 380px;           /* slightly taller than before for better proportion */
+    height: 380px;
     display: flex;
     flex-direction: column;
 }
 
-/* Media Visual Area (used by both video and images) */
 .media-visual-area {
     position: relative;
     flex: 1;
@@ -334,7 +322,6 @@
     transform: scale(1.05);
 }
 
-/* Video specific */
 .video-container {
     width: 100%;
     height: 100%;
@@ -364,7 +351,6 @@
     transform: scale(1.12);
 }
 
-/* Label / Title Overlay */
 .media-label {
     position: absolute;
     inset: auto 0 0 0;
@@ -393,7 +379,6 @@
     letter-spacing: 1px;
 }
 
-/* Detail Button (below each card) */
 .view-detail-btn {
     width: 100%;
     background: #15171a;
@@ -413,7 +398,6 @@
     border-color: var(--primary-red);
 }
 
-/* Details Drawer Overlay */
 .details-drawer {
     position: absolute;
     inset: 0;
@@ -444,10 +428,130 @@
     color: rgba(255, 255, 255, 0.85);
 }
 
-/* ────────────────────────────────────────────────
-   RESPONSIVE
-───────────────────────────────────────────────── */
+.animate-text-flow > * {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: revealUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-image-slide {
+    opacity: 0;
+    transform: translateX(60px);
+    animation: revealLeft 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 0.4s;
+}
+
+.anim-1 { animation-delay: 0.2s; }
+.anim-2 { animation-delay: 0.4s; }
+.anim-3 { animation-delay: 0.6s; }
+.anim-4 { animation-delay: 0.8s; }
+
+@keyframes revealUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes revealLeft {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.hero-content {
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-visual {
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.image-card, .reveal {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-content.active,
+.hero-visual.active,
+.image-card.active,
+.reveal.active {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+#warrior-hero {
+    will-change: transform;
+}
+
+.hero-visual.active {
+    animation: contentFloat 6s ease-in-out infinite 1.2s;
+}
+
+@keyframes contentFloat {
+    0%, 100% { margin-top: 0; }
+    50% { margin-top: -15px; }
+}
+
+.container { width: 100%; }
+
+@media (min-width: 768px) {
+    .container { width: 80%; }
+}
+
+@media (min-width: 1024px) {
+    .container { width: 60%; }
+}
+
 @media (max-width: 992px) {
+    .event-hero {
+        height: auto;
+        min-height: calc(100vh - 70px);
+        padding: 40px 5% 60px;
+    }
+
+    .event-container {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .hero-visual {
+        order: -1;
+        height: auto;
+        align-items: center;
+    }
+
+    .hero-visual img {
+        max-height: 60vh;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+    }
+
+    .event-highlights {
+        flex-wrap: wrap;
+    }
+
+    .highlight-box {
+        max-width: 100%;
+        min-width: 200px;
+    }
+
+    .chronicles-section {
+        padding: 60px 5%;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+    }
+
     .chronicles-grid {
         gap: 30px;
     }
@@ -467,114 +571,292 @@
     .update-main-content {
         height: 420px;
     }
+
+    .update-overlay {
+        padding: 30px;
+    }
+
+    .update-name {
+        font-size: 2rem;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .details-visuals {
+        grid-template-columns: 1fr;
+    }
+
+    .media-label {
+        padding: 25px 20px;
+    }
+
+    .media-label h3 {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .event-hero {
+        margin-top: 60px;
+        padding: 30px 5% 50px;
+    }
+
+    .hero-tag {
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+    }
+
+    .hero-title {
+        font-size: clamp(2rem, 8vw, 2.8rem);
+        margin-bottom: 15px;
+    }
+
+    .hero-description {
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+    }
+
+    .event-highlights {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .highlight-box {
+        padding: 12px 15px;
+    }
+
+    .highlight-box h4 {
+        font-size: 1rem;
+    }
+
+    .highlight-box p {
+        font-size: 0.75rem;
+    }
+
+    .chronicles-section {
+        padding: 50px 5%;
+    }
+
+    .section-tag {
+        font-size: 0.75rem;
+        letter-spacing: 3px;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .details-inner {
+        padding: 30px 20px;
+    }
+
+    .details-info h4 {
+        font-size: 1.4rem;
+    }
+
+    .details-info p {
+        font-size: 0.95rem;
+    }
+
+    .expand-btn {
+        padding: 12px 25px;
+        font-size: 0.9rem;
+    }
+
+    .view-detail-btn {
+        padding: 14px;
+        font-size: 0.9rem;
+    }
+
+    .play-button {
+        width: 60px;
+        height: 60px;
+    }
+
+    .media-label span {
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+    }
+
+    .media-label h3 {
+        font-size: 1.2rem;
+    }
+
+    .details-drawer p {
+        font-size: 0.95rem;
+    }
 }
 
 @media (max-width: 600px) {
+    .event-hero {
+        padding: 20px 5% 40px;
+    }
+
+    .hero-visual img {
+        max-height: 50vh;
+    }
+
     .video-card {
         height: 360px;
     }
+
     .image-card {
         height: 320px;
     }
-}
-/* --- HERO ANIMATION ENGINE --- */
 
-/* 1. Text Reveal (Slide Up + Fade In) */
-.animate-text-flow > * {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: revealUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
+    .update-main-content {
+        height: 350px;
+    }
 
-/* 2. Image Reveal (Slide Left + Fade In) */
-.animate-image-slide {
-    opacity: 0;
-    transform: translateX(60px);
-    animation: revealLeft 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    animation-delay: 0.4s; /* Starts slightly after the title */
-}
+    .update-overlay {
+        padding: 20px;
+    }
 
-/* 3. Staggered Delays for Text */
-.anim-1 { animation-delay: 0.2s; } /* Tag first */
-.anim-2 { animation-delay: 0.4s; } /* Title second */
-.anim-3 { animation-delay: 0.6s; } /* Description third */
-.anim-4 { animation-delay: 0.8s; } /* Boxes last */
+    .update-name {
+        font-size: 1.5rem;
+    }
 
-/* Keyframes */
-@keyframes revealUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    .update-date {
+        font-size: 0.85rem;
+    }
+
+    .media-label {
+        padding: 20px 15px;
     }
 }
 
-@keyframes revealLeft {
-    to {
-        opacity: 1;
-        transform: translateX(0);
+@media (max-width: 480px) {
+    .event-hero {
+        margin-top: 60px;
+        padding: 20px 4% 30px;
+    }
+
+    .hero-tag {
+        font-size: 0.7rem;
+        letter-spacing: 1.5px;
+    }
+
+    .hero-title {
+        font-size: clamp(1.75rem, 10vw, 2rem);
+        margin-bottom: 12px;
+    }
+
+    .hero-description {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+
+    .highlight-box {
+        padding: 10px 12px;
+    }
+
+    .highlight-box h4 {
+        font-size: 0.95rem;
+    }
+
+    .highlight-box p {
+        font-size: 0.7rem;
+    }
+
+    .chronicles-section {
+        padding: 40px 4%;
+    }
+
+    .section-tag {
+        font-size: 0.7rem;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+    }
+
+    .video-card {
+        height: 300px;
+    }
+
+    .image-card {
+        height: 280px;
+    }
+
+    .update-main-content {
+        height: 300px;
+    }
+
+    .play-button {
+        width: 50px;
+        height: 50px;
+    }
+
+    .media-label {
+        padding: 15px 12px;
+    }
+
+    .media-label span {
+        font-size: 0.7rem;
+        letter-spacing: 1.5px;
+        margin-bottom: 6px;
+    }
+
+    .media-label h3 {
+        font-size: 1rem;
+    }
+
+    .view-detail-btn {
+        padding: 12px;
+        font-size: 0.85rem;
+        letter-spacing: 1.5px;
+    }
+
+    .details-drawer {
+        padding: 20px 15px;
+    }
+
+    .details-drawer p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .details-inner {
+        padding: 25px 15px;
+    }
+
+    .details-info h4 {
+        font-size: 1.2rem;
+    }
+
+    .details-info p {
+        font-size: 0.9rem;
     }
 }
 
-/* Optional: Subtle Floating Animation for the Hero Image */
-/* --- 1. BASE HIDDEN STATES (Reset every time class is removed) --- */
+@media (max-width: 360px) {
+    .hero-title {
+        font-size: 1.6rem;
+    }
 
-/* Hero Text (From Left) */
-.hero-content {
-    opacity: 0;
-    transform: translateX(-100px);
-    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
+    .hero-description {
+        font-size: 0.85rem;
+    }
 
-/* Hero Image Container (From Right) */
-.hero-visual {
-    opacity: 0;
-    transform: translateX(100px);
-    transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
-}
+    .section-title {
+        font-size: 1.5rem;
+    }
 
-/* Multimedia Image Cards (From Bottom) */
-.image-card, .reveal {
-    opacity: 0;
-    transform: translateY(100px);
-    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
+    .video-card {
+        height: 260px;
+    }
 
-/* --- 2. ACTIVE STATES (Triggered every time on scroll) --- */
-.hero-content.active,
-.hero-visual.active,
-.image-card.active,
-.reveal.active {
-    opacity: 1;
-    transform: translate(0, 0); /* Snaps X or Y back to center */
-}
+    .image-card {
+        height: 240px;
+    }
 
-/* --- 3. DYNAMIC PARALLAX IMAGE --- */
-/* Note: We remove transition from the image itself so the JS scroll is snappy */
-#warrior-hero {
-    will-change: transform;
-    /* We don't use 'float' here because it clashes with the scroll parallax */
-    /* If you want it to float, use a wrapper div instead */
-}
-
-/* Optional: Gentle floating for the content instead */
-.hero-visual.active {
-    animation: contentFloat 6s ease-in-out infinite 1.2s;
-}
-
-@keyframes contentFloat {
-    0%, 100% { margin-top: 0; }
-    50% { margin-top: -15px; }
-}
-.container { width: 100%; }
-
-/* Tablet and up */
-@media (min-width: 768px) {
-  .container { width: 80%; }
-}
-
-/* Desktop and up */
-@media (min-width: 1024px) {
-  .container { width: 60%; }
+    .media-label h3 {
+        font-size: 0.9rem;
+    }
 }
     </style>
 </head>

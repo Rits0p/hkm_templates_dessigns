@@ -5,172 +5,383 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Professional Courses | Multimedia Institute</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primaryRed: '#E63946', // Matched from your image
-                        darkBg: '#0F0F0F',
-                    },
-                    fontFamily: {
-                        oswald: ['Oswald', 'sans-serif'],
-                    },
-                }
-            }
+    
+    <style>
+        :root {
+            --primary-red: #E63946;
+            --dark-bg: #0F0F0F;
+            --text-gray: #b3b3b3;
+            --gray-500: #777;
+            --gray-700: #444;
+            --white-10: rgba(255,255,255,0.1);
+            --red-overlay: rgba(230,57,70,0.4);
         }
-    </script>
-    <style type="text/css">
-        /* Custom Shapes and Glassmorphism not easily done in pure Tailwind */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background-color: #0F0F0F;
-            background-image: 
-                radial-gradient(circle at 0% 0%, rgba(230, 57, 70, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 100% 100%, rgba(230, 57, 70, 0.05) 0%, transparent 40%);
+            font-family: 'Oswald', sans-serif;
+            background-color: var(--dark-bg);
+            color: white;
+            min-height: 100vh;
+            background-image:
+                radial-gradient(circle at 0% 0%, rgba(230,57,70,0.08) 0%, transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(230,57,70,0.05) 0%, transparent 40%);
         }
 
-        .enroll-clip {
-            clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
+        /* ================= HEADER ================= */
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 1.5rem;
         }
 
-        /* Glassmorphic Overlay Logic */
+        .main-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            line-height: 1.05;
+        }
+
+        .main-title .highlight {
+            color: var(--primary-red);
+        }
+
+        .subtitle {
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
+            letter-spacing: 4px;
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+
+        .subtitle .sep {
+            color: var(--gray-700);
+        }
+
+        .accent-line {
+            width: 96px;
+            height: 6px;
+            background: var(--primary-red);
+            margin-top: 1.5rem;
+        }
+
+        /* ================= MAIN & GRID ================= */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem 6rem;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        /* ================= COURSE CARD ================= */
+        .course-card {
+            position: relative;
+            height: 450px;
+            background-size: cover;
+            background-position: center;
+            border: 1px solid var(--white-10);
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        .course-card:hover {
+            transform: translateY(-16px);
+            border-color: var(--primary-red);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+        }
+
+        .course-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 5px;
+            width: 0;
+            background: var(--primary-red);
+            transition: width 0.5s ease;
+            z-index: 3;
+        }
+
+        .course-card:hover::after {
+            width: 100%;
+        }
+
         .course-card::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(15, 15, 15, 1) 0%, rgba(15, 15, 15, 0.7) 40%, rgba(15, 15, 15, 0.2) 100%);
+            background: linear-gradient(to top,
+                rgba(15,15,15,1) 0%,
+                rgba(15,15,15,0.7) 40%,
+                rgba(15,15,15,0.2) 100%);
             transition: background 0.4s ease;
             z-index: 1;
         }
 
         .course-card:hover::before {
-            background: linear-gradient(to top, rgba(230, 57, 70, 0.4) 0%, rgba(15, 15, 15, 0.8) 100%);
+            background: linear-gradient(to top,
+                var(--red-overlay) 0%,
+                rgba(15,15,15,0.85) 100%);
+        }
+
+        .course-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .course-title {
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .course-description {
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            font-size: 1rem;
+        }
+
+        .enroll-btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: var(--primary-red);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
+        }
+
+        .course-card:hover .enroll-btn {
+            background: white;
+            color: var(--dark-bg);
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 1024px) {
+            .header-container {
+                padding: 4rem 1.5rem;
+            }
+
+            .main-title {
+                font-size: clamp(2.8rem, 7vw, 4.5rem);
+            }
+
+            .course-card {
+                height: 420px;
+                padding: 2rem;
+            }
+
+            .course-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 3rem 1.25rem;
+                text-align: left;
+            }
+
+            .main-title {
+                font-size: 2.8rem;
+                line-height: 1.1;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+                letter-spacing: 2px;
+            }
+
+            .main-container {
+                padding: 0 1.25rem 4rem;
+            }
+
+            .course-grid {
+                gap: 2rem;
+            }
+
+            .course-card {
+                height: 380px;
+                padding: 1.75rem;
+            }
+
+            .course-title {
+                font-size: 1.8rem;
+            }
+
+            .course-description {
+                font-size: 0.95rem;
+            }
+
+            .enroll-btn {
+                padding: 0.65rem 1.6rem;
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 2.3rem;
+            }
+
+            .subtitle {
+                font-size: 0.8rem;
+            }
+
+            .course-card {
+                height: 340px;
+                padding: 1.5rem;
+            }
+
+            .course-title {
+                font-size: 1.6rem;
+            }
+
+            .course-description {
+                font-size: 0.9rem;
+            }
+
+            .enroll-btn {
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
-<body class="font-oswald text-white min-h-screen">
+<body>
 
-    <header class="py-16 md:py-24 px-6 md:px-12 max-w-[1400px] mx-auto">
-        <h1 class="text-6xl md:text-8xl uppercase tracking-tighter font-bold leading-tight">
-            OUR PROFESSIONAL <span class="text-primaryRed">COURSES</span>
+    <header class="header-container">
+        <h1 class="main-title">
+            OUR PROFESSIONAL <span class="highlight">COURSES</span>
         </h1>
         
-        <p class="text-lg md:text-xl text-gray-500 uppercase tracking-[4px] font-medium mt-2">
-            CAREER <span class="text-gray-700">+</span> SKILL <span class="text-gray-700">+</span> TECHNOLOGY
+        <p class="subtitle">
+            CAREER <span class="sep">+</span> SKILL <span class="sep">+</span> TECHNOLOGY
         </p>
 
-        <div class="w-24 h-[6px] bg-primaryRed mt-6"></div>
+        <div class="accent-line"></div>
     </header>
 
-    <main class="max-w-[1400px] mx-auto px-6 md:px-12 pb-24">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+    <main class="main-container">
+        <div class="course-grid">
 
-            <div class="course-card group relative h-[450px] rounded-sm overflow-hidden flex flex-col justify-end p-8 md:p-10 border border-white/10 cursor-pointer transition-all duration-500 hover:-translate-y-4 hover:border-primaryRed hover:shadow-2xl bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=2071');">
-                <div class="absolute top-0 left-0 h-[5px] w-0 bg-primaryRed transition-all duration-500 group-hover:w-full z-30"></div>
-                <div class="relative z-10 backdrop-blur-[2px]">
-                    <h3 class="text-3xl md:text-4xl uppercase mb-4 leading-none font-bold">Graphics Design</h3>
-                    <p class="font-sans text-gray-300 text-base mb-6 font-light leading-relaxed">Master professional branding, layouts, and visual communication.</p>
-                    <a href="#" id="btn-graphics" class="enroll-clip inline-block bg-primaryRed text-white py-3 px-8 font-bold uppercase tracking-widest text-sm transition-all duration-300 group-hover:bg-white group-hover:text-darkBg">View course detail</a>
+            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=2071');">
+                <div class="course-content">
+                    <h3 class="course-title">Graphics Design</h3>
+                    <p class="course-description">Master professional branding, layouts, and visual communication.</p>
+                    <a href="#" class="enroll-btn">View course detail</a>
                 </div>
             </div>
 
-            <div class="course-card group relative h-[450px] rounded-sm overflow-hidden flex flex-col justify-end p-8 md:p-10 border border-white/10 cursor-pointer transition-all duration-500 hover:-translate-y-4 hover:border-primaryRed hover:shadow-2xl bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070');">
-                <div class="absolute top-0 left-0 h-[5px] w-0 bg-primaryRed transition-all duration-500 group-hover:w-full z-30"></div>
-                <div class="relative z-10 backdrop-blur-[2px]">
-                    <h3 class="text-3xl md:text-4xl uppercase mb-4 leading-none font-bold">2D Animation</h3>
-                    <p class="font-sans text-gray-300 text-base mb-6 font-light leading-relaxed">Create fluid character movements and professional storytelling.</p>
-                    <a href="#" id="btn-2d-animation" class="enroll-clip inline-block bg-primaryRed text-white py-3 px-8 font-bold uppercase tracking-widest text-sm transition-all duration-300 group-hover:bg-white group-hover:text-darkBg">View course detail</a>
+            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070');">
+                <div class="course-content">
+                    <h3 class="course-title">2D Animation</h3>
+                    <p class="course-description">Create fluid character movements and professional storytelling.</p>
+                    <a href="#" class="enroll-btn">View course detail</a>
                 </div>
             </div>
 
-            <div class="course-card group relative h-[450px] rounded-sm overflow-hidden flex flex-col justify-end p-8 md:p-10 border border-white/10 cursor-pointer transition-all duration-500 hover:-translate-y-4 hover:border-primaryRed hover:shadow-2xl bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=2070');">
-                <div class="absolute top-0 left-0 h-[5px] w-0 bg-primaryRed transition-all duration-500 group-hover:w-full z-30"></div>
-                <div class="relative z-10 backdrop-blur-[2px]">
-                    <h3 class="text-3xl md:text-4xl uppercase mb-4 leading-none font-bold">Video Editing</h3>
-                    <p class="font-sans text-gray-300 text-base mb-6 font-light leading-relaxed">Advanced post-production for cinematic and commercial projects.</p>
-                    <a href="#" id="btn-video-editing" class="enroll-clip inline-block bg-primaryRed text-white py-3 px-8 font-bold uppercase tracking-widest text-sm transition-all duration-300 group-hover:bg-white group-hover:text-darkBg">View course detail</a>
+            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=2070');">
+                <div class="course-content">
+                    <h3 class="course-title">Video Editing</h3>
+                    <p class="course-description">Advanced post-production for cinematic and commercial projects.</p>
+                    <a href="#" class="enroll-btn">View course detail</a>
                 </div>
             </div>
 
-            <div class="course-card group relative h-[450px] rounded-sm overflow-hidden flex flex-col justify-end p-8 md:p-10 border border-white/10 cursor-pointer transition-all duration-500 hover:-translate-y-4 hover:border-primaryRed hover:shadow-2xl bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1616400619175-5e3a17f477a3?q=80&w=2074');">
-                <div class="absolute top-0 left-0 h-[5px] w-0 bg-primaryRed transition-all duration-500 group-hover:w-full z-30"></div>
-                <div class="relative z-10 backdrop-blur-[2px]">
-                    <h3 class="text-3xl md:text-4xl uppercase mb-4 leading-none font-bold">3D Animation</h3>
-                    <p class="font-sans text-gray-300 text-base mb-6 font-light leading-relaxed">Advanced character modeling, rigging, and virtual world-building.</p>
-                    <a href="#" id="btn-3d-animation" class="enroll-clip inline-block bg-primaryRed text-white py-3 px-8 font-bold uppercase tracking-widest text-sm transition-all duration-300 group-hover:bg-white group-hover:text-darkBg">View course detail</a>
+            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1616400619175-5e3a17f477a3?q=80&w=2074');">
+                <div class="course-content">
+                    <h3 class="course-title">3D Animation</h3>
+                    <p class="course-description">Advanced character modeling, rigging, and virtual world-building.</p>
+                    <a href="#" class="enroll-btn">View course detail</a>
                 </div>
             </div>
 
-            <div class="course-card group relative h-[450px] rounded-sm overflow-hidden flex flex-col justify-end p-8 md:p-10 border border-white/10 cursor-pointer transition-all duration-500 hover:-translate-y-4 hover:border-primaryRed hover:shadow-2xl bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1503387762-592dea58292b?q=80&w=2062');">
-                <div class="absolute top-0 left-0 h-[5px] w-0 bg-primaryRed transition-all duration-500 group-hover:w-full z-30"></div>
-                <div class="relative z-10 backdrop-blur-[2px]">
-                    <h3 class="text-3xl md:text-4xl uppercase mb-4 leading-none font-bold">3D Architectural</h3>
-                    <p class="font-sans text-gray-300 text-base mb-6 font-light leading-relaxed">Develop photorealistic interior and exterior visualizations.</p>
-                    <a href="#" id="btn-architecture" class="enroll-clip inline-block bg-primaryRed text-white py-3 px-8 font-bold uppercase tracking-widest text-sm transition-all duration-300 group-hover:bg-white group-hover:text-darkBg">View course detail</a>
+            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1503387762-592dea58292b?q=80&w=2062');">
+                <div class="course-content">
+                    <h3 class="course-title">3D Architectural</h3>
+                    <p class="course-description">Develop photorealistic interior and exterior visualizations.</p>
+                    <a href="#" class="enroll-btn">View course detail</a>
                 </div>
             </div>
 
-            <div class="course-card group relative h-[450px] rounded-sm overflow-hidden flex flex-col justify-end p-8 md:p-10 border border-white/10 cursor-pointer transition-all duration-500 hover:-translate-y-4 hover:border-primaryRed hover:shadow-2xl bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?q=80&w=2070');">
-                <div class="absolute top-0 left-0 h-[5px] w-0 bg-primaryRed transition-all duration-500 group-hover:w-full z-30"></div>
-                <div class="relative z-10 backdrop-blur-[2px]">
-                    <h3 class="text-3xl md:text-4xl uppercase mb-4 leading-none font-bold">UI/UX Design</h3>
-                    <p class="font-sans text-gray-300 text-base mb-6 font-light leading-relaxed">Design seamless high-fidelity user journeys and interfaces.</p>
-                    <a href="#" id="btn-uiux" class="enroll-clip inline-block bg-primaryRed text-white py-3 px-8 font-bold uppercase tracking-widest text-sm transition-all duration-300 group-hover:bg-white group-hover:text-darkBg">View course detail</a>
+            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?q=80&w=2070');">
+                <div class="course-content">
+                    <h3 class="course-title">UI/UX Design</h3>
+                    <p class="course-description">Design seamless high-fidelity user journeys and interfaces.</p>
+                    <a href="#" class="enroll-btn">View course detail</a>
                 </div>
             </div>
 
-            <div class="course-card group relative h-[450px] rounded-sm overflow-hidden flex flex-col justify-end p-8 md:p-10 border border-white/10 cursor-pointer transition-all duration-500 hover:-translate-y-4 hover:border-primaryRed hover:shadow-2xl bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=2070');">
-                <div class="absolute top-0 left-0 h-[5px] w-0 bg-primaryRed transition-all duration-500 group-hover:w-full z-30"></div>
-                <div class="relative z-10 backdrop-blur-[2px]">
-                    <h3 class="text-3xl md:text-4xl uppercase mb-4 leading-none font-bold">3D Jewellery</h3>
-                    <p class="font-sans text-gray-300 text-base mb-6 font-light leading-relaxed">Precision digital jewelry design and 3D print preparation.</p>
-                    <a href="#" id="btn-jewellery" class="enroll-clip inline-block bg-primaryRed text-white py-3 px-8 font-bold uppercase tracking-widest text-sm transition-all duration-300 group-hover:bg-white group-hover:text-darkBg">View course detail</a>
+            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=2070');">
+                <div class="course-content">
+                    <h3 class="course-title">3D Jewellery</h3>
+                    <p class="course-description">Precision digital jewelry design and 3D print preparation.</p>
+                    <a href="#" class="enroll-btn">View course detail</a>
                 </div>
             </div>
 
-            <div class="course-card group relative h-[450px] rounded-sm overflow-hidden flex flex-col justify-end p-8 md:p-10 border border-white/10 cursor-pointer transition-all duration-500 hover:-translate-y-4 hover:border-primaryRed hover:shadow-2xl bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015');">
-                <div class="absolute top-0 left-0 h-[5px] w-0 bg-primaryRed transition-all duration-500 group-hover:w-full z-30"></div>
-                <div class="relative z-10 backdrop-blur-[2px]">
-                    <h3 class="text-3xl md:text-4xl uppercase mb-4 leading-none font-bold">Digital Marketing</h3>
-                    <p class="font-sans text-gray-300 text-base mb-6 font-light leading-relaxed">Growth strategies using SEO, data analytics, and SMM.</p>
-                    <a href="#" id="btn-marketing" class="enroll-clip inline-block bg-primaryRed text-white py-3 px-8 font-bold uppercase tracking-widest text-sm transition-all duration-300 group-hover:bg-white group-hover:text-darkBg">View course detail</a>
+            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015');">
+                <div class="course-content">
+                    <h3 class="course-title">Digital Marketing</h3>
+                    <p class="course-description">Growth strategies using SEO, data analytics, and SMM.</p>
+                    <a href="#" class="enroll-btn">View course detail</a>
                 </div>
             </div>
 
-            <div class="course-card group relative h-[450px] rounded-sm overflow-hidden flex flex-col justify-end p-8 md:p-10 border border-white/10 cursor-pointer transition-all duration-500 hover:-translate-y-4 hover:border-primaryRed hover:shadow-2xl bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1536243298747-af88302142e9?q=80&w=2070');">
-                <div class="absolute top-0 left-0 h-[5px] w-0 bg-primaryRed transition-all duration-500 group-hover:w-full z-30"></div>
-                <div class="relative z-10 backdrop-blur-[2px]">
-                    <h3 class="text-3xl md:text-4xl uppercase mb-4 leading-none font-bold">VFX Effects</h3>
-                    <p class="font-sans text-gray-300 text-base mb-6 font-light leading-relaxed">Master high-end cinematic compositing and simulations.</p>
-                    <a href="#" id="btn-vfx" class="enroll-clip inline-block bg-primaryRed text-white py-3 px-8 font-bold uppercase tracking-widest text-sm transition-all duration-300 group-hover:bg-white group-hover:text-darkBg">View course detail</a>
+            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1536243298747-af88302142e9?q=80&w=2070');">
+                <div class="course-content">
+                    <h3 class="course-title">VFX Effects</h3>
+                    <p class="course-description">Master high-end cinematic compositing and simulations.</p>
+                    <a href="#" class="enroll-btn">View course detail</a>
                 </div>
             </div>
 
-            <div class="course-card group relative h-[450px] rounded-sm overflow-hidden flex flex-col justify-end p-8 md:p-10 border border-white/10 cursor-pointer transition-all duration-500 hover:-translate-y-4 hover:border-primaryRed hover:shadow-2xl bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=2069');">
-                <div class="absolute top-0 left-0 h-[5px] w-0 bg-primaryRed transition-all duration-500 group-hover:w-full z-30"></div>
-                <div class="relative z-10 backdrop-blur-[2px]">
-                    <h3 class="text-3xl md:text-4xl uppercase mb-4 leading-none font-bold">C / C++ / Python</h3>
-                    <p class="font-sans text-gray-300 text-base mb-6 font-light leading-relaxed">Build a rock-solid foundation in world-class software logic.</p>
-                    <a href="#" id="btn-programming" class="enroll-clip inline-block bg-primaryRed text-white py-3 px-8 font-bold uppercase tracking-widest text-sm transition-all duration-300 group-hover:bg-white group-hover:text-darkBg">View course detail</a>
+            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=2069');">
+                <div class="course-content">
+                    <h3 class="course-title">C / C++ / Python</h3>
+                    <p class="course-description">Build a rock-solid foundation in world-class software logic.</p>
+                    <a href="#" class="enroll-btn">View course detail</a>
                 </div>
             </div>
 
-            <div class="course-card group relative h-[450px] rounded-sm overflow-hidden flex flex-col justify-end p-8 md:p-10 border border-white/10 cursor-pointer transition-all duration-500 hover:-translate-y-4 hover:border-primaryRed hover:shadow-2xl bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070');">
-                <div class="absolute top-0 left-0 h-[5px] w-0 bg-primaryRed transition-all duration-500 group-hover:w-full z-30"></div>
-                <div class="relative z-10 backdrop-blur-[2px]">
-                    <h3 class="text-3xl md:text-4xl uppercase mb-4 leading-none font-bold">Game Design</h3>
-                    <p class="font-sans text-gray-300 text-base mb-6 font-light leading-relaxed">Create immersive gameplay experiences from logic to final render.</p>
-                    <a href="#" id="btn-game-design" class="enroll-clip inline-block bg-primaryRed text-white py-3 px-8 font-bold uppercase tracking-widest text-sm transition-all duration-300 group-hover:bg-white group-hover:text-darkBg">View course detail</a>
+            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070');">
+                <div class="course-content">
+                    <h3 class="course-title">Game Design</h3>
+                    <p class="course-description">Create immersive gameplay experiences from logic to final render.</p>
+                    <a href="#" class="enroll-btn">View course detail</a>
                 </div>
             </div>
 
-            <div class="course-card group relative h-[450px] rounded-sm overflow-hidden flex flex-col justify-end p-8 md:p-10 border border-white/10 cursor-pointer transition-all duration-500 hover:-translate-y-4 hover:border-primaryRed hover:shadow-2xl bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974');">
-                <div class="absolute top-0 left-0 h-[5px] w-0 bg-primaryRed transition-all duration-500 group-hover:w-full z-30"></div>
-                <div class="relative z-10 backdrop-blur-[2px]">
-                    <h3 class="text-3xl md:text-4xl uppercase mb-4 leading-none font-bold">Android Dev</h3>
-                    <p class="font-sans text-gray-300 text-base mb-6 font-light leading-relaxed">Develop scalable and high-performance apps for mobile.</p>
-                    <a href="#" id="btn-android" class="enroll-clip inline-block bg-primaryRed text-white py-3 px-8 font-bold uppercase tracking-widest text-sm transition-all duration-300 group-hover:bg-white group-hover:text-darkBg">View course detail</a>
+            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974');">
+                <div class="course-content">
+                    <h3 class="course-title">Android Dev</h3>
+                    <p class="course-description">Develop scalable and high-performance apps for mobile.</p>
+                    <a href="#" class="enroll-btn">View course detail</a>
                 </div>
             </div>
 
