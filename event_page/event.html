@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Office Chronicles | Events Overview</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-red: #e63946;
+            --bg-dark: #08090b;
+            --panel-bg: rgba(255, 255, 255, 0.03);
+            --heading-font: 'Oswald', sans-serif;
+            --body-font: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #fff;
+            font-family: var(--body-font);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .event-hero {
+            position: relative;
+            height: calc(100vh - 70px);
+            margin-top: 70px;
+            padding: 0 5%;
+            background: radial-gradient(circle at 15% 50%, rgba(230, 57, 70, 0.08) 0%, transparent 50%);
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .event-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            z-index: 10;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-visual {
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .hero-visual img {
+            max-height: 80vh;
+            width: auto;
+            max-width: 100%;
+            filter: drop-shadow(0 0 30px rgba(0, 0, 0, 0.9));
+            margin-bottom: -5px;
+        }
+
+        .hero-content {
+            padding-bottom: 0;
+        }
+
+        .hero-tag {
+            color: var(--primary-red);
+            font-family: var(--heading-font);
+            letter-spacing: 3px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .hero-title {
+            font-family: var(--heading-font);
+            font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+            line-height: 1;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .hero-title span {
+            color: var(--primary-red);
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 650px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .event-highlights {
+            display: flex;
+            gap: 20px;
+        }
+
+        .highlight-box {
+            background: var(--panel-bg);
+            border-left: 3px solid var(--primary-red);
+            padding: 15px 20px;
+            flex: 1;
+            max-width: 250px;
+        }
+
+        .highlight-box h4 {
+            font-family: var(--heading-font);
+            color: #fff;
+            margin: 0 0 5px 0;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        .highlight-box p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .chronicles-section {
+            padding: 80px 5%;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 40px;
+        }
+
+        .section-tag {
+            font-family: var(--heading-font);
+            color: var(--primary-red);
+            letter-spacing: 4px;
+            font-size: 0.9rem;
+        }
+
+        .section-title {
+            font-family: var(--heading-font);
+            font-size: 3.2rem;
+            text-transform: uppercase;
+            margin: 5px 0;
+        }
+
+        .featured-update-card {
+            background: #0f1012;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s ease;
+        }
+
+        .featured-update-card:hover {
+            border-color: var(--primary-red);
+        }
+
+        .update-main-content {
+            position: relative;
+            height: 520px;
+            overflow: hidden;
+        }
+
+        .update-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(40%) contrast(1.1);
+            transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+
+        .featured-update-card:hover .update-img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        .update-overlay {
+            position: absolute;
+            inset: auto 0 0 0;
+            padding: 50px;
+            background: linear-gradient(to top, rgba(8, 9, 11, 1) 15%, transparent 100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .update-name {
+            font-family: var(--heading-font);
+            font-size: 2.5rem;
+            margin: 8px 0 0;
+            text-transform: uppercase;
+        }
+
+        .update-date {
+            color: var(--primary-red);
+            font-family: var(--heading-font);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .expand-btn {
+            background: var(--primary-red);
+            color: #fff;
+            border: none;
+            padding: 15px 35px;
+            font-family: var(--heading-font);
+            font-size: 1rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .expand-btn:hover {
+            background: #fff;
+            color: var(--primary-red);
+        }
+
+        .update-details-panel {
+            max-height: 0;
+            overflow: hidden;
+            background: #0d0f12;
+            transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .update-details-panel.open {
+            max-height: 1200px;
+            border-top: 2px solid var(--primary-red);
+        }
+
+        .details-inner {
+            padding: 50px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .details-info h4 {
+            font-family: var(--heading-font);
+            color: var(--primary-red);
+            font-size: 1.8rem;
+            margin: 0 0 15px;
+            text-transform: uppercase;
+        }
+
+        .details-info p {
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.05rem;
+        }
+
+        .details-list {
+            margin-top: 20px;
+            padding-left: 20px;
+            color: var(--primary-red);
+        }
+
+        .details-list li {
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .details-visuals {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .details-visuals img {
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chronicles-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .video-card {
+            height: 560px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .image-cards-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .image-card {
+            height: 380px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .media-visual-area {
+            position: relative;
+            flex: 1;
+            background: #0f1012;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            transition: border-color 0.3s ease;
+        }
+
+        .media-card:hover .media-visual-area {
+            border-color: var(--primary-red);
+        }
+
+        .media-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+            transition: opacity 0.5s ease, transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+
+        .media-card:hover .media-img {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+
+        .video-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+        }
+
+        .play-button {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: var(--primary-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(230, 57, 70, 0.5);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .media-card:hover .play-button {
+            transform: scale(1.12);
+        }
+
+        .media-label {
+            position: absolute;
+            inset: auto 0 0 0;
+            padding: 35px 30px;
+            background: linear-gradient(transparent, rgba(8, 9, 11, 0.96));
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .media-label span {
+            color: var(--primary-red);
+            font-family: var(--heading-font);
+            font-size: 0.85rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .media-label h3 {
+            margin: 0;
+            font-family: var(--heading-font);
+            font-size: 1.7rem;
+            text-transform: uppercase;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .view-detail-btn {
+            width: 100%;
+            background: #15171a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-family: var(--heading-font);
+            text-transform: uppercase;
+            padding: 16px;
+            margin-top: 12px;
+            cursor: pointer;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .view-detail-btn:hover {
+            background: var(--primary-red);
+            border-color: var(--primary-red);
+        }
+
+        .details-drawer {
+            position: absolute;
+            inset: 0;
+            background: rgba(8, 9, 11, 0.97);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            z-index: 5;
+        }
+
+        .media-card.show-details .details-drawer {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .media-card.show-details .media-label {
+            opacity: 0;
+        }
+
+        .details-drawer p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .animate-text-flow>* {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: revealUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .animate-image-slide {
+            opacity: 0;
+            transform: translateX(60px);
+            animation: revealLeft 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation-delay: 0.4s;
+        }
+
+        .anim-1 {
+            animation-delay: 0.2s;
+        }
+
+        .anim-2 {
+            animation-delay: 0.4s;
+        }
+
+        .anim-3 {
+            animation-delay: 0.6s;
+        }
+
+        .anim-4 {
+            animation-delay: 0.8s;
+        }
+
+        @keyframes revealUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes revealLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-content {
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .hero-visual {
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .image-card,
+        .reveal {
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .hero-content.active,
+        .hero-visual.active,
+        .image-card.active,
+        .reveal.active {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
+        #warrior-hero {
+            will-change: transform;
+        }
+
+        .hero-visual.active {
+            animation: contentFloat 6s ease-in-out infinite 1.2s;
+        }
+
+        @keyframes contentFloat {
+
+            0%,
+            100% {
+                margin-top: 0;
+            }
+
+            50% {
+                margin-top: -15px;
+            }
+        }
+
+        .container {
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                width: 80%;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                width: 60%;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .event-hero {
+                height: auto;
+                min-height: calc(100vh - 70px);
+                padding: 40px 5% 60px;
+            }
+
+            .event-container {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .hero-visual {
+                order: -1;
+                height: auto;
+                align-items: center;
+            }
+
+            .hero-visual img {
+                max-height: 60vh;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .event-highlights {
+                flex-wrap: wrap;
+            }
+
+            .highlight-box {
+                max-width: 100%;
+                min-width: 200px;
+            }
+
+            .chronicles-section {
+                padding: 60px 5%;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .chronicles-grid {
+                gap: 30px;
+            }
+
+            .video-card {
+                height: 420px;
+            }
+
+            .image-cards-row {
+                grid-template-columns: 1fr;
+            }
+
+            .image-card {
+                height: 360px;
+            }
+
+            .update-main-content {
+                height: 420px;
+            }
+
+            .update-overlay {
+                padding: 30px;
+            }
+
+            .update-name {
+                font-size: 2rem;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .details-visuals {
+                grid-template-columns: 1fr;
+            }
+
+            .media-label {
+                padding: 25px 20px;
+            }
+
+            .media-label h3 {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .event-hero {
+                margin-top: 60px;
+                padding: 30px 5% 50px;
+            }
+
+            .hero-tag {
+                font-size: 0.75rem;
+                letter-spacing: 2px;
+            }
+
+            .hero-title {
+                font-size: clamp(2rem, 8vw, 2.8rem);
+                margin-bottom: 15px;
+            }
+
+            .hero-description {
+                font-size: 0.95rem;
+                margin-bottom: 25px;
+            }
+
+            .event-highlights {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .highlight-box {
+                padding: 12px 15px;
+            }
+
+            .highlight-box h4 {
+                font-size: 1rem;
+            }
+
+            .highlight-box p {
+                font-size: 0.75rem;
+            }
+
+            .chronicles-section {
+                padding: 50px 5%;
+            }
+
+            .section-tag {
+                font-size: 0.75rem;
+                letter-spacing: 3px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .details-inner {
+                padding: 30px 20px;
+            }
+
+            .details-info h4 {
+                font-size: 1.4rem;
+            }
+
+            .details-info p {
+                font-size: 0.95rem;
+            }
+
+            .expand-btn {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+
+            .view-detail-btn {
+                padding: 14px;
+                font-size: 0.9rem;
+            }
+
+            .play-button {
+                width: 60px;
+                height: 60px;
+            }
+
+            .media-label span {
+                font-size: 0.75rem;
+                letter-spacing: 2px;
+            }
+
+            .media-label h3 {
+                font-size: 1.2rem;
+            }
+
+            .details-drawer p {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .event-hero {
+                padding: 20px 5% 40px;
+            }
+
+            .hero-visual img {
+                max-height: 50vh;
+            }
+
+            .video-card {
+                height: 360px;
+            }
+
+            .image-card {
+                height: 320px;
+            }
+
+            .update-main-content {
+                height: 350px;
+            }
+
+            .update-overlay {
+                padding: 20px;
+            }
+
+            .update-name {
+                font-size: 1.5rem;
+            }
+
+            .update-date {
+                font-size: 0.85rem;
+            }
+
+            .media-label {
+                padding: 20px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .event-hero {
+                margin-top: 60px;
+                padding: 20px 4% 30px;
+            }
+
+            .hero-tag {
+                font-size: 0.7rem;
+                letter-spacing: 1.5px;
+            }
+
+            .hero-title {
+                font-size: clamp(1.75rem, 10vw, 2rem);
+                margin-bottom: 12px;
+            }
+
+            .hero-description {
+                font-size: 0.9rem;
+                line-height: 1.5;
+                margin-bottom: 20px;
+            }
+
+            .highlight-box {
+                padding: 10px 12px;
+            }
+
+            .highlight-box h4 {
+                font-size: 0.95rem;
+            }
+
+            .highlight-box p {
+                font-size: 0.7rem;
+            }
+
+            .chronicles-section {
+                padding: 40px 4%;
+            }
+
+            .section-tag {
+                font-size: 0.7rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .video-card {
+                height: 300px;
+            }
+
+            .image-card {
+                height: 280px;
+            }
+
+            .update-main-content {
+                height: 300px;
+            }
+
+            .play-button {
+                width: 50px;
+                height: 50px;
+            }
+
+            .media-label {
+                padding: 15px 12px;
+            }
+
+            .media-label span {
+                font-size: 0.7rem;
+                letter-spacing: 1.5px;
+                margin-bottom: 6px;
+            }
+
+            .media-label h3 {
+                font-size: 1rem;
+            }
+
+            .view-detail-btn {
+                padding: 12px;
+                font-size: 0.85rem;
+                letter-spacing: 1.5px;
+            }
+
+            .details-drawer {
+                padding: 20px 15px;
+            }
+
+            .details-drawer p {
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
+
+            .details-inner {
+                padding: 25px 15px;
+            }
+
+            .details-info h4 {
+                font-size: 1.2rem;
+            }
+
+            .details-info p {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .hero-title {
+                font-size: 1.6rem;
+            }
+
+            .hero-description {
+                font-size: 0.85rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .video-card {
+                height: 260px;
+            }
+
+            .image-card {
+                height: 240px;
+            }
+
+            .media-label h3 {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Gaming Animation Styles */
+        @keyframes text-reveal-anim {
+            0% {
+                opacity: 0;
+                filter: blur(20px);
+                transform: translateY(100%) rotateX(-90deg);
+            }
+
+            100% {
+                opacity: 1;
+                filter: blur(0);
+                transform: translateY(0) rotateX(0deg);
+            }
+        }
+
+        .gaming-char {
+            display: inline-block !important;
+            /* FIX: Override conflicting block display */
+            opacity: 0;
+            transform: translateY(100%) rotateX(-90deg);
+            transform-origin: bottom center;
+            will-change: transform, opacity, filter;
+            color: inherit;
+            text-shadow: inherit;
+        }
+
+        .reveal-active .gaming-char {
+            animation: text-reveal-anim 0.8s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+            animation-delay: calc(var(--i) * 0.03s);
+        }
+
+        /* FIX: Force direct child animation characters to inherit parent color */
+        h1>.gaming-char,
+        h2>.gaming-char,
+        .hero-title>.gaming-char,
+        .section-title>.gaming-char {
+            color: inherit !important;
+            text-shadow: inherit;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="event-hero">
+        <div class="event-container">
+            <div class="hero-content">
+                <span class="hero-tag">Operational Logs: Archive</span>
+                <h1 class="hero-title">OFFICE <span>CHRONICLES</span></h1>
+                <p class="hero-description">
+                    Step inside the heart of our creative lab. From high-octane workshops and industry expert
+                    masterclasses to campus celebrations, explore the moments that fuel our innovation.
+                </p>
+
+                <div class="event-highlights">
+                    <div class="highlight-box">
+                        <h4>MASTERCLASSES</h4>
+                        <p>Industry Pipeline Insights</p>
+                    </div>
+                    <div class="highlight-box">
+                        <h4>CAMPUS LIFE</h4>
+                        <p>Culture & Celebrations</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <img src="hero-01.png" alt="Warrior Character" id="warrior-hero">
+            </div>
+    </section>
+    <section class="chronicles-section">
+        <div class="section-header">
+            <span class="section-tag">Multimedia Feed</span>
+            <h2 class="section-title">Latest <span>Updates</span></h2>
+        </div>
+
+        <div class="chronicles-grid">
+
+            <!-- 1. Video card – full width on top -->
+            <div class="media-card video-card">
+                <div class="media-visual-area">
+                    <div class="video-container">
+                        <!-- You can keep a thumbnail, or later replace with <video> or iframe -->
+                        <img src="video-placeholder.jpg" alt="Behind the Scenes 2024" class="media-img">
+                        <div class="play-button">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="white">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="media-label">
+                        <span>Featured Video</span>
+                        <h3>Behind the Scenes 2024</h3>
+                    </div>
+                    <!-- Optional: details drawer if you want to use the same toggle mechanism -->
+                    <div class="details-drawer">
+                        <p>Exclusive look at the making of our latest project – tools, workflow, and team moments.</p>
+                    </div>
+                </div>
+                <button class="view-detail-btn" onclick="toggleDetails(this.closest('.media-card'))">
+                    View Details
+                </button>
+            </div>
+
+            <!-- 2. Image cards – grouped in 2-column layout below the video -->
+            <div class="image-cards-row">
+
+                <div class="media-card image-card" id="card-img-1">
+                    <div class="media-visual-area">
+                        <img src="image-01.jpg" alt="Character Sculpting Workshop" class="media-img">
+                        <div class="media-label">
+                            <span>Workshop</span>
+                            <h3>Character Sculpting</h3>
+                        </div>
+                        <div class="details-drawer">
+                            <p>An intensive workshop focusing on anatomy, high-fidelity skin detailing,
+                                and realistic texturing workflows using the latest industry-standard tools.</p>
+                        </div>
+                    </div>
+                    <button class="view-detail-btn" onclick="toggleDetails(this.closest('.media-card'))">
+                        View Details
+                    </button>
+                </div>
+
+                <div class="media-card image-card" id="card-img-2">
+                    <div class="media-visual-area">
+                        <img src="image-02.jpg" alt="Cinematic Lighting Masterclass" class="media-img">
+                        <div class="media-label">
+                            <span>Masterclass</span>
+                            <h3>Cinematic Lighting</h3>
+                        </div>
+                        <div class="details-drawer">
+                            <p>Deep dive into expert lighting techniques using Ray Tracing, Lumen,
+                                and real-time global illumination for cinematic-quality environments.</p>
+                        </div>
+                    </div>
+                    <button class="view-detail-btn" onclick="toggleDetails(this.closest('.media-card'))">
+                        View Details
+                    </button>
+                </div>
+
+                <!-- You can easily add more image cards here -->
+                <!--
+            <div class="media-card image-card" id="card-img-3">...</div>
+            <div class="media-card image-card" id="card-img-4">...</div>
+            -->
+
+            </div>
+
+        </div>
+    </section>
+
+    </div>
+    </section>
+    <script>
+        // Toggle Function for the Detail Panel
+        function toggleDetails(card) {
+            if (card) {
+                card.classList.toggle('show-details');
+            }
+        }
+
+        // Gaming Text Animation System
+        function setupGamingTextAnimation() {
+            console.log('Initializing Gaming Text Animation...');
+
+            const targets = document.querySelectorAll(`
+        h1:not(.processed),
+        h2:not(.processed),
+        .hero-tag:not(.processed),
+        .section-tag:not(.processed),
+        .hero-description:not(.processed)
+      `);
+
+            targets.forEach(el => {
+                el.classList.add('processed');
+                const hasManualSpans = el.querySelector('.gaming-char');
+
+                if (!hasManualSpans) {
+                    const originalHTML = el.innerHTML;
+                    const hasNestedSpan = el.querySelector('span');
+
+                    if (hasNestedSpan) {
+                        const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
+                        const textNodes = [];
+                        let node;
+                        while (node = walker.nextNode()) {
+                            if (node.textContent.length > 0 && !/^\s*[\r\n]+\s*$/.test(node.textContent)) {
+                                textNodes.push(node);
+                            }
+                        }
+
+                        let charIndex = 0;
+                        textNodes.forEach(textNode => {
+                            const text = textNode.textContent;
+                            const fragment = document.createDocumentFragment();
+
+                            [...text].forEach((char) => {
+                                if (/[\r\n\t]/.test(char)) {
+                                    fragment.appendChild(document.createTextNode(char));
+                                    return;
+                                }
+                                if (char === ' ') {
+                                    fragment.appendChild(document.createTextNode(' '));
+                                    charIndex++;
+                                } else {
+                                    const span = document.createElement('span');
+                                    span.textContent = char;
+                                    span.className = 'gaming-char';
+                                    span.style.setProperty('--i', charIndex);
+                                    fragment.appendChild(span);
+                                    charIndex++;
+                                }
+                            });
+                            textNode.parentNode.replaceChild(fragment, textNode);
+                        });
+                    } else {
+                        const text = el.textContent.trim();
+                        el.innerHTML = '';
+                        [...text].forEach((char, index) => {
+                            if (char === ' ') {
+                                el.appendChild(document.createTextNode(' '));
+                            } else {
+                                const span = document.createElement('span');
+                                span.textContent = char;
+                                span.className = 'gaming-char';
+                                span.style.setProperty('--i', index);
+                                el.appendChild(span);
+                            }
+                        });
+                    }
+                }
+            });
+
+            // Internal Observer for Replay
+            const animObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal-active');
+                    } else {
+                        entry.target.classList.remove('reveal-active'); // Replay logic
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+            document.querySelectorAll('.processed').forEach(el => animObserver.observe(el));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // 1. Initialize Gaming Text Animation
+            setupGamingTextAnimation();
+
+            // 2. REPEATABLE OBSERVER for Content Blocks
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    } else {
+                        entry.target.classList.remove('active');
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            // Select all elements to be revealed
+            document.querySelectorAll('.hero-content, .hero-visual, .image-card, .reveal').forEach((el) => {
+                observer.observe(el);
+            });
+
+            // 3. SCROLL-BASED EFFECTS
+            window.addEventListener('scroll', () => {
+                const scrollPos = window.scrollY;
+
+                // Navbar Effect
+                const nav = document.querySelector('.navbar');
+                if (nav) {
+                    scrollPos > 50 ? nav.classList.add('scrolled') : nav.classList.remove('scrolled');
+                }
+
+                // Warrior Image Parallax
+                const warrior = document.getElementById('warrior-hero');
+                if (warrior) {
+                    warrior.style.transform = `translateY(${scrollPos * 0.4}px)`;
+                }
+            });
+        }); 
+    </script>
+
+</body>
+
+</html>
