@@ -1,465 +1,562 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visual Effects (VFX) | Studio Curriculum</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Oswald:wght@700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
-    --primary-red: #ff0000;
-    --bg-dark: #000000;
-    --text-main: #ffffff;
-    --glass-card: rgba(255, 255, 255, 0.08);
-}
+            --primary-red: #ff0000;
+            --bg-dark: #000000;
+            --text-main: #ffffff;
+            --glass-card: rgba(255, 255, 255, 0.08);
+        }
 
-body, html {
-    margin: 0;
-    padding: 0;
-    background-color: var(--bg-dark);
-    font-family: 'Inter', sans-serif;
-    color: var(--text-main);
-    height: 100vh;
-    overflow: hidden;
-}
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            height: 100vh;
+            overflow: hidden;
+        }
 
-.animated-bg {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    background: radial-gradient(circle at center, #220000 0%, #000 100%);
-    perspective: 1000px;
-}
+        .animated-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            background: radial-gradient(circle at center, #220000 0%, #000 100%);
+            perspective: 1000px;
+        }
 
-.grid-plane {
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    bottom: -50%;
-    left: -50%;
-    background-image: 
-        linear-gradient(rgba(255, 0, 0, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 0, 0, 0.1) 1px, transparent 1px);
-    background-size: 50px 50px;
-    transform: rotateX(75deg);
-    animation: grid-travel 4s linear infinite;
-}
+        .grid-plane {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            bottom: -50%;
+            left: -50%;
+            background-image:
+                linear-gradient(rgba(255, 0, 0, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: rotateX(75deg);
+            animation: grid-travel 4s linear infinite;
+        }
 
-@keyframes grid-travel {
-    0% { background-position: 0 0; }
-    100% { background-position: 0 50px; }
-}
+        @keyframes grid-travel {
+            0% {
+                background-position: 0 0;
+            }
 
-.top-nav {
-    position: absolute;
-    top: 40px;
-    left: 5%;
-    z-index: 100;
-}
+            100% {
+                background-position: 0 50px;
+            }
+        }
 
-.back-btn {
-    background: var(--glass-card);
-    color: white;
-    padding: 10px 24px;
-    text-decoration: none;
-    border-radius: 50px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    text-transform: uppercase;
-    transition: 0.3s;
-}
+        .top-nav {
+            position: absolute;
+            top: 40px;
+            left: 5%;
+            z-index: 100;
+        }
 
-.back-btn:hover { 
-    background: var(--primary-red); 
-    padding-left: 30px; 
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
-}
+        .back-btn {
+            background: var(--glass-card);
+            color: white;
+            padding: 10px 24px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
 
-.course-page {
-    position: relative;
-    z-index: 10;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 320px;
-    align-items: center;
-    padding: 0 5%;
-    gap: 40px;
-}
+        .back-btn:hover {
+            background: var(--primary-red);
+            padding-left: 30px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+        }
 
-.content-wrapper {
-    max-width: 1000px;
-    display: flex;
-    flex-direction: column;
-    margin-top: 60px;
-    animation: slideInLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-}
+        .course-page {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            align-items: center;
+            padding: 0 5%;
+            gap: 40px;
+        }
 
-.studio-label {
-    color: var(--primary-red);
-    font-weight: 800;
-    font-size: 0.8rem;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-}
+        .content-wrapper {
+            max-width: 1000px;
+            display: flex;
+            flex-direction: column;
+            margin-top: 60px;
+            animation: slideInLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
 
-.course-main-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(3.5rem, 7vw, 6.5rem);
-    line-height: 1;
-    margin: 0 0 30px 0;
-    text-transform: uppercase;
-    white-space: nowrap;
-}
+        .studio-label {
+            color: var(--primary-red);
+            font-weight: 800;
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
 
-.details-grid {
-    background: var(--glass-card);
-    padding: 40px;
-    border-left: 4px solid var(--primary-red);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    border-radius: 15px;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.4);
-    position: relative;
-    overflow: hidden;
-}
+        .course-main-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(3.5rem, 7vw, 6.5rem);
+            line-height: 1;
+            margin: 0 0 30px 0;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
 
-.details-grid::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
-    box-shadow: 0 0 15px var(--primary-red);
-    animation: card-scan 4s linear infinite;
-}
+        .details-grid {
+            background: var(--glass-card);
+            padding: 40px;
+            border-left: 4px solid var(--primary-red);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-radius: 15px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
 
-@keyframes card-scan {
-    0% { top: -5%; }
-    100% { top: 105%; }
-}
+        .details-grid::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+            box-shadow: 0 0 15px var(--primary-red);
+            animation: card-scan 4s linear infinite;
+        }
 
-.overview-text {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 25px;
-    color: #ddd;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding-bottom: 20px;
-}
+        @keyframes card-scan {
+            0% {
+                top: -5%;
+            }
 
-.columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-}
+            100% {
+                top: 105%;
+            }
+        }
 
-.detail-col h3 {
-    font-size: 0.75rem;
-    color: var(--primary-red);
-    margin-bottom: 18px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 800;
-}
+        .overview-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #ddd;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 20px;
+        }
 
-.detail-col ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
+        .columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
 
-.detail-col li {
-    font-size: 0.85rem;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #eee;
-}
+        .detail-col h3 {
+            font-size: 0.75rem;
+            color: var(--primary-red);
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 800;
+        }
 
-.detail-col li::before {
-    content: "";
-    width: 6px;
-    height: 6px;
-    background: var(--primary-red);
-    border-radius: 50%;
-    box-shadow: 0 0 8px var(--primary-red);
-}
+        .detail-col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
 
-.job-profiles {
-    margin-top: 25px;
-    font-size: 0.8rem;
-    color: #999;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
+        .detail-col li {
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #eee;
+        }
 
-.side-stats {
-    background: rgba(15, 0, 0, 0.6);
-    border: 1px solid rgba(255, 0, 0, 0.2);
-    padding: 35px;
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    animation: slideInRight 0.8s ease forwards;
-}
+        .detail-col li::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            background: var(--primary-red);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--primary-red);
+        }
 
-.stat-item h4 {
-    margin: 0;
-    font-size: 0.65rem;
-    color: #777;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
+        .job-profiles {
+            margin-top: 25px;
+            font-size: 0.8rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 
-.stat-item p {
-    margin: 5px 0 0;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: white;
-}
+        .side-stats {
+            background: rgba(15, 0, 0, 0.6);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            padding: 35px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            animation: slideInRight 0.8s ease forwards;
+        }
 
-.cta-container {
-    width: 100%;
-}
+        .stat-item h4 {
+            margin: 0;
+            font-size: 0.65rem;
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-.enroll-btn {
-    background: var(--primary-red);
-    color: white;
-    text-decoration: none;
-    padding: 18px 45px;
-    font-weight: 800;
-    border-radius: 50px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    transition: 0.3s;
-    display: inline-block;
-    margin-top: 35px;
-    box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
-}
+        .stat-item p {
+            margin: 5px 0 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+        }
 
-.enroll-btn:hover {
-    transform: scale(1.05);
-    background: white;
-    color: black;
-}
+        .cta-container {
+            width: 100%;
+        }
 
-@keyframes slideInLeft {
-    from {
-        transform: translateX(-100px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
+        .enroll-btn {
+            background: var(--primary-red);
+            color: white;
+            text-decoration: none;
+            padding: 18px 45px;
+            font-weight: 800;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            display: inline-block;
+            margin-top: 35px;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+        }
 
-@keyframes slideInRight {
-    from {
-        transform: translateX(100px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
+        .enroll-btn:hover {
+            transform: scale(1.05);
+            background: white;
+            color: black;
+        }
 
-@media (max-width: 1200px) {
-    .course-main-title {
-        white-space: normal;
-        line-height: 1;
-    }
-    .course-page {
-        grid-template-columns: 1fr;
-        height: auto;
-        padding-top: 150px;
-        padding-bottom: 50px;
-    }
-    body {
-        overflow-y: auto;
-    }
-}
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
 
-@media (max-width: 768px) {
-    body, html {
-        overflow-y: auto;
-        height: auto;
-    }
-    .top-nav {
-        top: 20px;
-        left: 4%;
-    }
-    .back-btn {
-        padding: 8px 18px;
-        font-size: 0.65rem;
-    }
-    .back-btn:hover {
-        padding-left: 22px;
-    }
-    .course-page {
-        grid-template-columns: 1fr;
-        height: auto;
-        padding: 100px 4% 40px;
-        gap: 30px;
-    }
-    .content-wrapper {
-        margin-top: 20px;
-        width: 100%;
-    }
-    .studio-label {
-        font-size: 0.7rem;
-        letter-spacing: 3px;
-        margin-bottom: 10px;
-    }
-    .course-main-title {
-        font-size: clamp(2.5rem, 10vw, 4rem);
-        margin-bottom: 20px;
-        white-space: normal;
-    }
-    .details-grid {
-        padding: 25px;
-    }
-    .overview-text {
-        font-size: 0.9rem;
-        margin-bottom: 20px;
-        padding-bottom: 15px;
-    }
-    .columns {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
-    .detail-col h3 {
-        font-size: 0.7rem;
-        margin-bottom: 15px;
-    }
-    .detail-col li {
-        font-size: 0.8rem;
-        margin-bottom: 8px;
-    }
-    .job-profiles {
-        margin-top: 20px;
-        font-size: 0.75rem;
-    }
-    .cta-container {
-        width: 100%;
-    }
-    .enroll-btn {
-        padding: 15px 35px;
-        font-size: 0.85rem;
-        margin-top: 25px;
-        width: 100%;
-        max-width: 100%;
-        text-align: center;
-        box-sizing: border-box;
-    }
-    .side-stats {
-        padding: 25px;
-        gap: 20px;
-    }
-    .stat-item h4 {
-        font-size: 0.6rem;
-    }
-    .stat-item p {
-        font-size: 1.1rem;
-    }
-}
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
 
-@media (max-width: 480px) {
-    .top-nav {
-        top: 15px;
-        left: 3%;
-    }
-    .back-btn {
-        padding: 7px 15px;
-        font-size: 0.6rem;
-    }
-    .back-btn:hover {
-        padding-left: 18px;
-    }
-    .course-page {
-        padding: 80px 3% 30px;
-        gap: 25px;
-    }
-    .content-wrapper {
-        margin-top: 15px;
-        width: 100%;
-    }
-    .studio-label {
-        font-size: 0.65rem;
-        letter-spacing: 2px;
-    }
-    .course-main-title {
-        font-size: clamp(2rem, 12vw, 3rem);
-        margin-bottom: 15px;
-    }
-    .details-grid {
-        padding: 20px;
-        border-radius: 12px;
-    }
-    .overview-text {
-        font-size: 0.85rem;
-        margin-bottom: 18px;
-        line-height: 1.5;
-        padding-bottom: 12px;
-    }
-    .columns {
-        gap: 20px;
-    }
-    .detail-col h3 {
-        font-size: 0.65rem;
-        margin-bottom: 12px;
-        letter-spacing: 1.5px;
-    }
-    .detail-col li {
-        font-size: 0.75rem;
-        margin-bottom: 7px;
-        gap: 8px;
-    }
-    .detail-col li::before {
-        width: 5px;
-        height: 5px;
-    }
-    .job-profiles {
-        margin-top: 18px;
-        font-size: 0.7rem;
-    }
-    .cta-container {
-        width: 100%;
-    }
-    .enroll-btn {
-        padding: 14px 30px;
-        font-size: 0.8rem;
-        margin-top: 20px;
-        letter-spacing: 1.5px;
-        width: 100%;
-        max-width: 100%;
-        text-align: center;
-        box-sizing: border-box;
-    }
-    .side-stats {
-        padding: 20px;
-        gap: 18px;
-        border-radius: 15px;
-    }
-    .stat-item h4 {
-        font-size: 0.55rem;
-    }
-    .stat-item p {
-        font-size: 1rem;
-    }
-}
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .course-main-title {
+                white-space: normal;
+                line-height: 1;
+            }
+
+            .course-page {
+                grid-template-columns: 1fr;
+                height: auto;
+                padding-top: 150px;
+                padding-bottom: 50px;
+            }
+
+            body {
+                overflow-y: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            body,
+            html {
+                overflow-y: auto;
+                height: auto;
+            }
+
+            .top-nav {
+                top: 20px;
+                left: 4%;
+            }
+
+            .back-btn {
+                padding: 8px 18px;
+                font-size: 0.65rem;
+            }
+
+            .back-btn:hover {
+                padding-left: 22px;
+            }
+
+            .course-page {
+                grid-template-columns: 1fr;
+                height: auto;
+                padding: 100px 4% 40px;
+                gap: 30px;
+            }
+
+            .content-wrapper {
+                margin-top: 20px;
+                width: 100%;
+            }
+
+            .studio-label {
+                font-size: 0.7rem;
+                letter-spacing: 3px;
+                margin-bottom: 10px;
+            }
+
+            .course-main-title {
+                font-size: clamp(2.5rem, 10vw, 4rem);
+                margin-bottom: 20px;
+                white-space: normal;
+            }
+
+            .details-grid {
+                padding: 25px;
+            }
+
+            .overview-text {
+                font-size: 0.9rem;
+                margin-bottom: 20px;
+                padding-bottom: 15px;
+            }
+
+            .columns {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .detail-col h3 {
+                font-size: 0.7rem;
+                margin-bottom: 15px;
+            }
+
+            .detail-col li {
+                font-size: 0.8rem;
+                margin-bottom: 8px;
+            }
+
+            .job-profiles {
+                margin-top: 20px;
+                font-size: 0.75rem;
+            }
+
+            .cta-container {
+                width: 100%;
+            }
+
+            .enroll-btn {
+                padding: 15px 35px;
+                font-size: 0.85rem;
+                margin-top: 25px;
+                width: 100%;
+                max-width: 100%;
+                text-align: center;
+                box-sizing: border-box;
+            }
+
+            .side-stats {
+                padding: 25px;
+                gap: 20px;
+            }
+
+            .stat-item h4 {
+                font-size: 0.6rem;
+            }
+
+            .stat-item p {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-nav {
+                top: 15px;
+                left: 3%;
+            }
+
+            .back-btn {
+                padding: 7px 15px;
+                font-size: 0.6rem;
+            }
+
+            .back-btn:hover {
+                padding-left: 18px;
+            }
+
+            .course-page {
+                padding: 80px 3% 30px;
+                gap: 25px;
+            }
+
+            .content-wrapper {
+                margin-top: 15px;
+                width: 100%;
+            }
+
+            .studio-label {
+                font-size: 0.65rem;
+                letter-spacing: 2px;
+            }
+
+            .course-main-title {
+                font-size: clamp(2rem, 12vw, 3rem);
+                margin-bottom: 15px;
+            }
+
+            .details-grid {
+                padding: 20px;
+                border-radius: 12px;
+            }
+
+            .overview-text {
+                font-size: 0.85rem;
+                margin-bottom: 18px;
+                line-height: 1.5;
+                padding-bottom: 12px;
+            }
+
+            .columns {
+                gap: 20px;
+            }
+
+            .detail-col h3 {
+                font-size: 0.65rem;
+                margin-bottom: 12px;
+                letter-spacing: 1.5px;
+            }
+
+            .detail-col li {
+                font-size: 0.75rem;
+                margin-bottom: 7px;
+                gap: 8px;
+            }
+
+            .detail-col li::before {
+                width: 5px;
+                height: 5px;
+            }
+
+            .job-profiles {
+                margin-top: 18px;
+                font-size: 0.7rem;
+            }
+
+            .cta-container {
+                width: 100%;
+            }
+
+            .enroll-btn {
+                padding: 14px 30px;
+                font-size: 0.8rem;
+                margin-top: 20px;
+                letter-spacing: 1.5px;
+                width: 100%;
+                max-width: 100%;
+                text-align: center;
+                box-sizing: border-box;
+            }
+
+            .side-stats {
+                padding: 20px;
+                gap: 18px;
+                border-radius: 15px;
+            }
+
+            .stat-item h4 {
+                font-size: 0.55rem;
+            }
+
+            .stat-item p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Gaming Animation Styles */
+        @keyframes text-reveal-anim {
+            0% {
+                opacity: 0;
+                filter: blur(20px);
+                transform: translateY(100%) rotateX(-90deg);
+            }
+
+            100% {
+                opacity: 1;
+                filter: blur(0);
+                transform: translateY(0) rotateX(0deg);
+            }
+        }
+
+        .gaming-char {
+            display: inline-block !important;
+            /* FIX: Override conflicting block display */
+            opacity: 0;
+            transform: translateY(100%) rotateX(-90deg);
+            transform-origin: bottom center;
+            will-change: transform, opacity, filter;
+            color: inherit;
+            text-shadow: inherit;
+        }
+
+        .reveal-active .gaming-char {
+            animation: text-reveal-anim 0.8s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+            animation-delay: calc(var(--i) * 0.03s);
+        }
+
+        /* FIX: Force direct child animation characters to inherit parent color */
+        h1>.gaming-char,
+        h2>.gaming-char,
+        h3>.gaming-char,
+        .course-main-title>.gaming-char,
+        .studio-label>.gaming-char {
+            color: inherit !important;
+            text-shadow: inherit;
+        }
     </style>
 </head>
+
 <body>
 
     <div class="animated-bg">
@@ -474,10 +571,12 @@ body, html {
         <section class="content-wrapper">
             <span class="studio-label">Studio Curriculum</span>
             <h1 class="course-main-title">Visual Effects (VFX)</h1>
-            
+
             <div class="details-grid">
                 <div class="overview-text">
-                    <strong>Overview:</strong> VFX involves creating or manipulating imagery added to live-action footage in post-production. It allows for the creation of environments, creatures, or cinematic events that are impossible or impractical to film in reality.
+                    <strong>Overview:</strong> VFX involves creating or manipulating imagery added to live-action
+                    footage in post-production. It allows for the creation of environments, creatures, or cinematic
+                    events that are impossible or impractical to film in reality.
                 </div>
 
                 <div class="columns">
@@ -540,5 +639,95 @@ body, html {
         </aside>
     </main>
 
+    <script>
+        // Gaming Text Animation System
+        function setupGamingTextAnimation() {
+            const targets = document.querySelectorAll(`
+        h1:not(.processed),
+        h2:not(.processed),
+        h3:not(.processed),
+        .studio-label:not(.processed),
+        .course-main-title:not(.processed)
+      `);
+
+            targets.forEach(el => {
+                el.classList.add('processed');
+                const hasManualSpans = el.querySelector('.gaming-char');
+
+                if (!hasManualSpans) {
+                    const originalHTML = el.innerHTML;
+                    const hasNestedSpan = el.querySelector('span');
+
+                    if (hasNestedSpan) {
+                        const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
+                        const textNodes = [];
+                        let node;
+                        while (node = walker.nextNode()) {
+                            if (node.textContent.length > 0 && !/^\s*[\r\n]+\s*$/.test(node.textContent)) {
+                                textNodes.push(node);
+                            }
+                        }
+
+                        let charIndex = 0;
+                        textNodes.forEach(textNode => {
+                            const text = textNode.textContent;
+                            const fragment = document.createDocumentFragment();
+
+                            [...text].forEach((char) => {
+                                if (/[\r\n\t]/.test(char)) {
+                                    fragment.appendChild(document.createTextNode(char));
+                                    return;
+                                }
+                                if (char === ' ') {
+                                    fragment.appendChild(document.createTextNode(' '));
+                                    charIndex++;
+                                } else {
+                                    const span = document.createElement('span');
+                                    span.textContent = char;
+                                    span.className = 'gaming-char';
+                                    span.style.setProperty('--i', charIndex);
+                                    fragment.appendChild(span);
+                                    charIndex++;
+                                }
+                            });
+                            textNode.parentNode.replaceChild(fragment, textNode);
+                        });
+                    } else {
+                        const text = el.textContent.trim();
+                        el.innerHTML = '';
+                        [...text].forEach((char, index) => {
+                            if (char === ' ') {
+                                el.appendChild(document.createTextNode(' '));
+                            } else {
+                                const span = document.createElement('span');
+                                span.textContent = char;
+                                span.className = 'gaming-char';
+                                span.style.setProperty('--i', index);
+                                el.appendChild(span);
+                            }
+                        });
+                    }
+                }
+            });
+
+            // Internal Observer for Replay
+            const animObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal-active');
+                    } else {
+                        entry.target.classList.remove('reveal-active'); // Replay logic
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+            document.querySelectorAll('.processed').forEach(el => animObserver.observe(el));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupGamingTextAnimation();
+        });
+    </script>
 </body>
+
 </html>

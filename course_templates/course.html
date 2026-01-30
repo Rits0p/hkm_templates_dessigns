@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Professional Courses | Multimedia Institute</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <style>
         :root {
             --primary-red: #E63946;
@@ -13,8 +14,8 @@
             --text-gray: #b3b3b3;
             --gray-500: #777;
             --gray-700: #444;
-            --white-10: rgba(255,255,255,0.1);
-            --red-overlay: rgba(230,57,70,0.4);
+            --white-10: rgba(255, 255, 255, 0.1);
+            --red-overlay: rgba(230, 57, 70, 0.4);
         }
 
         * {
@@ -29,8 +30,8 @@
             color: white;
             min-height: 100vh;
             background-image:
-                radial-gradient(circle at 0% 0%, rgba(230,57,70,0.08) 0%, transparent 40%),
-                radial-gradient(circle at 100% 100%, rgba(230,57,70,0.05) 0%, transparent 40%);
+                radial-gradient(circle at 0% 0%, rgba(230, 57, 70, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(230, 57, 70, 0.05) 0%, transparent 40%);
         }
 
         /* ================= HEADER ================= */
@@ -103,7 +104,7 @@
         .course-card:hover {
             transform: translateY(-16px);
             border-color: var(--primary-red);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
         }
 
         .course-card::after {
@@ -127,17 +128,17 @@
             position: absolute;
             inset: 0;
             background: linear-gradient(to top,
-                rgba(15,15,15,1) 0%,
-                rgba(15,15,15,0.7) 40%,
-                rgba(15,15,15,0.2) 100%);
+                    rgba(15, 15, 15, 1) 0%,
+                    rgba(15, 15, 15, 0.7) 40%,
+                    rgba(15, 15, 15, 0.2) 100%);
             transition: background 0.4s ease;
             z-index: 1;
         }
 
         .course-card:hover::before {
             background: linear-gradient(to top,
-                var(--red-overlay) 0%,
-                rgba(15,15,15,0.85) 100%);
+                    var(--red-overlay) 0%,
+                    rgba(15, 15, 15, 0.85) 100%);
         }
 
         .course-content {
@@ -270,15 +271,53 @@
                 text-align: center;
             }
         }
+
+        /* Gaming Animation Styles */
+        @keyframes text-reveal-anim {
+            0% {
+                opacity: 0;
+                filter: blur(20px);
+                transform: translateY(100%) rotateX(-90deg);
+            }
+
+            100% {
+                opacity: 1;
+                filter: blur(0);
+                transform: translateY(0) rotateX(0deg);
+            }
+        }
+
+        .gaming-char {
+            display: inline-block !important;
+            /* FIX: Override conflicting block display */
+            opacity: 0;
+            transform: translateY(100%) rotateX(-90deg);
+            transform-origin: bottom center;
+            will-change: transform, opacity, filter;
+            color: inherit;
+            text-shadow: inherit;
+        }
+
+        .reveal-active .gaming-char {
+            animation: text-reveal-anim 0.8s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+            animation-delay: calc(var(--i) * 0.03s);
+        }
+
+        /* FIX: Force direct child animation characters to inherit parent color */
+        h1>.gaming-char {
+            color: inherit !important;
+            text-shadow: inherit;
+        }
     </style>
 </head>
+
 <body>
 
     <header class="header-container">
         <h1 class="main-title">
             OUR PROFESSIONAL <span class="highlight">COURSES</span>
         </h1>
-        
+
         <p class="subtitle">
             CAREER <span class="sep">+</span> SKILL <span class="sep">+</span> TECHNOLOGY
         </p>
@@ -289,7 +328,8 @@
     <main class="main-container">
         <div class="course-grid">
 
-            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=2071');">
+            <div class="course-card"
+                style="background-image: url('https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=2071');">
                 <div class="course-content">
                     <h3 class="course-title">Graphics Design</h3>
                     <p class="course-description">Master professional branding, layouts, and visual communication.</p>
@@ -297,7 +337,8 @@
                 </div>
             </div>
 
-            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070');">
+            <div class="course-card"
+                style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070');">
                 <div class="course-content">
                     <h3 class="course-title">2D Animation</h3>
                     <p class="course-description">Create fluid character movements and professional storytelling.</p>
@@ -305,7 +346,8 @@
                 </div>
             </div>
 
-            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=2070');">
+            <div class="course-card"
+                style="background-image: url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=2070');">
                 <div class="course-content">
                     <h3 class="course-title">Video Editing</h3>
                     <p class="course-description">Advanced post-production for cinematic and commercial projects.</p>
@@ -313,7 +355,8 @@
                 </div>
             </div>
 
-            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1616400619175-5e3a17f477a3?q=80&w=2074');">
+            <div class="course-card"
+                style="background-image: url('https://images.unsplash.com/photo-1616400619175-5e3a17f477a3?q=80&w=2074');">
                 <div class="course-content">
                     <h3 class="course-title">3D Animation</h3>
                     <p class="course-description">Advanced character modeling, rigging, and virtual world-building.</p>
@@ -321,7 +364,8 @@
                 </div>
             </div>
 
-            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1503387762-592dea58292b?q=80&w=2062');">
+            <div class="course-card"
+                style="background-image: url('https://images.unsplash.com/photo-1503387762-592dea58292b?q=80&w=2062');">
                 <div class="course-content">
                     <h3 class="course-title">3D Architectural</h3>
                     <p class="course-description">Develop photorealistic interior and exterior visualizations.</p>
@@ -329,7 +373,8 @@
                 </div>
             </div>
 
-            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?q=80&w=2070');">
+            <div class="course-card"
+                style="background-image: url('https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?q=80&w=2070');">
                 <div class="course-content">
                     <h3 class="course-title">UI/UX Design</h3>
                     <p class="course-description">Design seamless high-fidelity user journeys and interfaces.</p>
@@ -337,7 +382,8 @@
                 </div>
             </div>
 
-            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=2070');">
+            <div class="course-card"
+                style="background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=2070');">
                 <div class="course-content">
                     <h3 class="course-title">3D Jewellery</h3>
                     <p class="course-description">Precision digital jewelry design and 3D print preparation.</p>
@@ -345,7 +391,8 @@
                 </div>
             </div>
 
-            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015');">
+            <div class="course-card"
+                style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015');">
                 <div class="course-content">
                     <h3 class="course-title">Digital Marketing</h3>
                     <p class="course-description">Growth strategies using SEO, data analytics, and SMM.</p>
@@ -353,7 +400,8 @@
                 </div>
             </div>
 
-            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1536243298747-af88302142e9?q=80&w=2070');">
+            <div class="course-card"
+                style="background-image: url('https://images.unsplash.com/photo-1536243298747-af88302142e9?q=80&w=2070');">
                 <div class="course-content">
                     <h3 class="course-title">VFX Effects</h3>
                     <p class="course-description">Master high-end cinematic compositing and simulations.</p>
@@ -361,7 +409,8 @@
                 </div>
             </div>
 
-            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=2069');">
+            <div class="course-card"
+                style="background-image: url('https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=2069');">
                 <div class="course-content">
                     <h3 class="course-title">C / C++ / Python</h3>
                     <p class="course-description">Build a rock-solid foundation in world-class software logic.</p>
@@ -369,7 +418,8 @@
                 </div>
             </div>
 
-            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070');">
+            <div class="course-card"
+                style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070');">
                 <div class="course-content">
                     <h3 class="course-title">Game Design</h3>
                     <p class="course-description">Create immersive gameplay experiences from logic to final render.</p>
@@ -377,7 +427,8 @@
                 </div>
             </div>
 
-            <div class="course-card" style="background-image: url('https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974');">
+            <div class="course-card"
+                style="background-image: url('https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974');">
                 <div class="course-content">
                     <h3 class="course-title">Android Dev</h3>
                     <p class="course-description">Develop scalable and high-performance apps for mobile.</p>
@@ -388,5 +439,93 @@
         </div>
     </main>
 
+    <script>
+        // Gaming Text Animation System
+        function setupGamingTextAnimation() {
+            const targets = document.querySelectorAll(`
+        h1:not(.processed),
+        .subtitle:not(.processed),
+        .course-title:not(.processed)
+      `);
+
+            targets.forEach(el => {
+                el.classList.add('processed');
+                const hasManualSpans = el.querySelector('.gaming-char');
+
+                if (!hasManualSpans) {
+                    const originalHTML = el.innerHTML;
+                    const hasNestedSpan = el.querySelector('span');
+
+                    if (hasNestedSpan) {
+                        const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
+                        const textNodes = [];
+                        let node;
+                        while (node = walker.nextNode()) {
+                            if (node.textContent.length > 0 && !/^\s*[\r\n]+\s*$/.test(node.textContent)) {
+                                textNodes.push(node);
+                            }
+                        }
+
+                        let charIndex = 0;
+                        textNodes.forEach(textNode => {
+                            const text = textNode.textContent;
+                            const fragment = document.createDocumentFragment();
+
+                            [...text].forEach((char) => {
+                                if (/[\r\n\t]/.test(char)) {
+                                    fragment.appendChild(document.createTextNode(char));
+                                    return;
+                                }
+                                if (char === ' ') {
+                                    fragment.appendChild(document.createTextNode(' '));
+                                    charIndex++;
+                                } else {
+                                    const span = document.createElement('span');
+                                    span.textContent = char;
+                                    span.className = 'gaming-char';
+                                    span.style.setProperty('--i', charIndex);
+                                    fragment.appendChild(span);
+                                    charIndex++;
+                                }
+                            });
+                            textNode.parentNode.replaceChild(fragment, textNode);
+                        });
+                    } else {
+                        const text = el.textContent.trim();
+                        el.innerHTML = '';
+                        [...text].forEach((char, index) => {
+                            if (char === ' ') {
+                                el.appendChild(document.createTextNode(' '));
+                            } else {
+                                const span = document.createElement('span');
+                                span.textContent = char;
+                                span.className = 'gaming-char';
+                                span.style.setProperty('--i', index);
+                                el.appendChild(span);
+                            }
+                        });
+                    }
+                }
+            });
+
+            // Internal Observer for Replay
+            const animObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal-active');
+                    } else {
+                        entry.target.classList.remove('reveal-active'); // Replay logic
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+            document.querySelectorAll('.processed').forEach(el => animObserver.observe(el));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupGamingTextAnimation();
+        });
+    </script>
 </body>
+
 </html>
