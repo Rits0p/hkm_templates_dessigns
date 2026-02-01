@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harikrushna Multimedia Institute</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Oswald:wght@700&display=swap"
+    rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- INTERNAL CSS -->
+  <style>
+    /* ===== FOOTER BASE STYLES ===== */
+.main-footer {
+  background-color: #0f1115;
+  color: #fff;
+  padding: clamp(60px, 10vw, 80px) 5% clamp(30px, 5vw, 40px) 5%;
+  border-top: 2px solid #e63946;
+  overflow: hidden;
+  font-family: 'Oswald', sans-serif;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.col-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.col-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: #e63946;
+}
+
+.about-text {
+  color: #aaa;
+  line-height: 1.6;
+  font-family: 'Oswald', sans-serif;
+}
+
+.social-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  background: #252830;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: 0.3s;
+}
+
+.social-icon:hover {
+  background: #e63946;
+  transform: scale(1.1) rotate(10deg);
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: #aaa;
+  text-decoration: none;
+  transition: 0.3s;
+  font-family: 'Oswald', sans-serif;
+}
+
+.footer-links a:hover {
+  color: #e63946;
+  padding-left: 6px;
+}
+
+.contact-info p {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  color: #aaa;
+  font-family: 'Oswald', sans-serif;
+}
+
+.btn-verify {
+  display: inline-block;
+  color: #e63946;
+  border: 1px solid #e63946;
+  padding: 10px 20px;
+  margin-top: 15px;
+  text-decoration: none;
+  transition: 0.3s;
+  font-family: 'Oswald', sans-serif;
+}
+
+.btn-verify:hover {
+  background: #e63946;
+  color: white;
+}
+
+.footer-bottom {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+  color: #aaa;
+  font-family: 'Oswald', sans-serif;
+}
+
+/* ===== TEXT ANIMATION ===== */
+.gaming-char {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(12px);
+  transform: translateY(40px) rotateX(-90deg);
+}
+
+.reveal-active .gaming-char {
+  animation: textReveal 0.6s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+  animation-delay: calc(0.02s * var(--i));
+}
+
+@keyframes textReveal {
+  from {
+    opacity: 0;
+    filter: blur(18px);
+    transform: translateY(80%) rotateX(-90deg);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) rotateX(0deg);
+  }
+}
+
+</style>
+</head>
+<body>
+
+<footer class="main-footer reveal-scope">
+
+  <div class="footer-container">
+
+    <div class="footer-col footer-about">
+      <h3 class="col-title anim-text">About Us</h3>
+      <p class="about-text anim-text">
+        Harikrishna Multimedia Institute is Surat's premier destination for creative education in Animation, Game
+        Design, VFX, and more.
+      </p>
+      <div class="social-links">
+        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h3 class="col-title anim-text">Quick Links</h3>
+      <ul class="footer-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Courses</a></li>
+        <li><a href="#">Student Work</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h3 class="col-title anim-text">Our Courses</h3>
+      <ul class="footer-links">
+        <li><a href="#">3D Animation</a></li>
+        <li><a href="#">VFX</a></li>
+        <li><a href="#">Graphics Design</a></li>
+        <li><a href="#">Video Editing</a></li>
+        <li><a href="#">Full Stack Development</a></li>
+        <li><a href="#">Flutter Development</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h3 class="col-title anim-text">Contact Us</h3>
+      <div class="contact-info anim-text">
+        <p><i class="fas fa-map-marker-alt"></i> M-36/37, 2nd Floor, Raj Corner Shopping Centre, TP 10 Main Rd, near
+          L.P. Savani, Pal Surat, Gujarat</p>
+        <p><i class="fas fa-phone-alt"></i> +91 96648 33542</p>
+        <p><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e880899a81839a9d9b808689859d849c81858d8c8189a88f85898184c68b8785">[email&#160;protected]</a></p>
+      </div>
+      <a href="#" class="btn-verify anim-text">Verify Student Certificate</a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom anim-text">
+    <p>© 2026 Harikrishna Multimedia Institute. All rights reserved.</p>
+  </div>
+
+  <!-- INTERNAL JS -->
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const footer = document.querySelector(".main-footer");
+      if (!footer) return;
+
+      const targets = footer.querySelectorAll(".anim-text");
+
+      targets.forEach(el => {
+        const text = el.textContent.trim();
+        if (!text) return;
+
+        el.innerHTML = "";
+
+        [...text].forEach((char, index) => {
+          if (char === " ") {
+            el.appendChild(document.createTextNode(" "));
+          } else {
+            const span = document.createElement("span");
+            span.className = "gaming-char";
+            span.textContent = char;
+            span.style.setProperty("--i", index);
+            el.appendChild(span);
+          }
+        });
+      });
+
+      const observer = new IntersectionObserver(entries => {
+        entries.
